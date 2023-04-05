@@ -1,10 +1,14 @@
 import React from "react";
-import { ProductsList } from "./";
+import Nav from 'react-bootstrap/Nav';
+import { ProductsList, SideNav } from "./";
 
 const Home = ({ allProducts }) => {
   return (
     <div id="main">
-     <ProductsList allProducts={allProducts} />
+      <div id="home-content-container">
+        <SideNav />
+        <ProductsList allProducts={allProducts} />
+     </div>
     </div>
   );
 };

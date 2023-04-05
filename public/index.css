@@ -2,12 +2,38 @@ body {
     margin: 0;
 }
 
-#navbar {
-    background-color: black;
-    color: white;
+#home-content-container {
     display: flex;
-    align-items: center;
-    flex-grow: 1;
-    max-height: 10%;
-    min-height: 40px;
+}
+#side-bar{
+    flex-direction: column;
+}
+.login-buttons{
+    display: flex;
+    flex-direction: column;
+}
+.login-buttons button{
+    margin: 5px;
+}
+#navbar-container.container{
+    margin: 0px;
+}
+/* #navbar-links{
+    position: fixed;
+    top: 5;
+    right:0;
+} */
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48;
+  font-size: 20pt;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
 }
