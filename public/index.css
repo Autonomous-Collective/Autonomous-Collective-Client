@@ -37,3 +37,8 @@ body {
   text-decoration: none;
   color: black;
 }
+
+#register-form button{
+    color: white;
+    border: none;
+  }

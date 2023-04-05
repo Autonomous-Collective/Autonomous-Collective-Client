@@ -37,13 +37,13 @@ const Login = () => {
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
             <div className ="login-buttons">
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
 
-            <Button variant="primary" type="submit">
-              Or Continue as Guest
-            </Button>
+              <Button variant="primary" type="submit">
+                Or Continue as Guest
+              </Button>
             </div>
           </form>
         </Modal.Body>

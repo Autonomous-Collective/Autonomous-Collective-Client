@@ -21,7 +21,7 @@ const Register = () => {
           <Modal.Title>Register</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <form>
+        <form id="register-form">
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter email" />
@@ -42,10 +42,11 @@ const Register = () => {
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type="password" placeholder="Password" />
             </Form.Group>
-            
+            <div className ="login-buttons">
             <Button variant="primary" type="submit">
               Submit
             </Button>
+            </div>
           </form>
         </Modal.Body>
       </Modal>
