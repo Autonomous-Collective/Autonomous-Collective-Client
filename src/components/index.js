@@ -9,3 +9,4 @@ export { default as ProductCard } from "./ProductCard";
 export { default as SingleProduct } from "./SingleProduct";
 export { default as ReviewList } from "./ReviewList";
 export { default as ReviewCard } from "./ReviewCard";
+export { default as CreateReview } from "./CreateReview";

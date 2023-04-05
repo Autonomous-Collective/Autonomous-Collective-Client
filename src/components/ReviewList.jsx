@@ -21,7 +21,7 @@ const ReviewList = ({ productId }) => {
   return (
     <div>
       {reviews.map((review, idx) => {
-        return <ReviewCard review={review} />;
+        return <ReviewCard review={review} key={`${idx} map for review card in review list`} />;
       })}
     </div>
   );

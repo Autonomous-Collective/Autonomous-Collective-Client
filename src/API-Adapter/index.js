@@ -1,5 +1,12 @@
 const URL = "https://autonomous-collective.onrender.com";
 
+const makeHeaders = (token) => {
+  return {
+    "Content-Type" : "application/json",
+    "Authorization" : `Bearer ${token}`,
+  }
+}
+
 export const registerNewUserCall = async (name, email, password) => {
   try {
     const response = await fetch(`${URL}/api/users/register`, {
@@ -97,3 +104,24 @@ export const getReviewsForProductCall = async (productId) => {
     throw error;
   }
 } 
+
+export const createReviewCall = async(productId, token, score, title, content) => {
+  try{
+    const response = await fetch(`${URL}/api/products/${productId}/reviews`, {
+      method: "POST", 
+      headers: makeHeaders(token),
+      body: JSON.stringify({
+        score: score,
+        title: title,
+        content: content
+      })
+    });
+
+    const result = await response.json();
+    console.log(result, "result from create review api call!!!");
+    return result;
+  }catch(error){
+    console.error(error);
+    throw error;
+  }
+}

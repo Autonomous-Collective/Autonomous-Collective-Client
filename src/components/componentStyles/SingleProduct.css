@@ -24,3 +24,7 @@
 
   border: 2px solid black;
 }
+
+#create-review{
+  display: none;
+}

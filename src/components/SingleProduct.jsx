@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductByIdCall } from "../API-Adapter";
 import "./componentStyles/SingleProduct.css";
-import { ReviewList } from "./";
+import { ReviewList, CreateReview } from "./";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({});
@@ -15,6 +15,15 @@ const SingleProduct = () => {
       setProduct(response.product);
     }
   };
+
+  const toggle = () => {
+    const createRev = document.getElementById("create-review").style;
+    if(createRev.display === "flex"){
+      createRev.display = "none";
+    }else{
+      createRev.display = "flex";
+    }
+  }
 
   useEffect(() => {
     getProductById();
@@ -54,7 +63,12 @@ const SingleProduct = () => {
               </div>
             </div>
             <div id="reviews">
-              <button>Add a Reveiw</button>
+              <button onClick={() => {
+                toggle();
+              }}>Add a Reveiw</button>
+              <div id="create-review" >
+                <CreateReview productId={product.id}/>
+              </div>
               <ReviewList productId={product.id} />
             </div>
           </div>
