@@ -1,8 +1,10 @@
 import React from "react";
+import { ProductsList } from "./";
 
-const Home = () => {
+const Home = ({ allProducts }) => {
   return (
     <div id="main">
+     <ProductsList allProducts={allProducts} />
     </div>
   );
 };
