@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Nav from 'react-bootstrap/Nav';
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -10,23 +12,42 @@ const Register = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Nav.Link variant="primary" onClick={handleShow} className="nav-modal">
         Register
-      </Button>
-
+      </Nav.Link>
+     
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Register</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
+        <Modal.Body>
+        <form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+              <Form.Text>
+                Password must be at least 8 characters
+              </Form.Text>
+            </Form.Group>
+            
+            <Form.Group className="mb-3" controlId="confirmBasicPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+            
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </form>
+        </Modal.Body>
       </Modal>
     </>
   );

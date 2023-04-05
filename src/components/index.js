@@ -7,4 +7,5 @@ export { default as Home } from "./Home";
 export { default as ProductsList } from "./ProductsList";
 export { default as ProductCard } from "./ProductCard";
 export { default as SingleProduct } from "./SingleProduct";
+export { default as SideNav } from "./SideNav";
 
