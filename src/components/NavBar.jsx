@@ -45,7 +45,8 @@ const NavBar = (props) => {
           <Navbar.Collapse>
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="#link">Profile</Nav.Link>
+              <Nav.Link href="">Admin</Nav.Link>
+              <Nav.Link href="">Profile</Nav.Link>
 
               {isLoggedIn ? (
                 <Nav.Link
@@ -86,6 +87,10 @@ const NavBar = (props) => {
                 setEmail={setEmail}
                 password={password}
                 setPassword={setPassword}
+                user={user}
+                setUser={setUser}
+                token={token}
+                setToken={setToken}
               />
               {/* <NavDropdown title="Dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

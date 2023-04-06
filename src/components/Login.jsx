@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
-import { userLoginCall } from "../API-Adapter";
+import { userLoginCall, guestLoginCall } from "../API-Adapter";
 
 // import Register from "./Register";
 
@@ -42,7 +42,6 @@ const Login = (props) => {
                 setUser("user");
                 setIsLoggedIn(true);
                 handleClose();
-                console.log("!!!!1", result);
               } else {
                 console.log("Invalid Login Credentials");
               }
@@ -95,7 +94,37 @@ const Login = (props) => {
                   Submit
                 </Button>
                 {/* use an onClick here to handle guest user login */}
-                <Button variant="primary" type="button">
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={async (event) => {
+                    event.preventDefault();
+                    try {
+                      if (localStorage.getItem("token")) {
+                        alert("Already logged in!");
+                      } else {
+                        const result = await guestLoginCall();
+                        if (result !== undefined) {
+                          localStorage.setItem("token", result.token);
+                          localStorage.setItem("email", result.guestUser.email);
+                          localStorage.setItem(
+                            "user",
+                            JSON.stringify(result.guestUser)
+                          );
+                          setToken("token");
+                          setEmail("email");
+                          setUser("user");
+                          setIsLoggedIn(true);
+                          handleClose();
+                        } else {
+                          console.log("Guest Login Error");
+                        }
+                      }
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
+                >
                   Or Continue as Guest
                 </Button>
               </div>
