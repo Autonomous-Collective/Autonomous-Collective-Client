@@ -16,3 +16,4 @@ export { default as CreateReview } from "./CreateReview";
 export { default as AdminPage } from "./AdminPage";
 export { default as EditProductForm } from "./EditProductForm";
 
+export { default as UserProfilePage } from "./UserProfilePage";

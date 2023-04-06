@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
-import { registerNewUserCall } from "../API-Adapter";
+import { registerNewUserCall, guestLoginCall } from "../API-Adapter";
 
 const Register = (props) => {
   const [show, setShow] = useState(false);
@@ -42,9 +42,9 @@ const Register = (props) => {
                   localStorage.setItem("token", result.token);
                   localStorage.setItem("email", email);
                   localStorage.setItem("user", JSON.stringify(result.user));
-                  setToken("token");
-                  setEmail("email");
-                  setUser("user");
+                  setToken(result.token);
+                  setEmail(email);
+                  setUser(result.user);
                   handleClose();
                 } else {
                   console.log("token came back undefined");
@@ -124,6 +124,39 @@ const Register = (props) => {
               <div className="login-buttons">
                 <Button variant="primary" type="submit">
                   Submit
+                </Button>
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={async (event) => {
+                    event.preventDefault();
+                    try {
+                      if (localStorage.getItem("token")) {
+                        alert("Already logged in!");
+                      } else {
+                        const result = await guestLoginCall();
+                        if (result !== undefined) {
+                          localStorage.setItem("token", result.token);
+                          localStorage.setItem("email", result.guestUser.email);
+                          localStorage.setItem(
+                            "user",
+                            JSON.stringify(result.guestUser)
+                          );
+                          setToken(result.token);
+                          setEmail(result.guestUser.email);
+                          setUser(result.guestUser);
+                          setIsLoggedIn(true);
+                          handleClose();
+                        } else {
+                          console.log("Guest Login Error");
+                        }
+                      }
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }}
+                >
+                  Or Continue as Guest
                 </Button>
               </div>
             </form>

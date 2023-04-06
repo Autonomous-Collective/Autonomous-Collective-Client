@@ -21,6 +21,10 @@ const NavBar = (props) => {
   const token = props.token;
   const setToken = props.setToken;
 
+  const verifyAdmin = user.isAdmin;
+  const verifyGuest = user.isGuest;
+  //guest navbar => register logout shoppingcart
+  
   return (
     <>
       <style type="text/css">
@@ -45,10 +49,15 @@ const NavBar = (props) => {
           <Navbar.Collapse>
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="">Admin</Nav.Link>
-              <Nav.Link href="">Profile</Nav.Link>
+              { isLoggedIn && verifyAdmin ?
+              <Nav.Link href="/admin">Admin</Nav.Link>: null }
+
+              {isLoggedIn && !verifyGuest ?
+              <Nav.Link href="/profile">Profile</Nav.Link> : null
+              }
 
               {isLoggedIn ? (
+                <>
                 <Nav.Link
                   id={"logoutLink"}
                   onClick={() => {
@@ -66,7 +75,9 @@ const NavBar = (props) => {
                 >
                   Log Out
                 </Nav.Link>
+                </>
               ) : (
+                <>
                 <Login
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
@@ -79,19 +90,20 @@ const NavBar = (props) => {
                   token={token}
                   setToken={setToken}
                 />
-              )}
-              <Register
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                email={email}
-                setEmail={setEmail}
-                password={password}
-                setPassword={setPassword}
-                user={user}
-                setUser={setUser}
-                token={token}
-                setToken={setToken}
-              />
+                <Register
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
+                  user={user}
+                  setUser={setUser}
+                  token={token}
+                  setToken={setToken}
+                />
+                </>
+                )}
               {/* <NavDropdown title="Dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

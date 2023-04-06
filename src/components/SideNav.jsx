@@ -2,9 +2,8 @@ import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 
-const SideNav = () =>{
+const SideNav = ({allTags}) =>{
     return(
-        //map thru tags and "link" to tag specific product pages
         <div id = "sideNav" >
             <Form className="d-flex">
                   <Form.Control
@@ -15,9 +14,13 @@ const SideNav = () =>{
                   />
             </Form>
           <Nav defaultActiveKey="/home" id="side-bar" >
-            <Nav.Link href="">Fantasy</Nav.Link>
-            <Nav.Link href="">Historical Fiction</Nav.Link>
-            <Nav.Link href="">Horror</Nav.Link>
+            {allTags.length ?(
+              allTags.map((tag, idx) => {
+                return(
+                  <Nav.Link href="" key={`${idx}`}>{tag.name}</Nav.Link>
+                )
+              })
+            ): <h3>LOADING..</h3>}
           </Nav>
         </div>
     )
