@@ -21,14 +21,34 @@ export const registerNewUserCall = async (name, email, password) => {
       }),
     });
     const result = await response.json();
-    return result.token;
+    return result;
   } catch (error) {
     console.log(error);
   }
   throw error;
 };
 
-export const loginUserCall = async (email, password) => {
+export const userLoginCall = async (email, password) => {
+  try {
+    const response = await fetch(`${URL}/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log();
+  }
+  throw error;
+};
+
+export const guestLoginCall = async (email, password) => {
   try {
     const response = await fetch(`${URL}/api/users/login`, {
       method: "POST",

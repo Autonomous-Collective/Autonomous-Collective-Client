@@ -12,10 +12,17 @@ import { Routes, Route } from "react-router-dom";
 import { getAllProductsCall, getAllUsersCall } from "../API-Adapter";
 
 const Main = () => {
+
+
+
+const [email, setEmail] = useState('')
+const [password, setPassword] = useState('')
+const [isLoggedIn, setIsLoggedIn ] = useState(localStorage.getItem("token"))
+
+
+
   const [allProducts, setAllProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiJwYXJrZXIuam9zaWUuZWRlbkBnbWFpbC5jb20iLCJpYXQiOjE2ODA3OTE3MTd9.bAHfSU17t31taoFNk9nN5K-Hx1-D1a0-l2B6K2Iu8bw";
   const getAllProducts = async () => {
     const response = await getAllProductsCall();
 
@@ -36,25 +43,19 @@ const Main = () => {
   useEffect(() => {
     getAllProducts();
     console.log(allProducts, "all products from the main use effect");
+
     getAllUsers();
   }, []);
 
-  //use effect
-  //check for token in local storage,
-  //grabs userdata and sets state
-  //grabs token and sets state
-  //grabs cart and sets state
-
-  //if no token, then token is assignedo n login
-  //user info asignedo n login
-  //grab cart on login
-
+ 
   return (
     <div id="main">
-      <NavBar />
+      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
+            email={email} setEmail={setEmail}
+            password={password} setPassword={setPassword}
+            />
       <Routes>
         <Route exact path="/" element={<Home allProducts={allProducts} />} />
-        <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/products/:productId" element={<SingleProduct />} />
         <Route
