@@ -16,8 +16,10 @@ const NavBar = (props) => {
   const setPassword = props.setPassword;
   const isLoggedIn = props.isLoggedIn;
   const setIsLoggedIn = props.setIsLoggedIn;
-  const user = props.user
-  const setUser = props.setUser
+  const user = props.user;
+  const setUser = props.setUser;
+  const token = props.token;
+  const setToken = props.setToken;
 
   return (
     <>
@@ -53,9 +55,9 @@ const NavBar = (props) => {
                     localStorage.removeItem("email");
                     localStorage.removeItem("token");
                     localStorage.removeItem("user");
-                    setEmail("")
-                    setToken("")
-                    setUser("")
+                    setEmail("");
+                    setToken("");
+                    setUser("");
                     // navigate("/", { replace: true });
                     // window.location.reload(true);
                   }}
@@ -73,6 +75,8 @@ const NavBar = (props) => {
                   setPassword={setPassword}
                   user={user}
                   setUser={setUser}
+                  token={token}
+                  setToken={setToken}
                 />
               )}
               <Register

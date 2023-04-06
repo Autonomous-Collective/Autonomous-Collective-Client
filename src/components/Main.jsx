@@ -63,6 +63,8 @@ const Main = () => {
         setPassword={setPassword}
         user={user}
         setUser={setUser}
+        token={token}
+        setToken={setToken}
       />
       <Routes>
         <Route exact path="/" element={<Home allProducts={allProducts} />} />
