@@ -145,3 +145,79 @@ export const createReviewCall = async(productId, token, score, title, content) =
     throw error;
   }
 }
+
+export const addProductToCartCall = async (token, userId, productId, quantity) => {
+
+  try {
+    const response = await fetch(`${URL}/api/users/${userId}/add-product/${productId}`, {
+      method: "POST",
+      headers: makeHeaders(token),
+      body: {
+        quantity: quantity,
+      }
+    
+  
+    })
+    const result = await response.json();
+    console.log(result,"result from addProductToCartCall ")
+    return result;
+    
+  } catch (error) {
+    console.error(error)
+  }
+
+} 
+
+export const getAllUsersCall = async (token) => {
+
+  try {
+    const response = await fetch(`${URL}/api/users/all`, {
+      method: "GET",
+      headers: makeHeaders(token)
+    })
+  
+    const result = await response.json();
+    console.log(result, " result from get all users ")
+    return result;
+    
+  } catch (error) {
+    console.error(error)
+  }
+
+}
+
+export const editProductCall = async(token, productId, title, author, isbn, description, price, imageUrl, inventory ) => {
+  try {
+      const response = await fetch(`${URL}/api/products/${productId}`, {
+        method: "PATCH",
+        headers: makeHeaders(token),
+        body: JSON.stringify( {
+          title: title,
+          author: author,
+          isbn: isbn,
+          description: description,
+          price: price,
+          imageUrl: imageUrl,
+          inventory: inventory
+
+        })
+      })
+      const result = await response.json();
+      console.log (result, "result from editProductCall")
+      return result;
+
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const deactivateProductCall = async (token, productId) => {
+  const response = await fetch(`${URL}/api/products/${productId}/delete`, {
+    method: "PATCH",
+    headers: makeHeaders(token)
+  })
+
+  const result = await response.json();
+  console.log(result, "result from deactivateProductCall")
+  return result; 
+}

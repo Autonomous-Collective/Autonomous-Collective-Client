@@ -1,46 +1,78 @@
-
 import React, { useState, useEffect } from "react";
-import { NavBar, Footer, Home,  Login, Register, SingleProduct } from "./";
+import {
+  NavBar,
+  Footer,
+  Home,
+  Login,
+  Register,
+  SingleProduct,
+  AdminPage,
+} from "./";
 import { Routes, Route } from "react-router-dom";
-import { getAllProductsCall } from "../API-Adapter";
+import { getAllProductsCall, getAllUsersCall } from "../API-Adapter";
 
 const Main = () => {
-const [allProducts, setAllProducts] = useState([]);
+
+
 
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 const [isLoggedIn, setIsLoggedIn ] = useState(localStorage.getItem("token"))
 
-const getAllProducts = async() => {
+
+
+  const [allProducts, setAllProducts] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
+  const getAllProducts = async () => {
     const response = await getAllProductsCall();
 
-    if(response.success){
-        setAllProducts(response.products);
-        console.log(response, "response from main for all products!!!");
+    if (response.success) {
+      setAllProducts(response.products);
+      console.log(response, "response from main for all products!!!");
     }
-}
+  };
+  const getAllUsers = async () => {
+    const response = await getAllUsersCall(token);
 
-useEffect(() => {
+    if (response.success) {
+      setAllUsers(response.allUsers);
+      console.log(response, "response from main for all users!!!");
+    }
+  };
+
+  useEffect(() => {
     getAllProducts();
     console.log(allProducts, "all products from the main use effect");
-}, [])
-    
-    return(
-        <div id="main">
-            <NavBar 
-            isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
+
+    getAllUsers();
+  }, []);
+
+ 
+  return (
+    <div id="main">
+      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
             email={email} setEmail={setEmail}
             password={password} setPassword={setPassword}
             />
-            <Routes>
-                <Route exact path = "/" element ={ <Home allProducts={allProducts} />}/>
-                {/* <Route exact path = "/login" element ={ <Login/>}/> */}
-                <Route exact path = "/register" element ={ <Register/>}/>
-                <Route exact path = "/products/:productId" element={<SingleProduct/>} />
-            </Routes>
-            <Footer/>
-        </div>
-    )
-}
+      <Routes>
+        <Route exact path="/" element={<Home allProducts={allProducts} />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/products/:productId" element={<SingleProduct />} />
+        <Route
+          exact
+          path="/admin"
+          element={
+            <AdminPage
+              token={token}
+              allProducts={allProducts}
+              allUsers={allUsers}
+            />
+          }
+        />
+      </Routes>
+      <Footer />
+    </div>
+  );
+};
 
-export default Main
+export default Main;
