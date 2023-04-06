@@ -1,4 +1,5 @@
-const URL = "https://autonomous-collective.onrender.com";
+// const URL = "https://autonomous-collective.onrender.com";
+const URL = "http://localhost:4000";
 
 const makeHeaders = (token) => {
   return {
@@ -209,12 +210,57 @@ export const editProductCall = async(token, productId, title, author, isbn, desc
 }
 
 export const deactivateProductCall = async (token, productId) => {
-  const response = await fetch(`${URL}/api/products/${productId}/delete`, {
-    method: "PATCH",
-    headers: makeHeaders(token)
-  })
+  try {
+    const response = await fetch(`${URL}/api/products/${productId}/delete`, {
+      method: "PATCH",
+      headers: makeHeaders(token)
+    })
+  
+    const result = await response.json();
+    console.log(result, "result from deactivateProductCall")
+    return result; 
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
 
-  const result = await response.json();
-  console.log(result, "result from deactivateProductCall")
-  return result; 
+export const activateProductCall = async(token, productId) => {
+  try {
+    const response = await fetch(`${URL}/api/products/${productId}/restore`, {
+      method: "PATCH",
+      headers: makeHeaders(token),
+    });
+  
+    const result = await response.json();
+    console.log(result, "result from activatePRoduct call");
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+  
+}
+
+export const adminEditUserCall = async(token, userId, name, email, isAdmin, isActive) => {
+  console.log(token, userId, name, email, isAdmin, isActive, "from admin edit user call")
+  try {
+    const response = await fetch(`${URL}/api/users/admin/edit-user/${userId}`, {
+      method: "PATCH",
+      headers: makeHeaders(token),
+      body: JSON.stringify({
+        name: name, 
+        email: email,
+        isAdmin: isAdmin,
+        isActive: isActive
+      })
+    });
+
+    const result = await response.json();
+    console.log(result, "result from admin edit user call");
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }

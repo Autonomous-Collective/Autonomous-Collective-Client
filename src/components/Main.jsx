@@ -41,7 +41,7 @@ const Main = () => {
     getAllProducts();
     console.log(allProducts, "all products from the main use effect");
 
-    getAllUsers();
+    // getAllUsers();
 
     if (localStorage.getItem("token")) {
         setToken(localStorage.getItem("token"))
@@ -49,6 +49,10 @@ const Main = () => {
         setIsLoggedIn(true)
     }  
   }, []);
+
+  useEffect(() => {
+    getAllUsers();
+  }, [isLoggedIn]);
 
 
 

@@ -1,6 +1,6 @@
 import React from "react";
-import { ProductCard, EditProductForm } from "./";
-import { deactivateProductCall } from "../API-Adapter";
+import { ProductCard, EditProductForm, EditUserAdminForm } from "./";
+import { deactivateProductCall, activateProductCall, adminEditUserCall } from "../API-Adapter";
 
 const AdminPage = ({ allProducts, allUsers, token }) => {
   const toggleForm = (id) => {
@@ -13,6 +13,16 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
     }
   };
 
+  const toggleEditUser = (userId) => {
+    let editUserForm = document.getElementById(`edit-user-form${userId}`);
+
+    if (editUserForm.style.display === "flex") {
+      editUserForm.style.display = "none";
+    } else {
+      editUserForm.style.display = "flex";
+    }
+  }
+
   const deactivateProduct = async (id) => {
     const response = await deactivateProductCall(token, id);
     if (response.success) {
@@ -22,14 +32,23 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
     }
   };
 
+  const activateProduct = async(id) => {
+    const response = await activateProductCall(token, id);
+    if(response.success){
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
+  }
+
   return (
     <>
       <h1>I am the Admin Page</h1>
       <button>Add Product</button>
       <h1>Product List Active products</h1>
-      {allProducts.map((product) => {
+      {allProducts.map((product, idx) => {
         return product.isActive ? (
-          <>
+          <div key={`${idx} on productCard map in admin`}>
             <ProductCard product={product} />
             <button
               onClick={() => {
@@ -48,24 +67,26 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
             >
               Dectivate Product
             </button>
-          </>
+          </div>
         ) : null;
       })}
       <h1>Product List InActive products</h1>
-      {allProducts.map((product) => {
+      {allProducts.map((product, idx) => {
         return !product.isActive ? (
-          <>
+          <div key={`${idx} on productCard deactivated map in admin`}>
             <ProductCard product={product} />
             <button>Edit Product</button>
-            <button>Activate Product</button>
-          </>
+            <button onClick={() => {
+              activateProduct(product.id);
+            }}>Activate Product</button>
+          </div>
         ) : null;
       })}
 
       <h1>User List</h1>
-      {allUsers.map((user) => {
+      {allUsers.map((user, idx) => {
         return (
-          <>
+          <div key={`${idx} on users map in admin`}>
             <h1>Name: {user.name}</h1>
             <p>ID: {user.id}</p>
             <p>Email: {user.email}</p>
@@ -79,9 +100,14 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
               isActive: {user.isActive ? <span>true</span> : <span>false</span>}{" "}
             </p>
 
-            <button>Edit User</button>
+            <button onClick={() => {
+              toggleEditUser(user.id);
+            }}>Edit User</button>
+            <div id={`edit-user-form${user.id}`} className="display-none">
+            <EditUserAdminForm name={user.name} email={user.email} isAdmin={user.isAdmin} isActive={user.isActive} token={token} userId={user.id}/>
+            </div>
             <button>Delete User</button>
-          </>
+          </div>
         );
       })}
     </>
