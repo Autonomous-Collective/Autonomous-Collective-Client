@@ -15,15 +15,14 @@ body {
 .login-buttons button{
     margin: 5px;
 }
-#navbar-container.container{
+/* #navbar-container.container{
     margin: 0px;
-}
+} */
 /* #navbar-links{
     position: fixed;
     top: 5;
     right:0;
 } */
-
 
 .material-symbols-outlined {
   font-variation-settings:
