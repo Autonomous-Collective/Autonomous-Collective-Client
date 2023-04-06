@@ -15,9 +15,9 @@ const SideNav = () =>{
                   />
             </Form>
           <Nav defaultActiveKey="/home" id="side-bar" >
-            <Nav.Link href="/home">Fanstasy</Nav.Link>
-            <Nav.Link href="link-1">Historical Fiction</Nav.Link>
-            <Nav.Link href="link-2">Horror</Nav.Link>
+            <Nav.Link href="">Fantasy</Nav.Link>
+            <Nav.Link href="">Historical Fiction</Nav.Link>
+            <Nav.Link href="">Horror</Nav.Link>
           </Nav>
         </div>
     )

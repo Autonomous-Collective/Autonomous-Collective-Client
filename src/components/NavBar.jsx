@@ -14,8 +14,10 @@ const NavBar = (props) => {
   const setEmail = props.setEmail;
   const password = props.password;
   const setPassword = props.setPassword;
-  const isLoggedIn = props.isLoggedIn
+  const isLoggedIn = props.isLoggedIn;
   const setIsLoggedIn = props.setIsLoggedIn;
+  const user = props.user
+  const setUser = props.setUser
 
   return (
     <>
@@ -41,22 +43,45 @@ const NavBar = (props) => {
           <Navbar.Collapse>
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
-              <Login
+              <Nav.Link href="#link">Profile</Nav.Link>
+
+              {isLoggedIn ? (
+                <Nav.Link
+                  id={"logoutLink"}
+                  onClick={() => {
+                    setIsLoggedIn(false);
+                    localStorage.removeItem("email");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("user");
+                    setEmail("")
+                    setToken("")
+                    setUser("")
+                    // navigate("/", { replace: true });
+                    // window.location.reload(true);
+                  }}
+                  className="navButton"
+                >
+                  Log Out
+                </Nav.Link>
+              ) : (
+                <Login
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
+                  user={user}
+                  setUser={setUser}
+                />
+              )}
+              <Register
                 isLoggedIn={isLoggedIn}
                 setIsLoggedIn={setIsLoggedIn}
                 email={email}
                 setEmail={setEmail}
                 password={password}
                 setPassword={setPassword}
-              />
-              <Register
-              isLoggedIn={isLoggedIn}
-              setIsLoggedIn={setIsLoggedIn}
-              email={email}
-              setEmail={setEmail}
-              password={password}
-              setPassword={setPassword}
               />
               {/* <NavDropdown title="Dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
