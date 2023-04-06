@@ -18,6 +18,7 @@ const Login = (props) => {
   const password = props.password;
   const setPassword = props.setPassword;
   const setIsLoggedIn = props.setIsLoggedIn;
+  const setUser = props.setUSer
 
   const navigate = useNavigate();
 
@@ -32,11 +33,15 @@ const Login = (props) => {
           } else {
             const result = await userLoginCall(email, password);
             if (result !== undefined) {
-              setIsLoggedIn(true);
               localStorage.setItem("token", result.token);
-              localStorage.setItem("username", email);
+              localStorage.setItem("email", email);
               localStorage.setItem("user", JSON.stringify(result.user))
+              setToken("token")
+              setEmail("email")
+              setUser("user")
+              setIsLoggedIn(true);
               handleClose();
+              console.log("!!!!1", result)
             } else {
               console.log("Invalid Login Credentials");
             }

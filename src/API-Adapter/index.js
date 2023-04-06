@@ -48,18 +48,15 @@ export const userLoginCall = async (email, password) => {
   throw error;
 };
 
-export const guestLoginCall = async (email, password) => {
+export const guestLoginCall = async () => {
   try {
-    const response = await fetch(`${URL}/api/users/login`, {
+    const response = await fetch(`${URL}/api/users/guest-login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
+      })
+    ;
     const result = await response.json();
     return result;
   } catch (error) {

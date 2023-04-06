@@ -12,14 +12,11 @@ import { Routes, Route } from "react-router-dom";
 import { getAllProductsCall, getAllUsersCall } from "../API-Adapter";
 
 const Main = () => {
-
-
-
-const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
-const [isLoggedIn, setIsLoggedIn ] = useState(localStorage.getItem("token"))
-
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState("")
 
   const [allProducts, setAllProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -45,15 +42,28 @@ const [isLoggedIn, setIsLoggedIn ] = useState(localStorage.getItem("token"))
     console.log(allProducts, "all products from the main use effect");
 
     getAllUsers();
+
+    if (localStorage.getItem("token")) {
+        setToken(localStorage.getItem("token"))
+        setUser(JSON.parse(localStorage.getItem("user")))
+        setIsLoggedIn(true)
+    }  
   }, []);
 
- 
+
+
   return (
     <div id="main">
-      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}
-            email={email} setEmail={setEmail}
-            password={password} setPassword={setPassword}
-            />
+      <NavBar
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        user={user}
+        setUser={setUser}
+      />
       <Routes>
         <Route exact path="/" element={<Home allProducts={allProducts} />} />
         <Route exact path="/register" element={<Register />} />
