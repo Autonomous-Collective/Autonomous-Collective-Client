@@ -218,3 +218,15 @@ export const deactivateProductCall = async (token, productId) => {
   console.log(result, "result from deactivateProductCall")
   return result; 
 }
+
+export const getAllTagsCall = async () => {
+  const response = await fetch(`${URL}/api/products/tags`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  const result = await response.json();
+  console.log(result, "This is result from get all tags");
+  return result;
+}

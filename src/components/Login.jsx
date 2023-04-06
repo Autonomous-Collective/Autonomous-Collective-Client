@@ -33,16 +33,21 @@ const Login = (props) => {
               alert("Already logged in!");
             } else {
               const result = await userLoginCall(email, password);
-              if (result !== undefined) {
+              console.log(result);
+
+              //think about better error handling? universal error & setError state?
+              
+              if (result.name !== 'Login Error') {
                 localStorage.setItem("token", result.token);
                 localStorage.setItem("email", email);
                 localStorage.setItem("user", JSON.stringify(result.user));
-                setToken("token");
-                setEmail("email");
-                setUser("user");
+                setToken(result.token);
+                setEmail(email);
+                setUser(result.user);
                 setIsLoggedIn(true);
                 handleClose();
               } else {
+                alert("Invalid Login Credentials"); //no alerts? How else should we handle errors?
                 console.log("Invalid Login Credentials");
               }
             }
@@ -69,6 +74,7 @@ const Login = (props) => {
                   value={email}
                   required
                   onChange={(event) => {
+                    event.preventDefault()
                     setEmail(event.target.value);
                   }}
                 />
@@ -85,6 +91,7 @@ const Login = (props) => {
                   value={password}
                   required
                   onChange={(event) => {
+                    event.preventDefault()
                     setPassword(event.target.value);
                   }}
                 />
@@ -111,9 +118,9 @@ const Login = (props) => {
                             "user",
                             JSON.stringify(result.guestUser)
                           );
-                          setToken("token");
-                          setEmail("email");
-                          setUser("user");
+                          setToken(result.token);
+                          setEmail(result.guestUser.email);
+                          setUser(result.guestUser);
                           setIsLoggedIn(true);
                           handleClose();
                         } else {
