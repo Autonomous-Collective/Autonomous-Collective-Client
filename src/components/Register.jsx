@@ -15,6 +15,10 @@ const Register = (props) => {
   const password = props.password;
   const setPassword = props.setPassword;
   const setIsLoggedIn = props.setIsLoggedIn;
+  const user = props.user
+  const setUser = props.setUser
+  const token = props.Token
+  const setToken = props.setToken
 
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -36,8 +40,11 @@ const Register = (props) => {
                 if (result !== undefined) {
                   setIsLoggedIn(true);
                   localStorage.setItem("token", result.token);
-                  localStorage.setItem("username", email);
+                  localStorage.setItem("email", email);
                   localStorage.setItem("user", JSON.stringify(result.user));
+                  setToken("token");
+                  setEmail("email");
+                  setUser("user");
                   handleClose();
                 } else {
                   console.log("token came back undefined");
