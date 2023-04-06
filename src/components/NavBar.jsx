@@ -1,19 +1,26 @@
 import React from "react";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Login from "./Login";
 import Register from "./Register";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const email = props.email;
+  const setEmail = props.setEmail;
+  const password = props.password;
+  const setPassword = props.setPassword;
+  const isLoggedIn = props.isLoggedIn
+  const setIsLoggedIn = props.setIsLoggedIn;
+
   return (
     <>
-    <style type ="text/css">
-      {`
+      <style type="text/css">
+        {`
       #navbar-container{
         display: flex;
         justify-content: space-between;
@@ -21,11 +28,13 @@ const NavBar = () => {
         flex-wrap:wrap;
       }
       `}
-    </style>
-    <Navbar bg="light" expand="sm" id="navbar-container" sticky="top">
-      {/* <Container id="navbar-container"> */}
+      </style>
+      <Navbar bg="light" expand="sm" id="navbar-container" sticky="top">
+        {/* <Container id="navbar-container"> */}
         <div>
-          <Navbar.Brand href="/" id="brand">The Autonomous Collective</Navbar.Brand>
+          <Navbar.Brand href="/" id="brand">
+            The Autonomous Collective
+          </Navbar.Brand>
         </div>
         <div id="navbar-links">
           <Navbar.Toggle />
@@ -33,8 +42,22 @@ const NavBar = () => {
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="#link">Link</Nav.Link>
-              <Login/>
-              <Register/>
+              <Login
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                email={email}
+                setEmail={setEmail}
+                password={password}
+                setPassword={setPassword}
+              />
+              <Register
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              />
               {/* <NavDropdown title="Dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -46,18 +69,14 @@ const NavBar = () => {
                 Separated link
                 </NavDropdown.Item>
               </NavDropdown> */}
-              <Link className="material-symbols-outlined">
-                shopping_cart
-              </Link>
+              <Link className="material-symbols-outlined">shopping_cart</Link>
             </Nav>
           </Navbar.Collapse>
         </div>
-      {/* </Container> */}
-    </Navbar>
+        {/* </Container> */}
+      </Navbar>
     </>
   );
-}
+};
 
-export default NavBar
-
-  
+export default NavBar;
