@@ -13,4 +13,6 @@ export { default as SideNav } from "./SideNav";
 export { default as ReviewList } from "./ReviewList";
 export { default as ReviewCard } from "./ReviewCard";
 export { default as CreateReview } from "./CreateReview";
+export { default as AdminPage } from "./AdminPage";
+export { default as EditProductForm } from "./EditProductForm";
 
