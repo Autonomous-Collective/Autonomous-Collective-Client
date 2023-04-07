@@ -120,8 +120,11 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                 }}
               >
                 <option>Select A Tag</option>
+
                 {allTags.map((tag) => {
-                  return <option value={tag.name}>{tag.name}</option>;
+                  return product.tags.includes(tag.name) ? null : (
+                    <option value={tag.name}>{tag.name}</option>
+                  );
                 })}
               </select>
               <button type="submit">Add tag to Product</button>
