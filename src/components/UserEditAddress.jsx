@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 // import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
-import {editUserAddressCall} from "../API-Adapter";
+import {editUserAddressCall, createUserAddressCall} from "../API-Adapter";
 
 // import Register from "./Register";
 
@@ -19,6 +19,7 @@ const UserEditAddress = (props) => {
   const [updateState, setUpdateState] = useState("");
 
   const token = props.token;
+  const userAddress = props.userAddress 
 
 
   const editUserAddress = async(token, updateName, updateAddress, updateCity, updateState) => {
@@ -33,12 +34,28 @@ const UserEditAddress = (props) => {
     }
   }
 
+  const createUserAddress = async (token, updateName, updateAddress, updateCity, updateState ) =>{
+    try{
+      const result = await createUserAddressCall(token, updateName, updateAddress, updateCity, updateState);
+      if(result.success){
+          handleClose();
+          window.location.reload();
+      }
+  } catch(error){
+      console.error(error);
+  }
+}
+
   return (
     <>
       <div
         onSubmit={async (event) => {
             event.preventDefault();
+            if (userAddress) {
             editUserAddress(token, updateName, updateAddress, updateCity, updateState);
+            } else {
+              createUserAddress(token, updateName, updateAddress, updateCity, updateState)
+            }
         }}
       >
         <Button

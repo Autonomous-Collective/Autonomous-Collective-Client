@@ -218,6 +218,25 @@ export const editUserInfoCall = async (token, name, email, password) => {
   }
 }
 
+export const createUserAddressCall = async ( token, name, address, city, state) => {
+  try{
+const response = await fetch(`${URL}/api/users/me/create-address`, {
+  method: "POST",
+  headers: makeHeaders(token),
+  body: JSON.stringify({
+    name: name,
+    address: address,
+    city: city,
+    state: state
+  })
+})
+const result = await response.json()
+return result
+  } catch(error) {
+    console.error(error)
+  }
+}
+
 export const editUserAddressCall = async (token, name, address, city, state) => {
   try{
     const response = await fetch(`${URL}/api/users/me/edit-address`, {
@@ -367,6 +386,21 @@ export const deactivateUserCall = async (token, userId) => {
   } catch (error) {
     console.error(error);
     throw error;
+  }
+}
+
+export const selfDeactivateUserCall = async (token) => {
+  try{
+const response = await fetch(`${URL}/api/users/me/delete`, {
+  method: "PATCH",
+  headers: makeHeaders(token)
+})
+const result = await response.json()
+console.log(result, "result from selfDeactivateUserCall")
+return result
+  } catch(error) {
+    console.error(error)
+    throw error
   }
 }
 

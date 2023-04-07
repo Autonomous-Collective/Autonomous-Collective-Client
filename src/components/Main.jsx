@@ -138,6 +138,7 @@ const Main = () => {
               user={user}
               token={token}
               pastOrders={pastOrders}
+              setIsLoggedIn={setIsLoggedIn}
             />
           }
         />

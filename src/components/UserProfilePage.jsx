@@ -7,6 +7,7 @@ import { getUserInfoCall } from '../API-Adapter';
 const UserProfilePage = (props) => {
   const pastOrders = props.pastOrders;
   const token = props.token;
+  const setIsLoggedIn = props.setIsLoggedIn
 
   const [userInfo, setUserInfo] = useState([]);
   const [userAddress, setUserAddress] = useState({});
@@ -34,7 +35,7 @@ const UserProfilePage = (props) => {
       </div>
       <div id="userInfoContainer">
         {userAddress || userInfo ?
-        <UserInfo userInfo={userInfo} userAddress={userAddress} token={token}></UserInfo> : <h1> LOADING...</h1>}
+        <UserInfo userInfo={userInfo} userAddress={userAddress} token={token} setIsLoggedIn={setIsLoggedIn}></UserInfo> : <h1> LOADING...</h1>}
       </div>
     </div>
     //user info (api call users/me - returns name, email, password, address)
