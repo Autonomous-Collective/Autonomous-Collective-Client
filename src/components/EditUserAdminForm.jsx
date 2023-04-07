@@ -52,7 +52,7 @@ const EditUserAdminForm = ({
         ></input>
         <label>Email:</label>
         <input
-          type="email"
+          type="text"
           defaultValue={email}
           onChange={(e) => {
             setNewEmail(e.target.value);

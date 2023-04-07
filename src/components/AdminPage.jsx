@@ -1,8 +1,21 @@
-import React from "react";
-import { ProductCard, EditProductForm, EditUserAdminForm } from "./";
-import { deactivateProductCall, activateProductCall, adminEditUserCall } from "../API-Adapter";
+import React, { useState } from "react";
+import {
+  ProductCard,
+  EditProductForm,
+  EditUserAdminForm,
+  AddProductForm,
+} from "./";
+import {
+  deactivateProductCall,
+  activateProductCall,
+  adminEditUserCall,
+  deactivateUserCall,
+  addTagToProductCall,
+} from "../API-Adapter";
 
-const AdminPage = ({ allProducts, allUsers, token }) => {
+const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
+  const [tagToAdd, setTagToAdd] = useState("");
+
   const toggleForm = (id) => {
     let form = document.getElementById(`edit-product-form${id}`);
 
@@ -21,7 +34,16 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
     } else {
       editUserForm.style.display = "flex";
     }
-  }
+  };
+  const toggleAddProduct = () => {
+    let addProductForm = document.getElementById(`add-product-form`);
+
+    if (addProductForm.style.display === "flex") {
+      addProductForm.style.display = "none";
+    } else {
+      addProductForm.style.display = "flex";
+    }
+  };
 
   const deactivateProduct = async (id) => {
     const response = await deactivateProductCall(token, id);
@@ -32,19 +54,47 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
     }
   };
 
-  const activateProduct = async(id) => {
-    const response = await activateProductCall(token, id);
-    if(response.success){
+  const deleteUser = async (userId) => {
+    const response = await deactivateUserCall(token, userId);
+    if (response.success) {
       setTimeout(() => {
         window.location.reload();
       }, 1500);
     }
-  }
+  };
+
+  const activateProduct = async (id) => {
+    const response = await activateProductCall(token, id);
+    if (response.success) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
+  };
+
+  const addTagToProduct = async (productId) => {
+    const response = await addTagToProductCall(token, tagToAdd, productId);
+
+    if (response.success) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
+  };
 
   return (
     <>
       <h1>I am the Admin Page</h1>
-      <button>Add Product</button>
+      <button
+        onClick={() => {
+          toggleAddProduct();
+        }}
+      >
+        Add Product
+      </button>
+      <div className="display-none" id="add-product-form">
+        <AddProductForm token={token} />
+      </div>
       <h1>Product List Active products</h1>
       {allProducts.map((product, idx) => {
         return product.isActive ? (
@@ -57,6 +107,25 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
             >
               Edit Product
             </button>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                addTagToProduct(product.id);
+              }}
+            >
+              <label>Select Tag to Add to Product</label>
+              <select
+                onChange={(e) => {
+                  setTagToAdd(e.target.value);
+                }}
+              >
+                <option>Select A Tag</option>
+                {allTags.map((tag) => {
+                  return <option value={tag.name}>{tag.name}</option>;
+                })}
+              </select>
+              <button type="submit">Add tag to Product</button>
+            </form>
             <div className="display-none" id={`edit-product-form${product.id}`}>
               <EditProductForm token={token} product={product} />
             </div>
@@ -76,9 +145,13 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
           <div key={`${idx} on productCard deactivated map in admin`}>
             <ProductCard product={product} />
             <button>Edit Product</button>
-            <button onClick={() => {
-              activateProduct(product.id);
-            }}>Activate Product</button>
+            <button
+              onClick={() => {
+                activateProduct(product.id);
+              }}
+            >
+              Activate Product
+            </button>
           </div>
         ) : null;
       })}
@@ -100,13 +173,30 @@ const AdminPage = ({ allProducts, allUsers, token }) => {
               isActive: {user.isActive ? <span>true</span> : <span>false</span>}{" "}
             </p>
 
-            <button onClick={() => {
-              toggleEditUser(user.id);
-            }}>Edit User</button>
+            <button
+              onClick={() => {
+                toggleEditUser(user.id);
+              }}
+            >
+              Edit User
+            </button>
             <div id={`edit-user-form${user.id}`} className="display-none">
-            <EditUserAdminForm name={user.name} email={user.email} isAdmin={user.isAdmin} isActive={user.isActive} token={token} userId={user.id}/>
+              <EditUserAdminForm
+                name={user.name}
+                email={user.email}
+                isAdmin={user.isAdmin}
+                isActive={user.isActive}
+                token={token}
+                userId={user.id}
+              />
             </div>
-            <button>Delete User</button>
+            <button
+              onClick={() => {
+                deleteUser(user.id);
+              }}
+            >
+              Delete User
+            </button>
           </div>
         );
       })}

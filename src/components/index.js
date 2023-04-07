@@ -18,3 +18,4 @@ export { default as EditProductForm } from "./EditProductForm";
 export { default as EditUserAdminForm } from "./EditUserAdminForm";
 
 export { default as UserProfilePage } from "./UserProfilePage";
+export { default as AddProductForm } from "./AddProductForm";
