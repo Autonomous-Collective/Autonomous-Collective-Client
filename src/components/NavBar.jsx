@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Login from "./Login";
 import Register from "./Register";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -24,7 +24,8 @@ const NavBar = (props) => {
   const verifyAdmin = user.isAdmin;
   const verifyGuest = user.isGuest;
   //guest navbar => register logout shoppingcart
-  
+  const navigate = useNavigate();
+
   return (
     <>
       <style type="text/css">
@@ -68,8 +69,7 @@ const NavBar = (props) => {
                     setEmail("");
                     setToken("");
                     setUser("");
-                    // navigate("/", { replace: true });
-                    // window.location.reload(true);
+                    navigate("/");
                   }}
                   className="navButton"
                 >

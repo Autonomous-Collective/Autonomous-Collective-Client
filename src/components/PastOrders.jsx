@@ -10,12 +10,12 @@ const PastOrders = (props) => {
       {pastOrders.length ? (
         pastOrders.map((order, idx) => {
           return (
-            <Card>
+            <Card key={idx}>
               <Card.Header>Cart {`${idx + 1}`}</Card.Header>
               <div>
                 {order.products.map((product, idx) => {
                   return (
-                    <Card.Body>
+                    <Card.Body key={idx}>
                       <Card.Title>{product.title}</Card.Title>
                       <Card.Text>Quantity:{product.quantity}</Card.Text>
                       <Card.Text>Price: ${product.price}</Card.Text>

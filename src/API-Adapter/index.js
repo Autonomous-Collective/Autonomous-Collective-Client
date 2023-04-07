@@ -184,6 +184,61 @@ export const getAllUsersCall = async (token) => {
 
 }
 
+export const getUserInfoCall = async (token) =>{
+  try{
+    const response = await fetch(`${URL}/api/users/me`, {
+      method: "GET",
+      headers: makeHeaders(token)
+    })
+
+    const result = await response.json();
+    return result;
+  } catch(error){
+    console.error(error);
+  }
+}
+
+export const editUserInfoCall = async (token, name, email, password) => {
+  try{
+    const response = await fetch(`${URL}/api/users/me/edit-info`, {
+      method: "PATCH",
+      headers: makeHeaders(token),
+      body: JSON.stringify( {
+        name: name,
+        email: email,
+        password: password
+      })
+    })
+
+    const result = await response.json();
+    // console.log(result, "result from edit user info call");
+    return result;
+  } catch(error){
+    console.error(error);
+  }
+}
+
+export const editUserAddressCall = async (token, name, address, city, state) => {
+  try{
+    const response = await fetch(`${URL}/api/users/me/edit-address`, {
+      method: "PATCH",
+      headers: makeHeaders(token),
+      body: JSON.stringify( {
+        name: name,
+        address: address,
+        city: city,
+        state: state
+      })
+    })
+
+    const result = await response.json();
+    console.log(result, "result from edit user address call");
+    return result;
+  } catch(error){
+    console.error(error);
+  }
+}
+
 export const getPastOrdersCall = async (token, userId) =>{
 try{
   const response = await fetch(`${URL}/api/users/${userId}/orders`, {
