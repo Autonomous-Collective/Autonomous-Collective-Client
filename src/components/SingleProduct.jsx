@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getProductByIdCall } from "../API-Adapter";
+import { getProductByIdCall, addProductToCartCall, editCartProductCall } from "../API-Adapter";
 import "./componentStyles/SingleProduct.css";
 import { ReviewList, CreateReview } from "./";
 
-const SingleProduct = () => {
+const SingleProduct = ({ token, user, cart }) => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
+  const [quantity, setQuantity] = useState(1);
   console.log(productId, "product id ???????");
 
   const getProductById = async () => {
@@ -30,6 +31,39 @@ const SingleProduct = () => {
     console.log(product, "product is set! -----");
   }, []);
 
+  const addProductToCart = async() => {
+
+    console.log(token, user.id, productId, quantity , "add product to cart in single product")
+
+  for(let i = 0; i < cart.products?.length; i++){
+    console.log(cart.products[i]);
+    if(cart.products[i].productId == productId){
+     await editCartProduct(cart.products[i].quantity);
+      return null;
+    }
+  }
+
+    const response = await addProductToCartCall(token, user.id, productId, quantity);
+    if(response.success){
+     setTimeout(() => {
+      window.location.reload();
+     }, 2000) 
+      console.log("added to cart")
+    }
+  }
+
+  const editCartProduct = async(initQuant) => {
+     let finalQuant = Number(initQuant) + Number(quantity);
+    const response = await editCartProductCall(token, user.id, productId,finalQuant);
+
+    if(response.success){
+      console.log("product was edited in cart")
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
+  }
+
   return (
     <div className="flex-column">
       {product?.title ? (
@@ -48,7 +82,16 @@ const SingleProduct = () => {
               <h3>By: {product.author}</h3>
               <p>{product.isbn}</p>
               <h4>${product.price / 100}</h4>
-              <button onClick={() => {}}>add to cart</button>
+              <form onSubmit={(e) => {
+                e.preventDefault();
+                addProductToCart();
+              }}>
+                <label>choose the quantity</label>
+              <input type="number" defaultValue={1} min={1} onChange={(e) => {
+                setQuantity(e.target.value);
+              }}/>
+              <button type="submit" onClick={() => {}}>add to cart</button>
+              </form>
             </div>
           </div>
           <div className="flex-row">
