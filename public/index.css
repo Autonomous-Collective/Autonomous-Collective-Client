@@ -56,3 +56,17 @@ body {
   color: white;
   border: none;
 }
+
+#pastOrderContainer {
+  width: 66vw;
+  margin-left: 10px;
+}
+#userInfoContainer {
+  margin-right: 10px;
+}
+
+#userProfileContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

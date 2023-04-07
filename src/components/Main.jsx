@@ -10,19 +10,31 @@ import {
   UserProfilePage,
 } from "./";
 import { Routes, Route } from "react-router-dom";
-import { getAllProductsCall, getAllUsersCall, getAllTagsCall } from "../API-Adapter";
+import {
+  getAllProductsCall,
+  getAllUsersCall,
+  getAllTagsCall,
+  getCartByUserIdCall,
+
+  getPastOrdersCall,
+
+} from "../API-Adapter";
 
 const Main = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
-  const [user, setUser] = useState("")
+  const [user, setUser] = useState("");
+
+  const [cart, setCart] = useState("");
+
 
   const [allProducts, setAllProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
   const [allTags, setAllTags] = useState([]);
+  const [pastOrders, setPastOrders] = useState([]);
 
   const getAllProducts = async () => {
     const response = await getAllProductsCall();
@@ -43,33 +55,57 @@ const Main = () => {
 
   const getAllTags = async () => {
     const response = await getAllTagsCall();
-    console.log(response, "YYYYYYYY");
-    if(response.success){
-      setAllTags(response.tags)
-      console.log(allTags, "!!@@!!")
+
+
+    if (response.success) {
+      setAllTags(response.tags);
+     
     }
-  }
+  };
+
+  const getCartByUserId = async () => {
+    const response = await getCartByUserIdCall(token, user.id);
+    if (response.success) {
+      setCart(response.cart);
+    }
+  };
+
+   
+
+  const getPastOrders = async () => {
+    const response = await getPastOrdersCall(token, user.id);
+  
+    if (response.success) {
+      setPastOrders(response.userOrders);
+    }
+  };
+
 
   useEffect(() => {
     getAllProducts();
     console.log(allProducts, "all products from the main use effect");
-
-    // getAllUsers();
-
     getAllTags();
 
     if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"))
-        setUser(JSON.parse(localStorage.getItem("user")))
-        setIsLoggedIn(true)
-    }  
+
+      setToken(localStorage.getItem("token"));
+      setUser(JSON.parse(localStorage.getItem("user")));
+      setIsLoggedIn(true);
+    }
+
+    
+    
   }, []);
 
   useEffect(() => {
     getAllUsers();
+
+    getCartByUserId();
+    console.log(cart);
+
+    getPastOrders()
+
   }, [isLoggedIn]);
-
-
 
   return (
     <div id="main">
@@ -86,7 +122,11 @@ const Main = () => {
         setToken={setToken}
       />
       <Routes>
-        <Route exact path="/" element={<Home allProducts={allProducts} allTags={allTags} />} />
+        <Route
+          exact
+          path="/"
+          element={<Home allProducts={allProducts} allTags={allTags} />}
+        />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/products/:productId" element={<SingleProduct />} />
         <Route
@@ -97,18 +137,16 @@ const Main = () => {
               token={token}
               allProducts={allProducts}
               allUsers={allUsers}
+              allTags={allTags}
             />
           }
         />
-        <Route 
+        <Route
           exact
           path="/profile"
-          element={
-            <UserProfilePage 
-              user={user}
-              token={token}
-            />
-          }
+
+        element={<UserProfilePage user={user} token={token} pastOrders={pastOrders} />}
+
         />
       </Routes>
       <Footer />

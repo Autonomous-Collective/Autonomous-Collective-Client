@@ -184,6 +184,21 @@ export const getAllUsersCall = async (token) => {
 
 }
 
+export const getPastOrdersCall = async (token, userId) =>{
+try{
+  const response = await fetch(`${URL}/api/users/${userId}/orders`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  })
+const result = await response.json()
+console.log("result from get past orders", result)
+return result
+} catch (error) {
+  console.error(error)
+}
+}
+
+
 export const editProductCall = async(token, productId, title, author, isbn, description, price, imageUrl, inventory ) => {
   try {
       const response = await fetch(`${URL}/api/products/${productId}`, {
@@ -281,4 +296,85 @@ export const getAllTagsCall = async () => {
   console.error(error)
   throw error
 }
+}
+
+export const deactivateUserCall = async (token, userId) => {
+
+  try {
+    const response = await fetch(`${URL}/api/users/delete/${userId}`, {
+      method: "PATCH",
+      headers: makeHeaders(token)
+    })
+  
+    const result = await response.json();
+    console.log(result, "result from deactivateUserCall")
+    return result; 
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export const addAProductCall = async (token, title, author, isbn, description, price, img, inventory) => {
+
+  try {
+    const response = await fetch(`${URL}/api/products/`, {
+      method: "POST",
+      headers: makeHeaders(token),
+      body: JSON.stringify({
+        title: title,
+        author: author,
+        isbn: isbn,
+        description: description,
+        price: price,
+        imageUrl: img,
+        inventory: inventory
+      })
+    })
+  
+    const result = await response.json();
+    console.log(result, "result from addProductCall")
+    return result; 
+  } catch (error) {
+    console.error(error)
+    throw error
+  }  
+}
+
+export const addTagToProductCall = async (token, name, productId) => {
+
+  try {
+    const response = await fetch(`${URL}/api/products/${productId}/add-tag`, {
+        method: "POST",
+        headers: makeHeaders(token),
+        body: JSON.stringify({
+          name: name,
+        })
+      })
+    
+      const result = await response.json();
+      console.log(result, "result from addProductToTag call")
+      return result;
+
+    } catch (error) {
+    console.error(error)
+    throw error;
+  }
+}
+
+export const getCartByUserIdCall = async (token, userId) => {
+  try {
+    const response = await fetch(`${URL}/api/users/${userId}/cart`, {
+      method: "GET",
+      headers: makeHeaders(token)
+    })
+
+    const result = await response.json();
+    console.log(result, "result from getCartByUserIdCall")
+    return result;
+
+  } catch (error) {
+    console.error(error)
+    throw error
+  }
 }
