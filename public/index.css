@@ -5,6 +5,10 @@ body {
 #home-content-container {
   display: flex;
 }
+
+#sideNav {
+  margin-top: 10px;
+}
 #side-bar {
   flex-direction: column;
 }
@@ -35,14 +39,6 @@ body {
 .login-buttons button {
   margin: 5px;
 }
-/* #navbar-container.container{
-    margin: 0px;
-} */
-/* #navbar-links{
-    position: fixed;
-    top: 5;
-    right:0;
-} */
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
@@ -56,6 +52,13 @@ body {
 #register-form button {
   color: white;
   border: none;
+}
+
+#productsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 #pastOrderContainer {

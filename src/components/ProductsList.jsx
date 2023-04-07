@@ -4,7 +4,7 @@ import { ProductCard } from "./";
 const ProductsList = ({ allProducts }) => {
   console.log(allProducts, "all products from Products List *******");
   return (
-    <div>
+    <div id="productsContainer">
       {allProducts.length ? (
         allProducts.map((product, idx) => {
           return product.isActive ? (
