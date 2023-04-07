@@ -4,6 +4,7 @@ import {
   EditProductForm,
   EditUserAdminForm,
   AddProductForm,
+  TagsSectionAdmin,
 } from "./";
 import {
   deactivateProductCall,
@@ -156,6 +157,7 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
         ) : null;
       })}
 
+      <TagsSectionAdmin allTags={allTags} token={token}/>
       <h1>User List</h1>
       {allUsers.map((user, idx) => {
         return (
