@@ -33,7 +33,8 @@ const UserProfilePage = (props) => {
       <PastOrders pastOrders={pastOrders}></PastOrders>
       </div>
       <div id="userInfoContainer">
-        <UserInfo userInfo={userInfo} userAddress={userAddress} token={token}></UserInfo>
+        {userAddress && userInfo ?
+        <UserInfo userInfo={userInfo} userAddress={userAddress} token={token}></UserInfo> : <h1> LOADING...</h1>}
       </div>
     </div>
     //user info (api call users/me - returns name, email, password, address)

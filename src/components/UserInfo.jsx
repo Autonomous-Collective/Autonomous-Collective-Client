@@ -11,12 +11,14 @@ const UserInfo = (props) => {
   const userAddress = props.userAddress;
   
   return (
+    <div>
+    {/* {userInfo.length && userAddress.length ?  */}
     <Card style={{ width: '20rem' }} >
       <Card.Header>Your Info:</Card.Header>
       <Card.Body>
         <Card.Title>Name</Card.Title>
         <Card.Text>
-          {`${userAddress.name}`}
+          {`${userInfo.name}`}
         </Card.Text>
 
         <Card.Title>Email</Card.Title>
@@ -41,8 +43,10 @@ const UserInfo = (props) => {
       <Card.Body>
         <Button href="#" variant="danger">Delete your Account</Button>
       </Card.Body>
-    </div>
+    </div> 
     </Card>
+    {/* : <h1> LOADING ...</h1>} */}
+    </div>
   );
 }
 
