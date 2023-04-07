@@ -141,7 +141,7 @@ const Main = () => {
             />
           }
         />
-        <Route exact path="/cart" element={<UserCart cart={cart}/>} />
+        <Route exact path="/cart" element={<UserCart cart={cart} user={user} token={token}/>} />
       </Routes>
       <Footer />
     </div>
