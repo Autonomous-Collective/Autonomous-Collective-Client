@@ -16,6 +16,7 @@ const UserInfo = (props) => {
     <Card style={{ width: '20rem' }} >
       <Card.Header>Your Info:</Card.Header>
       <Card.Body>
+
         <Card.Title>Name</Card.Title>
         <Card.Text>
           {`${userInfo.name}`}
@@ -26,10 +27,13 @@ const UserInfo = (props) => {
             {`${userInfo.email}`}
         </Card.Text>
 
+        {userAddress ? 
+        <div id="userAddressCard">
         <Card.Title>Address</Card.Title>
         <Card.Text>{`${userAddress.address}`}</Card.Text>
         <Card.Title>City/State</Card.Title>
         <Card.Text>{`${userAddress.city}, ${userAddress.state}`}</Card.Text>
+        </div> : <h3> No address </h3>}
         
       </Card.Body>
     <div className="login-buttons">
