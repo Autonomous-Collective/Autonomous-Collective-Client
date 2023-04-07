@@ -11,10 +11,12 @@ import {
   adminEditUserCall,
   deactivateUserCall,
   addTagToProductCall,
+  removeTagFromProductCall,
 } from "../API-Adapter";
 
 const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
   const [tagToAdd, setTagToAdd] = useState("");
+  const [tagToRemove, setTagToRemove] = useState("");
 
   const toggleForm = (id) => {
     let form = document.getElementById(`edit-product-form${id}`);
@@ -82,6 +84,25 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
     }
   };
 
+  const removeTagFromProduct = async (productId, tagToRemove) => {
+    let tagId = 0;
+
+    for (let i = 0; i < allTags.length; i++) {
+      if (allTags[i].name == tagToRemove) {
+        tagId = allTags[i].id;
+        break;
+      }
+    }
+
+    const response = await removeTagFromProductCall(token, tagId, productId);
+
+    if (response.success) {
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
+  };
+
   return (
     <>
       <h1>I am the Admin Page</h1>
@@ -97,6 +118,7 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
       </div>
       <h1>Product List Active products</h1>
       {allProducts.map((product, idx) => {
+        console.log(product.tags, "Product.tags");
         return product.isActive ? (
           <div key={`${idx} on productCard map in admin`}>
             <ProductCard product={product} />
@@ -121,10 +143,31 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
               >
                 <option>Select A Tag</option>
                 {allTags.map((tag) => {
-                  return <option value={tag.name}>{tag.name}</option>;
+                  return product.tags.includes(tag.name) ? null : (
+                    <option value={tag.name}>{tag.name}</option>
+                  );
                 })}
               </select>
               <button type="submit">Add tag to Product</button>
+            </form>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                removeTagFromProduct(product.id, tagToRemove);
+              }}
+            >
+              <label>Remove Tags from this product</label>
+              <select
+                onChange={(e) => {
+                  setTagToRemove(e.target.value);
+                }}
+              >
+                <option>Please select a tag</option>
+                {product.tags.map((tag, idx) => {
+                  return <option value={tag}>{tag}</option>;
+                })}
+              </select>
+              <button type="submit">Remove Tag</button>
             </form>
             <div className="display-none" id={`edit-product-form${product.id}`}>
               <EditProductForm token={token} product={product} />
