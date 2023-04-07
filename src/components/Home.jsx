@@ -2,11 +2,11 @@ import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import { ProductsList, SideNav } from "./";
 
-const Home = ({ allProducts }) => {
+const Home = ({ allProducts, allTags }) => {
   return (
     <div id="main">
       <div id="home-content-container">
-        <SideNav />
+        <SideNav allTags={allTags} />
         <ProductsList allProducts={allProducts} />
      </div>
     </div>

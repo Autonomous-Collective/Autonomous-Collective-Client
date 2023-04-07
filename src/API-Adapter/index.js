@@ -210,6 +210,7 @@ export const editProductCall = async(token, productId, title, author, isbn, desc
 }
 
 export const deactivateProductCall = async (token, productId) => {
+
   try {
     const response = await fetch(`${URL}/api/products/${productId}/delete`, {
       method: "PATCH",
@@ -263,4 +264,16 @@ export const adminEditUserCall = async(token, userId, name, email, isAdmin, isAc
     console.error(error);
     throw error;
   }
+
+export const getAllTagsCall = async () => {
+  const response = await fetch(`${URL}/api/products/tags`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  const result = await response.json();
+  console.log(result, "This is result from get all tags");
+  return result;
+
 }
