@@ -35,6 +35,9 @@ const NavBar = (props) => {
         justify-content: space-between;
         flex-direction: row;
         flex-wrap:wrap;
+        padding-left: 15px;
+        padding-right: 15px
+        
       }
       `}
       </style>
