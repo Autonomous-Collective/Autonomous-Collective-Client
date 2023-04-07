@@ -8,6 +8,7 @@ import {
   SingleProduct,
   AdminPage,
   UserProfilePage,
+  UserCart,
 } from "./";
 import { Routes, Route } from "react-router-dom";
 import {
@@ -116,7 +117,7 @@ const Main = () => {
           element={<Home allProducts={allProducts} allTags={allTags} />}
         />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/products/:productId" element={<SingleProduct />} />
+        <Route exact path="/products/:productId" element={<SingleProduct token={token} user={user} cart={cart}/>} />
         <Route
           exact
           path="/admin"
@@ -140,6 +141,7 @@ const Main = () => {
             />
           }
         />
+        <Route exact path="/cart" element={<UserCart cart={cart}/>} />
       </Routes>
       <Footer />
     </div>

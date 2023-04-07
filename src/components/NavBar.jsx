@@ -115,7 +115,7 @@ const NavBar = (props) => {
                 Separated link
                 </NavDropdown.Item>
               </NavDropdown> */}
-              <Link className="material-symbols-outlined">shopping_cart</Link>
+              <Link className="material-symbols-outlined" to="/cart">shopping_cart</Link>
             </Nav>
           </Navbar.Collapse>
         </div>
