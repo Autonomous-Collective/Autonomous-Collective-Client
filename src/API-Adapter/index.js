@@ -267,6 +267,7 @@ export const adminEditUserCall = async(token, userId, name, email, isAdmin, isAc
 }
 
 export const getAllTagsCall = async () => {
+  try{
   const response = await fetch(`${URL}/api/products/tags`, {
     method: "GET",
     headers: {
@@ -276,5 +277,8 @@ export const getAllTagsCall = async () => {
   const result = await response.json();
   console.log(result, "This is result from get all tags");
   return result;
-
+} catch (error) {
+  console.error(error)
+  throw error
+}
 }
