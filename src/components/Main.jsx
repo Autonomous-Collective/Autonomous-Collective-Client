@@ -15,9 +15,7 @@ import {
   getAllUsersCall,
   getAllTagsCall,
   getCartByUserIdCall,
-
   getPastOrdersCall,
-
 } from "../API-Adapter";
 
 const Main = () => {
@@ -28,7 +26,6 @@ const Main = () => {
   const [user, setUser] = useState("");
 
   const [cart, setCart] = useState("");
-
 
   const [allProducts, setAllProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -56,30 +53,26 @@ const Main = () => {
   const getAllTags = async () => {
     const response = await getAllTagsCall();
 
-
     if (response.success) {
       setAllTags(response.tags);
-     
     }
   };
 
   const getCartByUserId = async () => {
     const response = await getCartByUserIdCall(token, user.id);
+    console.log(response, token, user.id);
     if (response.success) {
       setCart(response.cart);
     }
   };
 
-   
-
   const getPastOrders = async () => {
     const response = await getPastOrdersCall(token, user.id);
-  
+
     if (response.success) {
       setPastOrders(response.userOrders);
     }
   };
-
 
   useEffect(() => {
     getAllProducts();
@@ -87,14 +80,10 @@ const Main = () => {
     getAllTags();
 
     if (localStorage.getItem("token")) {
-
       setToken(localStorage.getItem("token"));
       setUser(JSON.parse(localStorage.getItem("user")));
       setIsLoggedIn(true);
     }
-
-    
-    
   }, []);
 
   useEffect(() => {
@@ -103,8 +92,7 @@ const Main = () => {
     getCartByUserId();
     console.log(cart);
 
-    getPastOrders()
-
+    getPastOrders();
   }, [isLoggedIn]);
 
   return (
@@ -144,9 +132,13 @@ const Main = () => {
         <Route
           exact
           path="/profile"
-
-        element={<UserProfilePage user={user} token={token} pastOrders={pastOrders} />}
-
+          element={
+            <UserProfilePage
+              user={user}
+              token={token}
+              pastOrders={pastOrders}
+            />
+          }
         />
       </Routes>
       <Footer />
