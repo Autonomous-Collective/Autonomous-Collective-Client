@@ -15,6 +15,9 @@ import {
   getAllUsersCall,
   getAllTagsCall,
   getCartByUserIdCall,
+
+  getPastOrdersCall,
+
 } from "../API-Adapter";
 
 const Main = () => {
@@ -23,12 +26,15 @@ const Main = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
   const [user, setUser] = useState("");
+
   const [cart, setCart] = useState("");
+
 
   const [allProducts, setAllProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
   const [allTags, setAllTags] = useState([]);
+  const [pastOrders, setPastOrders] = useState([]);
 
   const getAllProducts = async () => {
     const response = await getAllProductsCall();
@@ -49,10 +55,11 @@ const Main = () => {
 
   const getAllTags = async () => {
     const response = await getAllTagsCall();
-    console.log(response, "YYYYYYYY");
+
+
     if (response.success) {
       setAllTags(response.tags);
-      console.log(allTags, "!!@@!!");
+     
     }
   };
 
@@ -63,25 +70,41 @@ const Main = () => {
     }
   };
 
+   
+
+  const getPastOrders = async () => {
+    const response = await getPastOrdersCall(token, user.id);
+  
+    if (response.success) {
+      setPastOrders(response.userOrders);
+    }
+  };
+
+
   useEffect(() => {
     getAllProducts();
     console.log(allProducts, "all products from the main use effect");
-
-    // getAllUsers();
-
     getAllTags();
 
     if (localStorage.getItem("token")) {
+
       setToken(localStorage.getItem("token"));
       setUser(JSON.parse(localStorage.getItem("user")));
       setIsLoggedIn(true);
     }
+
+    
+    
   }, []);
 
   useEffect(() => {
     getAllUsers();
+
     getCartByUserId();
     console.log(cart);
+
+    getPastOrders()
+
   }, [isLoggedIn]);
 
   return (
@@ -121,7 +144,9 @@ const Main = () => {
         <Route
           exact
           path="/profile"
-          element={<UserProfilePage user={user} token={token} />}
+
+        element={<UserProfilePage user={user} token={token} pastOrders={pastOrders} />}
+
         />
       </Routes>
       <Footer />

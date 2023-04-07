@@ -184,6 +184,21 @@ export const getAllUsersCall = async (token) => {
 
 }
 
+export const getPastOrdersCall = async (token, userId) =>{
+try{
+  const response = await fetch(`${URL}/api/users/${userId}/orders`, {
+    method: "GET",
+    headers: makeHeaders(token),
+  })
+const result = await response.json()
+console.log("result from get past orders", result)
+return result
+} catch (error) {
+  console.error(error)
+}
+}
+
+
 export const editProductCall = async(token, productId, title, author, isbn, description, price, imageUrl, inventory ) => {
   try {
       const response = await fetch(`${URL}/api/products/${productId}`, {
