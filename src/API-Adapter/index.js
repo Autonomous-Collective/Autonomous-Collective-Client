@@ -1,5 +1,5 @@
-// const URL = "https://autonomous-collective.onrender.com";
-const URL = "http://localhost:4000";
+const URL = "https://autonomous-collective.onrender.com";
+// const URL = "http://localhost:4000";
 
 const makeHeaders = (token) => {
   return {
@@ -455,5 +455,20 @@ export const editCartProductCall = async(token, userId, productId, quantity) => 
   } catch (error) {
       console.error(error);
       throw error;
+  }
+}
+
+export const checkoutCartCall = async (token) => {
+  try {
+    const response = await fetch(`${URL}/api/users/cart/checkout`, {
+      method: "PATCH",
+      headers: makeHeaders(token)
+    })
+
+    const result = await response.json();
+    console.log(result, "result from check out cart call")
+    return result; 
+  } catch (error) {
+    console.error(error)
   }
 }
