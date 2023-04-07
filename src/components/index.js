@@ -15,5 +15,6 @@ export { default as ReviewCard } from "./ReviewCard";
 export { default as CreateReview } from "./CreateReview";
 export { default as AdminPage } from "./AdminPage";
 export { default as EditProductForm } from "./EditProductForm";
+export { default as EditUserAdminForm } from "./EditUserAdminForm";
 
 export { default as UserProfilePage } from "./UserProfilePage";

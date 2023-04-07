@@ -54,7 +54,7 @@ const Main = () => {
     getAllProducts();
     console.log(allProducts, "all products from the main use effect");
 
-    getAllUsers();
+    // getAllUsers();
 
     getAllTags();
 
@@ -64,6 +64,10 @@ const Main = () => {
         setIsLoggedIn(true)
     }  
   }, []);
+
+  useEffect(() => {
+    getAllUsers();
+  }, [isLoggedIn]);
 
 
 
