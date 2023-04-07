@@ -364,6 +364,7 @@ export const addTagToProductCall = async (token, name, productId) => {
 
 export const getCartByUserIdCall = async (token, userId) => {
   try {
+    console.log(userId, token, "FROM API CALL")
     const response = await fetch(`${URL}/api/users/${userId}/cart`, {
       method: "GET",
       headers: makeHeaders(token)
