@@ -264,6 +264,7 @@ export const adminEditUserCall = async(token, userId, name, email, isAdmin, isAc
     console.error(error);
     throw error;
   }
+}
 
 export const getAllTagsCall = async () => {
   const response = await fetch(`${URL}/api/products/tags`, {
