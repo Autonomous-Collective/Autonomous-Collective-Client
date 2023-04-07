@@ -506,3 +506,18 @@ export const checkoutCartCall = async (token) => {
     console.error(error)
   }
 }
+
+export const removeTagFromProductCall = async (token, tagId, productId) => {
+  try {
+  const response = await fetch(`${URL}/api/products/tags/${productId}/${tagId}`, {
+    method: "DELETE",
+    headers: makeHeaders(token)
+  })    
+
+  const result = await response.json();
+  console.log(result, "result from removeTagFromProductCall")
+  return result;
+  } catch (error) {
+      console.error(error)
+  }
+}
