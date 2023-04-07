@@ -14,7 +14,10 @@ import {
   getAllProductsCall,
   getAllUsersCall,
   getAllTagsCall,
+  getCartByUserIdCall,
+
   getPastOrdersCall,
+
 } from "../API-Adapter";
 
 const Main = () => {
@@ -23,6 +26,9 @@ const Main = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState("");
   const [user, setUser] = useState("");
+
+  const [cart, setCart] = useState("");
+
 
   const [allProducts, setAllProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -49,18 +55,31 @@ const Main = () => {
 
   const getAllTags = async () => {
     const response = await getAllTagsCall();
+
+
     if (response.success) {
       setAllTags(response.tags);
+     
     }
   };
 
+  const getCartByUserId = async () => {
+    const response = await getCartByUserIdCall(token, user.id);
+    if (response.success) {
+      setCart(response.cart);
+    }
+  };
+
+   
+
   const getPastOrders = async () => {
     const response = await getPastOrdersCall(token, user.id);
-    // console.log(response.userOrders, "$$$$$$$");
+  
     if (response.success) {
       setPastOrders(response.userOrders);
     }
   };
+
 
   useEffect(() => {
     getAllProducts();
@@ -68,16 +87,24 @@ const Main = () => {
     getAllTags();
 
     if (localStorage.getItem("token")) {
-        setToken(localStorage.getItem("token"));
-        setUser(JSON.parse(localStorage.getItem("user")));
-        setIsLoggedIn(true);
+
+      setToken(localStorage.getItem("token"));
+      setUser(JSON.parse(localStorage.getItem("user")));
+      setIsLoggedIn(true);
     }
+
+    
     
   }, []);
 
   useEffect(() => {
     getAllUsers();
+
+    getCartByUserId();
+    console.log(cart);
+
     getPastOrders()
+
   }, [isLoggedIn]);
 
   return (
@@ -110,13 +137,16 @@ const Main = () => {
               token={token}
               allProducts={allProducts}
               allUsers={allUsers}
+              allTags={allTags}
             />
           }
         />
         <Route
           exact
           path="/profile"
-          element={<UserProfilePage user={user} token={token} pastOrders={pastOrders} />}
+
+        element={<UserProfilePage user={user} token={token} pastOrders={pastOrders} />}
+
         />
       </Routes>
       <Footer />
