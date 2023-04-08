@@ -5,6 +5,7 @@ import {
   EditUserAdminForm,
   AddProductForm,
   TagsSectionAdmin,
+  MessageAlert,
 } from "./";
 import {
   deactivateProductCall,
@@ -19,6 +20,7 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
   const [tagToAdd, setTagToAdd] = useState("");
   const [tagToRemove, setTagToRemove] = useState("");
   const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
 
   const toggleForm = (id) => {
     let form = document.getElementById(`edit-product-form${id}`);
@@ -52,37 +54,68 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
   const deactivateProduct = async (id) => {
     const response = await deactivateProductCall(token, id);
     if (response.success) {
+      setMessage("You have successfully deactivated the product");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3500);
+    } else {
+      setMessage("Something went wrong deactivating the product");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3500);
     }
   };
 
   const deleteUser = async (userId) => {
     const response = await deactivateUserCall(token, userId);
     if (response.success) {
+      setMessage("You have successfully deleted the user");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3500);
+    } else {
+      setMessage("Something went wrong deactivating the user");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3500);
     }
   };
 
   const activateProduct = async (id) => {
     const response = await activateProductCall(token, id);
     if (response.success) {
+      setMessage("You have successfully activated the product");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3500);
+    } else {
+      setMessage("Something went wrong activating the product");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3500);
     }
   };
 
-  const addTagToProduct = async (productId) => {
+  const addTagToProduct = async (productId, productTags) => {
     const response = await addTagToProductCall(token, tagToAdd, productId);
-
     if (response.success) {
+      setMessage("You have successfully added the tag to the product");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3000);
+    } else {
+      setMessage("Something went wrong adding the tag to the product");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
   };
 
@@ -99,14 +132,23 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
     const response = await removeTagFromProductCall(token, tagId, productId);
 
     if (response.success) {
+      setMessage("You have successfully removed the tag from the product");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3500);
+    } else {
+      setMessage("Error removing the tag from the product");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3500);
     }
   };
 
   return (
     <>
+      {message ? <MessageAlert message={message} isError={isError} /> : null}
       <h1>I am the Admin Page</h1>
       <button
         onClick={() => {
@@ -134,7 +176,7 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                addTagToProduct(product.id);
+                addTagToProduct(product.id, product.tags);
               }}
             >
               <label>Select Tag to Add to Product</label>
@@ -201,7 +243,7 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
         ) : null;
       })}
 
-      <TagsSectionAdmin allTags={allTags} token={token}/>
+      <TagsSectionAdmin allTags={allTags} token={token} />
       <h1>User List</h1>
       {allUsers.map((user, idx) => {
         return (
