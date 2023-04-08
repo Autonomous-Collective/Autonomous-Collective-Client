@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getProductByIdCall, addProductToCartCall, editCartProductCall } from "../API-Adapter";
+import {
+  getProductByIdCall,
+  addProductToCartCall,
+  editCartProductCall,
+} from "../API-Adapter";
 import "./componentStyles/SingleProduct.css";
-import { ReviewList, CreateReview } from "./";
+import { ReviewList, CreateReview, MessageAlert } from "./";
 
-import Card from 'react-bootstrap/Card';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Form from 'react-bootstrap/Form'
+import Card from "react-bootstrap/Card";
+import ListGroup from "react-bootstrap/ListGroup";
+import Form from "react-bootstrap/Form";
 
 const SingleProduct = ({ token, user, cart }) => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
   const [quantity, setQuantity] = useState(1);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
   console.log(productId, "product id ???????");
 
   const getProductById = async () => {
@@ -23,53 +29,85 @@ const SingleProduct = ({ token, user, cart }) => {
 
   const toggle = () => {
     const createRev = document.getElementById("create-review").style;
-    if(createRev.display === "flex"){
+    if (createRev.display === "flex") {
       createRev.display = "none";
-    }else{
+    } else {
       createRev.display = "flex";
     }
-  }
+  };
 
   useEffect(() => {
     getProductById();
     console.log(product, "product is set! -----");
   }, []);
 
-  const addProductToCart = async() => {
+  const addProductToCart = async () => {
+    console.log(
+      token,
+      user.id,
+      productId,
+      quantity,
+      "add product to cart in single product"
+    );
 
-    console.log(token, user.id, productId, quantity , "add product to cart in single product")
-
-  for(let i = 0; i < cart.products?.length; i++){
-    console.log(cart.products[i]);
-    if(cart.products[i].productId == productId){
-     await editCartProduct(cart.products[i].quantity);
-      return null;
+    for (let i = 0; i < cart.products?.length; i++) {
+      console.log(cart.products[i]);
+      if (cart.products[i].productId == productId) {
+        await editCartProduct(cart.products[i].quantity);
+        return null;
+      }
     }
-  }
 
-    const response = await addProductToCartCall(token, user.id, productId, quantity);
-    if(response.success){
-     setTimeout(() => {
-      window.location.reload();
-     }, 2000) 
-      console.log("added to cart")
-    }
-  }
-
-  const editCartProduct = async(initQuant) => {
-     let finalQuant = Number(initQuant) + Number(quantity);
-    const response = await editCartProductCall(token, user.id, productId,finalQuant);
-
-    if(response.success){
-      console.log("product was edited in cart")
+    const response = await addProductToCartCall(
+      token,
+      user.id,
+      productId,
+      quantity
+    );
+    if (response.success) {
+      setMessage("Product was added to cart");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3000);
+      console.log("added to cart");
+    } else {
+      setMessage("Seomthing went wrong");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
-  }
+  };
+
+  const editCartProduct = async (initQuant) => {
+    let finalQuant = Number(initQuant) + Number(quantity);
+    const response = await editCartProductCall(
+      token,
+      user.id,
+      productId,
+      finalQuant
+    );
+
+    if (response.success) {
+      console.log("product was edited in cart");
+      setMessage("Product was added to cart");
+      setIsError(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    } else {
+      setMessage("Something went wrong");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    }
+  };
 
   return (
     <div className="flex-column">
+      {message ? <MessageAlert message={message} isError={isError} /> : null}
       {product?.title ? (
         <>
           <div className="flex-row">
@@ -86,15 +124,22 @@ const SingleProduct = ({ token, user, cart }) => {
               <h3>By: {product.author}</h3>
               <p>{product.isbn}</p>
               <h4>${product.price / 100}</h4>
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                addProductToCart();
-              }}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  addProductToCart();
+                }}
+              >
                 <label>choose the quantity</label>
-              <input type="number" defaultValue={1} min={1} onChange={(e) => {
-                setQuantity(e.target.value);
-              }}/>
-              <button type="submit" onClick={() => {}}>add to cart</button>
+                <input
+                  type="number"
+                  defaultValue={1}
+                  min={1}
+                  onChange={(e) => {
+                    setQuantity(e.target.value);
+                  }}
+                />
+                <button type="submit">add to cart</button>
               </form>
             </div>
           </div>
@@ -110,11 +155,15 @@ const SingleProduct = ({ token, user, cart }) => {
               </div>
             </div>
             <div id="reviews">
-              <button onClick={() => {
-                toggle();
-              }}>Add a Reveiw</button>
-              <div id="create-review" >
-                <CreateReview productId={product.id}/>
+              <button
+                onClick={() => {
+                  toggle();
+                }}
+              >
+                Add a Reveiw
+              </button>
+              <div id="create-review">
+                <CreateReview token={token} productId={product.id} />
               </div>
               <ReviewList productId={product.id} />
             </div>
@@ -149,7 +198,6 @@ const SingleProduct = ({ token, user, cart }) => {
   //     </Form>
   //   </Card>
   // );
-}
-
+};
 
 export default SingleProduct;

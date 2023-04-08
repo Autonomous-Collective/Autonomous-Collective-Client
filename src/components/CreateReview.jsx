@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { createReviewCall } from "../API-Adapter";
+import { MessageAlert } from "./";
 
-const CreateReview = ({ productId }) => {
+const CreateReview = ({ productId, token }) => {
   const [title, setTitle] = useState("");
   const [score, setScore] = useState(0);
   const [content, setContent] = useState("");
-
+  const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
   const createReview = async () => {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiJwYXJrZXIuam9zaWUuZWRlbkBnbWFpbC5jb20iLCJpYXQiOjE2ODA3OTE3MTd9.bAHfSU17t31taoFNk9nN5K-Hx1-D1a0-l2B6K2Iu8bw";
     const response = await createReviewCall(
       productId,
       token,
@@ -16,19 +16,27 @@ const CreateReview = ({ productId }) => {
       title,
       content
     );
-    const [isError, setIsError] = useState(false);
     console.log(response, "response from api stuff in front end");
 
     if (response.success) {
       //MAKE THIS ACTUALLY DO SOMETHING!!!!
+      setMessage("Review succesfully posted");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3500);
+    } else {
+      setMessage("Error Posting Review");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3500);
     }
   };
 
   return (
     <div>
+      {message ? <MessageAlert message={message} isError={isError} /> : null}
       <h1>create a review</h1>
       <form
         onSubmit={(e) => {
