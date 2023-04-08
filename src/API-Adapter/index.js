@@ -198,7 +198,7 @@ export const getUserInfoCall = async (token) =>{
   }
 }
 
-export const editUserInfoCall = async (token, name, email, password) => {
+export const editUserInfoCall = async (token, name, email, password, isGuest) => {
   try{
     const response = await fetch(`${URL}/api/users/me/edit-info`, {
       method: "PATCH",
@@ -206,12 +206,13 @@ export const editUserInfoCall = async (token, name, email, password) => {
       body: JSON.stringify( {
         name: name,
         email: email,
-        password: password
+        password: password,
+        isGuest: isGuest
       })
     })
 
     const result = await response.json();
-    // console.log(result, "result from edit user info call");
+    console.log(result, "result from edit user info call");
     return result;
   } catch(error){
     console.error(error);

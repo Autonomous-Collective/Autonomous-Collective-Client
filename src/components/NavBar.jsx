@@ -7,6 +7,8 @@ import Login from "./Login";
 import Register from "./Register";
 import { Link, useNavigate } from "react-router-dom";
 
+import GuestRegister from "./GuestRegister";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const NavBar = (props) => {
@@ -42,7 +44,6 @@ const NavBar = (props) => {
       `}
       </style>
       <Navbar bg="light" expand="sm" id="navbar-container" sticky="top">
-        {/* <Container id="navbar-container"> */}
         <div>
           <Navbar.Brand href="/" id="brand">
             The Autonomous Collective
@@ -53,6 +54,18 @@ const NavBar = (props) => {
           <Navbar.Collapse>
             <Nav>
               <Nav.Link href="/">Home</Nav.Link>
+              {verifyGuest ? 
+              <GuestRegister 
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
+                  user={user}
+                  setUser={setUser}
+                  token={token}
+                  setToken={setToken}/> : null}
               { isLoggedIn && verifyAdmin ?
               <Nav.Link href="/admin">Admin</Nav.Link>: null }
 
@@ -107,22 +120,10 @@ const NavBar = (props) => {
                 />
                 </>
                 )}
-              {/* <NavDropdown title="Dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                Separated link
-                </NavDropdown.Item>
-              </NavDropdown> */}
               <Link className="material-symbols-outlined" to="/cart">shopping_cart</Link>
             </Nav>
           </Navbar.Collapse>
         </div>
-        {/* </Container> */}
       </Navbar>
     </>
   );
