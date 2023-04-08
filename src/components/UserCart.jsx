@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { checkoutCartCall, editCartProductCall } from "../API-Adapter";
+import { MessageAlert } from "./";
 
 const UserCart = ({ cart, user, token }) => {
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+
   console.log(cart, "cart from userCart page");
   let totalPrice = 0;
 
@@ -12,20 +16,26 @@ const UserCart = ({ cart, user, token }) => {
       productId,
       quantity
     );
-    if (response.success) {
-      console.log("changed in the backend!");
+    if (response.success && quantity === 0) {
+      setMessage("Successfully Removed product from cart");
+      setIsError(false);
     }
   };
 
   const checkOutCart = async () => {
     const response = await checkoutCartCall(token);
     if (response.success) {
-      document.getElementById(`success-message`).style.display = "inline";
+      setMessage("You have succesfully checked out ");
+      setIsError(false);
+    } else {
+      setMessage("Something went wrong");
+      setIsError(true);
     }
   };
 
   return (
     <div>
+      {message ? <MessageAlert message={message} isError={isError} /> : null}
       <h1>Your Order:</h1>
       {cart?.products?.length ? (
         cart.products.map((product, idx) => {
@@ -71,28 +81,18 @@ const UserCart = ({ cart, user, token }) => {
       ) : (
         <h1>Your cart is empty!</h1>
       )}
-      <h3>Total Price: {totalPrice / 100}</h3>
+      <h3>Total Price: ${totalPrice / 100}</h3>
       <button
         onClick={() => {
           checkOutCart();
-          document.getElementById("success-message").style.display = "flex"
+
           setTimeout(() => {
             window.location.reload();
-          }, 1500)
+          }, 3500);
         }}
       >
         Check Out!
       </button>
-      {/* <div id="success-message" className="display-none">
-        <h1>You have successfully check out</h1>
-        <button
-          onClick={() => {
-            document.getElementById(`success-message`).style.display = "none";
-          }}
-        >
-          Close
-        </button>
-      </div> */}
     </div>
   );
 };

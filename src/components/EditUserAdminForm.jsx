@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { adminEditUserCall } from "../API-Adapter";
+import { MessageAlert } from "./";
 
 const EditUserAdminForm = ({
   token,
@@ -17,6 +18,7 @@ const EditUserAdminForm = ({
   const [NewIsAdmin, setNewIsAdmin] = useState(isAdmin);
   const [NewIsActive, setNewIsActive] = useState(isActive);
   const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState(false);
 
   const adminEditUser = async () => {
     const response = await adminEditUserCall(
@@ -28,14 +30,23 @@ const EditUserAdminForm = ({
       NewIsActive
     );
     if (response.success) {
+      setMessage("Success editing user");
+      setIsError(false);
       setTimeout(() => {
         window.location.reload();
-      }, 1500);
+      }, 3500);
+    } else {
+      setMessage("Error editing user");
+      setIsError(true);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3500);
     }
   };
 
   return (
     <div>
+      {message ? <MessageAlert message={message} isError={isError} /> : null}
       <form
         className="flex-column"
         onSubmit={(e) => {

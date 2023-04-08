@@ -39,8 +39,8 @@ const Login = (props) => {
               console.log(result);
 
               //think about better error handling? universal error & setError state?
-              
-              if (result.name !== 'Login Error') {
+
+              if (result.success) {
                 localStorage.setItem("token", result.token);
                 localStorage.setItem("email", email);
                 localStorage.setItem("user", JSON.stringify(result.user));
@@ -77,7 +77,7 @@ const Login = (props) => {
                   value={email}
                   required
                   onChange={(event) => {
-                    event.preventDefault()
+                    event.preventDefault();
                     setEmail(event.target.value);
                   }}
                 />
@@ -94,7 +94,7 @@ const Login = (props) => {
                   value={password}
                   required
                   onChange={(event) => {
-                    event.preventDefault()
+                    event.preventDefault();
                     setPassword(event.target.value);
                   }}
                 />
