@@ -86,3 +86,11 @@ body {
   justify-content: space-between;
   margin-top: 20px;
 }
+
+#navbar-container{
+  background-color: #025928 !important;
+}
+
+.pCard-button{
+  background-color: #025928 !important;
+}

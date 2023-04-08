@@ -36,12 +36,13 @@ const NavBar = (props) => {
         flex-direction: row;
         flex-wrap:wrap;
         padding-left: 15px;
-        padding-right: 15px
-        
+        padding-right: 15px;
+        background-color: hotpink;
       }
       `}
       </style>
-      <Navbar bg="light" expand="sm" id="navbar-container" sticky="top">
+      <div id="trying">
+      <Navbar bg="light" expand="sm" id="navbar-container" sticky="top" >
         {/* <Container id="navbar-container"> */}
         <div>
           <Navbar.Brand href="/" id="brand">
@@ -124,6 +125,7 @@ const NavBar = (props) => {
         </div>
         {/* </Container> */}
       </Navbar>
+     </div>
     </>
   );
 };

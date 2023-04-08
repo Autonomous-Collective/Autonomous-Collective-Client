@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
     <Card.Body>
       <Card.Title>{product.title}</Card.Title>
       <Card.Text>{product.author}</Card.Text>
-      <Button variant="primary" to={`/products/${product.id}`}>See More</Button>
+      <Button variant="primary" to={`/products/${product.id}`} className="pCard-button">See More</Button>
     </Card.Body>
   </Card>
 );
