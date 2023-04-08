@@ -5,12 +5,12 @@ import Card from 'react-bootstrap/Card';
 
 const ProductCard = ({ product }) => {
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '18rem', margin: '10px'}}>
     <Card.Img variant="top" style={{padding: "20px"}} src={product.img} />
     <Card.Body>
       <Card.Title>{product.title}</Card.Title>
       <Card.Text>{product.author}</Card.Text>
-      <Button variant="primary" to={`/products/${product.id}`}>See More</Button>
+      <Button variant="primary" href={`/products/${product.id}`}>See More</Button>
     </Card.Body>
   </Card>
 );

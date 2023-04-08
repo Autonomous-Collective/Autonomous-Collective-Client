@@ -9,6 +9,7 @@ import {
   AdminPage,
   UserProfilePage,
   UserCart,
+  TaggedProductList,
 } from "./";
 import { Routes, Route } from "react-router-dom";
 import {
@@ -118,6 +119,7 @@ const Main = () => {
         />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/products/:productId" element={<SingleProduct token={token} user={user} cart={cart}/>} />
+        <Route exact path="/products/:name/:tagId" element={< TaggedProductList  user={user} cart={cart}/>} />
         <Route
           exact
           path="/admin"

@@ -372,6 +372,23 @@ export const getAllTagsCall = async () => {
 }
 }
 
+export const getProductsByTagCall = async (tagId) => {
+  try{
+    const response = await fetch (`${URL}/api/products/tags/${tagId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const result = await response.json();
+    console.log(result, "This is result from get products by tag call !!!!");
+    return result;
+  } catch (error){
+    console.error(error);
+    throw error;
+  }
+}
+
 export const deactivateUserCall = async (token, userId) => {
 
   try {

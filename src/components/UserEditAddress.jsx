@@ -74,7 +74,7 @@ const UserEditAddress = (props) => {
           <Modal.Body>
             <form>
               <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Label> Update Name: </Form.Label>
+                <Form.Label> Update Shipping Name: </Form.Label>
                 <Form.Control type="text" value={updateName} placeholder="Enter New Name" onChange={(event) => {
                     setUpdateName(event.target.value);
                 }}/>

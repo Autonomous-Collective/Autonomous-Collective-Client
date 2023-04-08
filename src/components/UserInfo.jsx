@@ -43,6 +43,8 @@ const UserInfo = (props) => {
 
           {userAddress ? (
             <div id="userAddressCard">
+              <Card.Title>Shipping Name</Card.Title>
+              <Card.Text>{`${userAddress.name}`}</Card.Text>
               <Card.Title>Address</Card.Title>
               <Card.Text>{`${userAddress.address}`}</Card.Text>
               <Card.Title>City/State</Card.Title>
