@@ -35,6 +35,8 @@ const Main = () => {
   const [allTags, setAllTags] = useState([]);
   const [pastOrders, setPastOrders] = useState([]);
 
+  const [searchString, setSearchString] = useState([]);
+
   const getAllProducts = async () => {
     const response = await getAllProductsCall();
 
@@ -115,11 +117,28 @@ const Main = () => {
         <Route
           exact
           path="/"
-          element={<Home allProducts={allProducts} allTags={allTags} />}
+          element={
+            <Home
+              allProducts={allProducts}
+              allTags={allTags}
+              setSearchString={setSearchString}
+              searchString={searchString}
+            ></Home>
+          }
         />
         <Route exact path="/register" element={<Register />} />
-        <Route exact path="/products/:productId" element={<SingleProduct token={token} user={user} cart={cart}/>} />
-        <Route exact path="/products/:name/:tagId" element={< TaggedProductList  user={user} cart={cart} allTags={allTags}/>} />
+        <Route
+          exact
+          path="/products/:productId"
+          element={<SingleProduct token={token} user={user} cart={cart} />}
+        />
+        <Route
+          exact
+          path="/products/:name/:tagId"
+          element={
+            <TaggedProductList user={user} cart={cart} allTags={allTags} />
+          }
+        />
         <Route
           exact
           path="/admin"
@@ -144,7 +163,11 @@ const Main = () => {
             />
           }
         />
-        <Route exact path="/cart" element={<UserCart cart={cart} user={user} token={token}/>} />
+        <Route
+          exact
+          path="/cart"
+          element={<UserCart cart={cart} user={user} token={token} />}
+        />
       </Routes>
       <Footer />
     </div>
