@@ -119,7 +119,7 @@ const Main = () => {
         />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/products/:productId" element={<SingleProduct token={token} user={user} cart={cart}/>} />
-        <Route exact path="/products/:name/:tagId" element={< TaggedProductList  user={user} cart={cart}/>} />
+        <Route exact path="/products/:name/:tagId" element={< TaggedProductList  user={user} cart={cart} allTags={allTags}/>} />
         <Route
           exact
           path="/admin"

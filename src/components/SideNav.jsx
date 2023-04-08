@@ -2,7 +2,8 @@ import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 
-const SideNav = ({allTags}) =>{
+const SideNav = (props) =>{
+  const allTags=props.allTags
     return(
         <div id = "sideNav" >
             <Form className="d-flex">
@@ -13,7 +14,7 @@ const SideNav = ({allTags}) =>{
                     aria-label="Search"
                   />
             </Form>
-          <Nav defaultActiveKey="/home" id="side-bar" >
+          <Nav defaultActiveKey="/home" id="side-bar" variant="pills" >
             {allTags.length ?(
               allTags.map((tag, idx) => {
                 return(
