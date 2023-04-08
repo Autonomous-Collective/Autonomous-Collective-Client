@@ -8,6 +8,7 @@ black: #0D0D0D
 
 body {
   margin: 0;
+  background-color: #F1F4EB !important;
 }
 
 #home-content-container {
@@ -88,9 +89,14 @@ body {
 }
 
 #navbar-container{
-  background-color: #025928 !important;
+  background-color: #1c8e4e !important;
 }
 
 .pCard-button{
-  background-color: #025928 !important;
+  background-color: #1c8e4e !important;
+}
+
+.pCard-button:hover{
+  background-color: #D8D9D7 !important;
+  box-shadow: 2px 2px 3px #1c8e4e !important;
 }
