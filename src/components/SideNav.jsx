@@ -17,7 +17,7 @@ const SideNav = ({allTags}) =>{
             {allTags.length ?(
               allTags.map((tag, idx) => {
                 return(
-                  <Nav.Link href="" key={`${idx}`}>{tag.name}</Nav.Link>
+                  <Nav.Link href={`/products/${tag.name}/${tag.id}`} key={`${idx}`}>{tag.name}</Nav.Link>
                 )
               })
             ): <h3>LOADING..</h3>}
