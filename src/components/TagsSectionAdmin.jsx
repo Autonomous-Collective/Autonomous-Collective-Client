@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { addTagToDBCall } from "../API-Adapter";
+import { EditTagForm } from "./";
 
 const TagSectionAdmin = ({ allTags, token }) => {
     const [tagName, setTagName] = useState("");
@@ -22,6 +23,15 @@ const TagSectionAdmin = ({ allTags, token }) => {
             //set error message stuff here
         }
     }
+    const toggleEditForm = (tagId) => {
+        const edit = document.getElementById(`edit-tag-form${tagId}`);
+
+        if(edit.style.display === "flex"){
+            edit.style.display = "none";
+        }else{
+            edit.style.display = "flex";
+        }
+    }
 
     return (
         <div>
@@ -39,7 +49,17 @@ const TagSectionAdmin = ({ allTags, token }) => {
             {
                 allTags?.length ? 
                 allTags.map((tag, idx) => {
-                    return <p key={`${idx} map for tags section in admin`}>{tag.name}</p>
+                    return <div key={`${idx} map for tags section in admin`}> 
+                    <p>{tag.name}</p>
+                   
+                        <button onClick={() => {
+                            toggleEditForm(tag.id);
+                        }}>edit tag!</button>
+                        <div id={`edit-tag-form${tag.id}`} className="display-none">
+                            <EditTagForm token={token} tagId={tag.id}/>
+                        </div>
+                   
+                    </div>
                 }) : null
             }
             <button>add new tag</button>

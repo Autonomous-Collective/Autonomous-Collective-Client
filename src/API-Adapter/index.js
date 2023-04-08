@@ -1,5 +1,5 @@
-const URL = "https://autonomous-collective.onrender.com";
-// const URL = "http://localhost:4000";
+// const URL = "https://autonomous-collective.onrender.com";
+const URL = "http://localhost:4000";
 
 const makeHeaders = (token) => {
   return {
@@ -551,6 +551,25 @@ export const addTagToDBCall = async(token, name) => {
 
     const result = await response.json();
     console.log(result, "result from addTagToDBCall");
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export const editTagCall = async(token, tagId, name) => {
+  try {
+    const response = await fetch(`${URL}/api/products/edit-tag/${tagId}`, {
+      method: "PATCH", 
+      headers: makeHeaders(token),
+      body: JSON.stringify({
+        name: name,
+      })
+    });
+
+    const result = await response.json();
+    console.log(result, "result from edit tag api call");
     return result;
   } catch (error) {
     console.error(error);
