@@ -33,10 +33,11 @@ body {
 #message-alert-div {
   position: fixed;
   top: 50vh;
-  left: 50vw;
+  left: 25vw;
   width: 50vw;
   height: 25vh;
   background-color: green;
+  z-index: 9999;
 }
 
 .display-none {
