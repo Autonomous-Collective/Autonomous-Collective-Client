@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const MessageAlert = ({ message, isError }) => {
-  if (isError) {
-    document.getElementById("message-alert-div").style.backgroundColor = "red";
-  }
+  useEffect(() => {
+    removeMessage();
+  }, []);
 
   const removeMessage = () => {
+    console.log("remove message is running");
+    if (isError) {
+      document.getElementById("message-alert-div").style.backgroundColor =
+        "red";
+    }
     setTimeout(() => {
       document.getElementById("message-alert-div").style.display = "none";
     }, 3000);
   };
 
   return (
-    <div
-      onLoad={() => {
-        removeMessage();
-      }}
-      id="message-alert-div"
-    >
+    <div id="message-alert-div">
       <h1>{message}</h1>
     </div>
   );
