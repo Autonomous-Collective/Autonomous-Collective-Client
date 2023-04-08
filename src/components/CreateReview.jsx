@@ -16,6 +16,7 @@ const CreateReview = ({ productId }) => {
       title,
       content
     );
+    const [isError, setIsError] = useState(false);
     console.log(response, "response from api stuff in front end");
 
     if (response.success) {

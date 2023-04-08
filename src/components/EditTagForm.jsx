@@ -3,6 +3,7 @@ import { editTagCall } from "../API-Adapter";
 
 const EditTagForm = ({ token, tagId }) => {
     const [newTagName, setNewTagName] = useState("");
+    const [isError, setIsError] = useState(false);
  
     const editTag = async() => {
         const response = await editTagCall(token, tagId, newTagName);

@@ -16,6 +16,7 @@ const EditUserAdminForm = ({
   const [newEmail, setNewEmail] = useState(email);
   const [NewIsAdmin, setNewIsAdmin] = useState(isAdmin);
   const [NewIsActive, setNewIsActive] = useState(isActive);
+  const [isError, setIsError] = useState(false);
 
   const adminEditUser = async () => {
     const response = await adminEditUserCall(
@@ -92,7 +93,7 @@ const EditUserAdminForm = ({
           <select
             value={true}
             onChange={(e) => {
-              setNewIsAdmin(e.target.value);
+              setNewIsActive(e.target.value);
               console.log(NewIsAdmin);
             }}
           >

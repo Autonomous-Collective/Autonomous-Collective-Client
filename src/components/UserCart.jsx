@@ -75,11 +75,15 @@ const UserCart = ({ cart, user, token }) => {
       <button
         onClick={() => {
           checkOutCart();
+          document.getElementById("success-message").style.display = "flex"
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500)
         }}
       >
         Check Out!
       </button>
-      <div id="success-message" display="none">
+      {/* <div id="success-message" className="display-none">
         <h1>You have successfully check out</h1>
         <button
           onClick={() => {
@@ -88,7 +92,7 @@ const UserCart = ({ cart, user, token }) => {
         >
           Close
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
