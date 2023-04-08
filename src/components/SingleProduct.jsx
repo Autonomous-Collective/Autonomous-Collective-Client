@@ -4,6 +4,10 @@ import { getProductByIdCall, addProductToCartCall, editCartProductCall } from ".
 import "./componentStyles/SingleProduct.css";
 import { ReviewList, CreateReview } from "./";
 
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Form from 'react-bootstrap/Form'
+
 const SingleProduct = ({ token, user, cart }) => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
@@ -121,6 +125,31 @@ const SingleProduct = ({ token, user, cart }) => {
       )}
     </div>
   );
-};
+
+  //   <Card style={{ width: '18rem' }}>
+  //     <Card.Img variant="top" src={product.img} />
+  //     <Card.Body>
+  //       <Card.Title>{product.title}</Card.Title>
+  //       <Card.Text>
+  //       </Card.Text>
+  //     </Card.Body>
+  //     <ListGroup className="list-group-flush">
+  //       <ListGroup.Item>ISBN: {product.isbn}</ListGroup.Item>
+  //       <ListGroup.Item>Price: ${product.price / 100}</ListGroup.Item>
+  //       <ListGroup.Item></ListGroup.Item>
+  //     </ListGroup>
+  //     <Card.Body>
+  //       <Card.Link href="#">Card Link</Card.Link>
+  //       <Card.Link href="#">Another Link</Card.Link>
+  //     </Card.Body>
+  //     <Form>
+  //       <Form.Group>
+  //         <Form.Label>Test</Form.Label>
+  //       </Form.Group>
+  //     </Form>
+  //   </Card>
+  // );
+}
+
 
 export default SingleProduct;
