@@ -5,7 +5,6 @@ import { ProductsList, SideNav, MessageAlert } from "./";
 const Home = ({ allProducts, allTags }) => {
   return (
     <div id="main">
-      <MessageAlert message="Test" isError={true} />
       <div id="home-content-container">
         <SideNav allTags={allTags} />
         <ProductsList allProducts={allProducts} />
