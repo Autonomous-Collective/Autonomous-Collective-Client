@@ -538,3 +538,22 @@ export const removeTagFromProductCall = async (token, tagId, productId) => {
       console.error(error)
   }
 }
+
+export const addTagToDBCall = async(token, name) => {
+  try {
+    const response = await fetch(`${URL}/api/products/tags`, {
+      method: "POST",
+      headers: makeHeaders(token),
+      body: JSON.stringify({
+        name: name,
+      })
+    });
+
+    const result = await response.json();
+    console.log(result, "result from addTagToDBCall");
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
