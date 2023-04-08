@@ -29,4 +29,6 @@ export { default as UserEditAddress } from "./UserEditAddress";
 export { default as UserCart } from "./UserCart"
 export { default as TagsSectionAdmin } from "./TagsSectionAdmin";
 export { default as TaggedProductList } from "./TaggedProductList";
+export { default as EditTagForm } from "./EditTagForm";
+export { default as MessageAlert } from "./MessageAlert";
 

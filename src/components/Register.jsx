@@ -22,6 +22,8 @@ const Register = (props) => {
 
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
 
   return (
     <>

@@ -18,6 +18,7 @@ import {
 const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
   const [tagToAdd, setTagToAdd] = useState("");
   const [tagToRemove, setTagToRemove] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const toggleForm = (id) => {
     let form = document.getElementById(`edit-product-form${id}`);

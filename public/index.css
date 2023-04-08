@@ -31,6 +31,16 @@ body {
   text-decoration: underline;
 }
 
+#message-alert-div {
+  position: fixed;
+  top: 50vh;
+  left: 25vw;
+  width: 50vw;
+  height: 25vh;
+  background-color: green;
+  z-index: 9999;
+}
+
 .display-none {
   display: none;
 }
