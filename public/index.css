@@ -16,7 +16,8 @@ body {
 
 #sideNav {
   margin-top: 10px;
-  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
 }
 #side-bar {
   flex-direction: column;

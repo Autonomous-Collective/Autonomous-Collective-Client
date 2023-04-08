@@ -21,11 +21,12 @@ const TaggedProductList = (props) => {
   }, []);
 
   return (
-    <div id="productByTagContainer">
+    <div>
       <h1 id="productByTagTitle">All {name} Books:</h1>
+    <div id="home-content-container">
+      <SideNav allTags={allTags} />
       {products.length ? (
-        <div id="home-content-container">
-          <SideNav allTags={allTags} />
+      <div id="productsContainer">
           {products.length ? (
             products.map((product, idx) => {
               return product.isActive ? (
@@ -42,6 +43,7 @@ const TaggedProductList = (props) => {
       ) : (
         <h1> no products found with this tag! </h1>
       )}
+    </div>
     </div>
   );
 };
