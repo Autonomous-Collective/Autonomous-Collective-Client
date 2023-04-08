@@ -30,6 +30,15 @@ body {
   text-decoration: underline;
 }
 
+#message-alert-div {
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  width: 50vw;
+  height: 25vh;
+  background-color: green;
+}
+
 .display-none {
   display: none;
 }
