@@ -17,6 +17,8 @@ const GuestRegister = (props) => {
   const [updateEmail, setUpdateEmail] = useState("");
   const [updatePassword, setUpdatePassword] = useState("");
   const [confirmUpdatePassword, setConfirmUpdatePassword] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
 
 //   const email = props.email;
   const setEmail = props.setEmail;
