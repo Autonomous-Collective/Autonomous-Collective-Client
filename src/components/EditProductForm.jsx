@@ -9,6 +9,7 @@ const EditProductForm = ({ product, token }) => {
   const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [inventory, setInventory] = useState("");
+  const [isError, setIsError] = useState(false);
   const editProduct = async () => {
     const response = await editProductCall(
       token,

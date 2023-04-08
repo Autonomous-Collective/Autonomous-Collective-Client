@@ -23,6 +23,8 @@ const Login = (props) => {
   const setToken = props.setToken;
   const navigate = useNavigate();
 
+  const [isError, setIsError] = useState(false);
+
   return (
     <>
       <div
