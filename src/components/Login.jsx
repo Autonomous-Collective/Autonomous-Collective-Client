@@ -24,6 +24,7 @@ const Login = (props) => {
   const navigate = useNavigate();
 
   const [isError, setIsError] = useState(false);
+  const [message, setMessage] = useState("");
 
   return (
     <>
