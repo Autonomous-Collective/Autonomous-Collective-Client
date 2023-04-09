@@ -1,0 +1,31 @@
+#navbar-container{
+    /* background: linear-gradient(to right top, #CED9B8, #9BBF9D); */
+    background-color: #CED9B8 !important;
+}
+
+#brand{
+    font-family: 'Gloock', sans-serif !important;
+    font-size: 25pt;
+    color: #025928 !important;
+    text-shadow: 2px 2px 3px #9BBF9D;
+    letter-spacing: 2px;
+    animation: fadeIn;
+    animation-duration: 2s;
+}
+
+#navbar-links{
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    color: #025928;
+    text-shadow: 2px 2px 3px #9BBF9D;
+    font-size: 14pt;
+    transition: ease-in !important;
+    transition-duration: 0.3s !important;
+}
+
+#navbar-links a:hover{
+    transition: ease-in !important;
+    transition-duration: 0.3s !important;
+    color: #025928 !important;
+    text-shadow: 3px 3px 4px #FFBD00 !important;
+}

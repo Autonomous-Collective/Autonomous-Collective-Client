@@ -7,6 +7,8 @@ import Login from "./Login";
 import Register from "./Register";
 import { Link, useNavigate } from "react-router-dom";
 
+import  navbarStyling  from "./componentStyles/navbarStyling.css"
+
 import GuestRegister from "./GuestRegister";
 
 import "bootstrap/dist/css/bootstrap.min.css";

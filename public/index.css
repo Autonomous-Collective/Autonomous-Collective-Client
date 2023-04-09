@@ -8,6 +8,8 @@ black: #0D0D0D
 
 body {
   margin: 0;
+  background-color: #F1F4EB !important;
+  font-family: 'DM Sans', sans-serif !important;
 }
 
 #home-content-container {
