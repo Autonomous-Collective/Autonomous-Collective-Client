@@ -11,6 +11,7 @@
     letter-spacing: 2px;
     animation: fadeIn;
     animation-duration: 2s;
+    border-bottom: 3px solid #025928 !important;
 }
 
 #navbar-links{
@@ -28,4 +29,5 @@
     transition-duration: 0.3s !important;
     color: #025928 !important;
     text-shadow: 3px 3px 4px #FFBD00 !important;
+    border-bottom: 3px solid #025928 !important;
 }
