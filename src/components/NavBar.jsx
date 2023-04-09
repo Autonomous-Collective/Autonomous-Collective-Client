@@ -122,7 +122,8 @@ const NavBar = (props) => {
                 />
                 </>
                 )}
-              <Link className="material-symbols-outlined" to="/cart">shopping_cart</Link>
+              {/* <Link className="material-symbols-outlined" to="/cart">shopping_cart</Link> */}
+              <Link to="/cart"><i className="material-symbols-outlined">shopping_cart</i></Link>
             </Nav>
           </Navbar.Collapse>
         </div>

@@ -4,12 +4,24 @@ sage-ish: #9BBF9D
 grey: #D8D9D7
 light green: #CED9B8
 black: #0D0D0D
+
+font stuff:
+font-family: 'Bungee', cursive;
+font-family: 'Bungee Inline', cursive;
+font-family: 'Bungee Shade', cursive;
+font-family: 'Koulen', cursive;
+font-family: 'Lexend', sans-serif;
+font-family: 'Lexend Exa', sans-serif;
+font-family: 'Rubik Mono One', sans-serif;
+font-family: 'Staatliches', cursive;
+
+
 */
 
 body {
   margin: 0;
-  background-color: #F1F4EB !important;
-  font-family: 'DM Sans', sans-serif !important;
+  /* background-color: #F1F4EB !important; */
+  font-family: 'Lexend', sans-serif !important;
 }
 
 #home-content-container {
