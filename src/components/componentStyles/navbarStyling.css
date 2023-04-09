@@ -15,7 +15,6 @@ font-family: 'Lexend Exa', sans-serif;
 font-family: 'Rubik Mono One', sans-serif;
 font-family: 'Staatliches', cursive;
 */
-
 #navbar-container{
     /* background: linear-gradient(to right top, #CED9B8, #9BBF9D); */
     background-color: white !important;
@@ -24,18 +23,19 @@ font-family: 'Staatliches', cursive;
 #brand{
     font-family: 'Bungee Shade', sans-serif !important;
     font-size: 25pt;
-    color: #3F47A2  !important;
+    color: #025928 !important;
+    /* color: #3F47A2  !important; */
     text-shadow: 2px 2px 3px #9BBF9D;
     letter-spacing: 2px;
     animation: fadeIn;
     animation-duration: 2s;
-    border-bottom: 3px dashed #9BBF9D !important;
+    border-bottom: 3px dashed #3F47A2 !important;
 }
 
 #navbar-links a{
     font-family: 'Lexend Exa', sans-serif;
     font-weight: 700;
-    color:#3F47A2 !important;
+    color:#025928 !important;
     text-shadow: 2px 2px 3px #9BBF9D !important;
     font-size: 14pt;
     transition: ease-in !important;

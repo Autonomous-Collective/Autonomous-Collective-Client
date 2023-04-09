@@ -1,0 +1,40 @@
+/* colors::after
+deep green: #025928
+sage-ish: #9BBF9D
+grey: #D8D9D7
+light green: #CED9B8
+black: #0D0D0D
+
+font stuff:
+font-family: 'Bungee', cursive;
+font-family: 'Bungee Inline', cursive;
+font-family: 'Bungee Shade', cursive;
+font-family: 'Koulen', cursive;
+font-family: 'Lexend', sans-serif;
+font-family: 'Lexend Exa', sans-serif;
+font-family: 'Rubik Mono One', sans-serif;
+font-family: 'Staatliches', cursive;
+*/
+
+#sideNav{
+    padding-top: 0.5rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+    /* background-color: #CED9B8 !important; */
+}
+
+#sideNav a{
+    font-family: 'Bungee Shade', sans-serif;
+    color: #3F47A2 !important;
+    text-shadow: 3px 3px 4px #CED9B8;
+    font-size: 14pt;
+}
+
+#side-nav-search{
+    border-radius: 35px !important;
+    font-size: 10.5pt;
+    text-shadow: 2px 2px 3px #CED9B8 !important;
+    font-family: 'Lexend Exa', sans-serif;
+    font-weight: 700;
+    border: 3px solid #3F47A2;
+}

@@ -2,6 +2,7 @@ import React from "react";
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import Button  from "react-bootstrap/Button";
+import SideNavStyling from "./componentStyles/SideNavStyling.css";
 
 const SideNav = (props) =>{
   const allTags=props.allTags
@@ -10,6 +11,7 @@ const SideNav = (props) =>{
         <div id = "sideNav" >
             <Form className="d-flex">
                   <Form.Control
+                  id="side-nav-search"
                     type="search"
                     placeholder="Search"
                     className="me-2"
