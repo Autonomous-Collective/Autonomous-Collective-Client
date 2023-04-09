@@ -15,7 +15,7 @@ const PastOrders = (props) => {
               <Card.Header>Cart {`${idx + 1}`}</Card.Header>
               <div>
                 {order.products.map((product, idx) => {
-                  total += product.price;
+                  total += product.price * product.quantity;
                   return (
                     <Card.Body key={idx}>
                       <Card.Title>{product.title}</Card.Title>
