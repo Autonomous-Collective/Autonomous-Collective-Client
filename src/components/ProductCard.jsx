@@ -2,15 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import ProductCardStyling from "./componentStyles/ProductCardStyling.css"
 
 const ProductCard = ({ product }) => {
   return (
-    <Card style={{ width: '18rem', margin: '10px'}}>
+    <Card style={{ width: '18rem', margin: '10px'}} id="product-card">
     <Card.Img variant="top" style={{padding: "20px"}} src={product.img} />
     <Card.Body>
-      <Card.Title>{product.title}</Card.Title>
+      <Card.Title id="product-title">{product.title}</Card.Title>
       <Card.Text>{product.author}</Card.Text>
-      <Button variant="primary" href={`/products/${product.id}`}>See More</Button>
+      <Button variant="primary" href={`/products/${product.id}`} id="product-card-button">See More</Button>
     </Card.Body>
   </Card>
 );

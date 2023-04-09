@@ -43,8 +43,9 @@ font-family: 'Staatliches', cursive;
     text-decoration: none !important;
 }
 
+/* need some input on the shopping cart */
 #navbar-links i{
-    background-color: #FFBD00;
+    background-color: #9BBF9D;
     text-decoration: none !important;
     color: #3F47A2!important;
     border-radius: 50%  !important;
