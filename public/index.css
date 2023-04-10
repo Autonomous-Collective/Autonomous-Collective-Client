@@ -145,3 +145,7 @@ body {
 .material-icons.star{
   color: #FFBD00 !important;
 }
+
+.single-product-tags{
+  font-weight: 700 !important;
+}

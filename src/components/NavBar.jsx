@@ -32,7 +32,7 @@ const NavBar = (props) => {
     <>
       <Navbar style= {{justifyContent:"space-evenly"}} bg="light" expand="sm" id="navbar-container" className='gap-20 px-3' sticky="top">
         <div>
-          <Navbar.Brand href="/" id="brand">
+          <Navbar.Brand as={Link} to="/" id="brand">
             The Autonomous Collective
           </Navbar.Brand>
         </div>
@@ -40,7 +40,7 @@ const NavBar = (props) => {
           <Navbar.Collapse>
         <Container>
             <Nav style={{justifyContent: "flex-end"}}>
-              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
               {verifyGuest ? 
               <GuestRegister 
                   isLoggedIn={isLoggedIn}
@@ -54,10 +54,10 @@ const NavBar = (props) => {
                   token={token}
                   setToken={setToken}/> : null}
               { isLoggedIn && verifyAdmin ?
-              <Nav.Link href="/admin">Admin</Nav.Link>: null }
+              <Nav.Link as={Link} to="/admin">Admin</Nav.Link>: null }
 
               {isLoggedIn && !verifyGuest ?
-              <Nav.Link href="/profile">Profile</Nav.Link> : null
+              <Nav.Link as={Link} to="/profile" >Profile</Nav.Link> : null
               }
 
               {isLoggedIn ? (

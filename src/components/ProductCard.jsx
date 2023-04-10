@@ -10,7 +10,8 @@ const ProductCard = ({ product }) => {
     <Card.Body>
       <Card.Title>{product.title}</Card.Title>
       <Card.Text>{product.author}</Card.Text>
-      <Button variant="primary" href={`/products/${product.id}`}>See More</Button>
+      <Button variant="primary" as={Link} to={`/products/${product.id}`}>See More</Button>
+      {/* href={`/products/${product.id}`} */}
     </Card.Body>
   </Card>
 );

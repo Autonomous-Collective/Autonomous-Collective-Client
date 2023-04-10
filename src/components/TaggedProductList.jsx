@@ -21,7 +21,7 @@ const TaggedProductList = (props) => {
 
   useEffect(() => {
     getProductsByTag();
-  }, []);
+  }, [name]);
 
   console.log(products, "products in tagged product list");
 

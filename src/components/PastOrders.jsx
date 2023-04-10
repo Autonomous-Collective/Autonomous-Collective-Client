@@ -5,9 +5,14 @@ import Card from "react-bootstrap/Card";
 const PastOrders = (props) => {
   const pastOrders = props.pastOrders;
 
+  console.log(pastOrders, "pastorders");
+
   return (
     <div>
-      {pastOrders.length ? (
+      {pastOrders === null ? 
+      <h1>LOAFING...</h1> : 
+      pastOrders?.length ? 
+      (
         pastOrders.map((order, idx) => {
           let total = 0;
           return (
@@ -29,9 +34,7 @@ const PastOrders = (props) => {
             </Card>
           );
         })
-      ) : (
-        <h1>Loading</h1>
-      )}
+      ) : <h1>you have not made any orders!</h1> }
     </div>
   );
 };
