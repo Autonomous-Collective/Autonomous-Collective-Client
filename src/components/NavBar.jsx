@@ -38,7 +38,7 @@ const NavBar = (props) => {
         </div>
           <Navbar.Toggle/>
           <Navbar.Collapse>
-        <Container>
+        <Container style={{marginRight: "0px", paddingRight: "0px"}}>
             <Nav style={{justifyContent: "flex-end"}}>
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               {verifyGuest ? 
