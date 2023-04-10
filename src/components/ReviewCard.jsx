@@ -19,7 +19,7 @@ const ReviewCard = ({ review }) => {
       <Card>
         <Card.Header as="h5">{review.title}</Card.Header>
         <Card.Body>
-          <Card.Title>{<i className="material-icons">{reviewString}</i>}</Card.Title>
+          <Card.Title>{<i className="material-icons star">{reviewString}</i>}</Card.Title>
           <Card.Subtitle>by {review.name}</Card.Subtitle>
           <Card.Text>
            {review.content}
