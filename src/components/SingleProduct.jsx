@@ -74,11 +74,24 @@ const SingleProduct = ({ token, user, cart }) => {
       }, 3000);
       console.log("added to cart");
     } else {
-      setMessage("Seomthing went wrong");
-      setIsError(true);
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      // setMessage("Please login");
+      // setIsError(true);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 3000);
+      if(!token){
+        setMessage("Please login");
+        setIsError(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }else{
+        setMessage("Something went wrong");
+        setIsError(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      }
     }
   };
 
@@ -221,14 +234,14 @@ const SingleProduct = ({ token, user, cart }) => {
                 </Button>
               </Form>
               <Card.Body></Card.Body>
-              <Button
+              {token ?    <Button
                 variant="primary"
                 onClick={() => {
                   toggle();
                 }}
               >
                 Create Review
-              </Button>
+              </Button> : null}
               <Card.Body></Card.Body>
               <div id="create-review">
                 <CreateReview token={token} productId={product.id} />
