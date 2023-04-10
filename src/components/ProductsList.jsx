@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ProductCard } from "./";
 
-const ProductsList = ({ allProducts, searchString }) => {
+const ProductsList = (props) => {
+  const allProducts = props.allProducts;
+  const searchString = props.searchString;
   console.log(allProducts, "all products from Products List *******");
 console.log ("@@@@", searchString)
 
   return (
     <div id="productsContainer">
-     {!searchString ?
+     {!searchString.length ?
     <div id="productsContainer">
       {allProducts.length ? (
         allProducts.map((product, idx) => {
@@ -22,9 +24,12 @@ console.log ("@@@@", searchString)
     : allProducts.map((product, idx)=> {
       let titleLowerCase = product.title.toLowerCase ();
       let authorLowerCase = product.author.toLowerCase()
-      // let searchStringLowerCase = searchString.toLowerCase()
+      let searchStringLowerCase = searchString.toLowerCase()
+      console.log(typeof(searchString));
+      console.log(typeof(allProducts));
+      console.log(searchStringLowerCase);
       if (
-        titleLowerCase.includes(searchString) || authorLowerCase.includes(searchString) 
+        titleLowerCase.includes(searchStringLowerCase) || authorLowerCase.includes(searchStringLowerCase) 
         ) {
           return (
             <ProductCard product={product} key={`${idx} - product list map`} />)

@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { registerNewUserCall, guestLoginCall } from "../API-Adapter";
+import MessageAlert from "./MessageAlert";
 
 const Register = (props) => {
   const [show, setShow] = useState(false);
@@ -27,19 +28,25 @@ const Register = (props) => {
 
   return (
     <>
+    {message ? <MessageAlert message={message} isError={isError} /> : null}
       <div
         id="registerPage"
         onSubmit={async (event) => {
           event.preventDefault();
           if (password !== confirmPassword) {
-            alert("Both password fields must match!");
+            setMessage("Both password fields must match!");
+            setIsError(true);
           } else
             try {
               if (localStorage.getItem("token")) {
-                alert("Need to log out before creating a new account");
+                setMessage("Need to log out before creating a new account");
+                setIsError(true);
               } else {
                 const result = await registerNewUserCall(name, email, password);
-                if (result !== undefined) {
+                if (result.success) {
+                  setMessage("Successfully Registered!");
+                  setIsError(false);
+
                   setIsLoggedIn(true);
                   localStorage.setItem("token", result.token);
                   localStorage.setItem("email", email);
@@ -49,7 +56,8 @@ const Register = (props) => {
                   setUser(result.user);
                   handleClose();
                 } else {
-                  console.log("token came back undefined");
+                  setMessage("Unable to Register your account, email may already be used");
+                  setIsError(true);
                 }
               }
             } catch (error) {
@@ -138,6 +146,9 @@ const Register = (props) => {
                       } else {
                         const result = await guestLoginCall();
                         if (result !== undefined) {
+                          setMessage("Logged in as Guest");
+                          setIsError(false);
+
                           localStorage.setItem("token", result.token);
                           localStorage.setItem("email", result.guestUser.email);
                           localStorage.setItem(
@@ -150,7 +161,8 @@ const Register = (props) => {
                           setIsLoggedIn(true);
                           handleClose();
                         } else {
-                          console.log("Guest Login Error");
+                          setMessage("Unable to register as guest");
+                          setIsError(true);
                         }
                       }
                     } catch (error) {

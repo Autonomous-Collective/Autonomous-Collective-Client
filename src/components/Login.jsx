@@ -5,8 +5,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { useNavigate } from "react-router-dom";
 import { userLoginCall, guestLoginCall } from "../API-Adapter";
-
-// import Register from "./Register";
+import MessageAlert from "./MessageAlert";
 
 const Login = (props) => {
   const [show, setShow] = useState(false);
@@ -28,12 +27,14 @@ const Login = (props) => {
 
   return (
     <>
+    {message ? <MessageAlert message={message} isError={isError} /> : null}
       <div
         onSubmit={async (event) => {
           event.preventDefault();
           try {
             if (localStorage.getItem("token")) {
-              alert("Already logged in!");
+              setMessage("Already logged in!");
+              setIsError(true);
             } else {
               const result = await userLoginCall(email, password);
               console.log(result);
@@ -41,6 +42,9 @@ const Login = (props) => {
               //think about better error handling? universal error & setError state?
 
               if (result.success) {
+                setMessage("Successfully Logged In!");
+                setIsError(false);
+
                 localStorage.setItem("token", result.token);
                 localStorage.setItem("email", email);
                 localStorage.setItem("user", JSON.stringify(result.user));
@@ -50,8 +54,8 @@ const Login = (props) => {
                 setIsLoggedIn(true);
                 handleClose();
               } else {
-                alert("Invalid Login Credentials"); //no alerts? How else should we handle errors?
-                console.log("Invalid Login Credentials");
+                setMessage("Invalid Login Credentials");
+                setIsError(true);
               }
             }
           } catch (error) {
@@ -111,10 +115,14 @@ const Login = (props) => {
                     event.preventDefault();
                     try {
                       if (localStorage.getItem("token")) {
-                        alert("Already logged in!");
+                        setMessage("Already logged in!");
+                        setIsError(true);
                       } else {
                         const result = await guestLoginCall();
                         if (result !== undefined) {
+                          setMessage("Logged in as Guest");
+                          setIsError(false);
+                          
                           localStorage.setItem("token", result.token);
                           localStorage.setItem("email", result.guestUser.email);
                           localStorage.setItem(
@@ -127,7 +135,8 @@ const Login = (props) => {
                           setIsLoggedIn(true);
                           handleClose();
                         } else {
-                          console.log("Guest Login Error");
+                          setMessage("Unable to register as guest");
+                          setIsError(true);
                         }
                       }
                     } catch (error) {
@@ -140,10 +149,6 @@ const Login = (props) => {
               </div>
             </form>
           </Modal.Body>
-          <Modal.Footer>
-            <p> Don't have an account? </p>
-            <Button variant="primary">Register Here</Button>
-          </Modal.Footer>
         </Modal>
       </div>
     </>

@@ -18,7 +18,8 @@ body {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  max-width: 20%;
+  min-width: 15vw;
+  padding-left: 10px;
 }
 #side-bar {
   display: flex;
@@ -89,7 +90,8 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   margin-top: 10px;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  min-width: 85vw;
 }
 
 #pastOrderContainer {

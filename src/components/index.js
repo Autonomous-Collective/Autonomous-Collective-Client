@@ -21,7 +21,6 @@ export { default as UserProfilePage } from "./UserProfilePage";
 
 export { default as AddProductForm } from "./AddProductForm";
 
-
 export { default as PastOrders } from "./PastOrders";
 export { default as UserInfo } from "./UserInfo";
 export { default as UserEditInfo } from "./UserEditInfo";
