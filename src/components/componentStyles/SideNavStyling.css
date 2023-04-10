@@ -24,7 +24,8 @@ font-family: 'Staatliches', cursive;
 }
 
 #sideNav a{
-    font-family: 'Bungee Shade', sans-serif;
+    /* font-family: 'Bungee Shade', sans-serif; */
+    font-family: 'Lexend Exa', sans-serif;
     color: #3F47A2 !important;
     text-shadow: 3px 3px 4px #CED9B8;
     font-size: 14pt;

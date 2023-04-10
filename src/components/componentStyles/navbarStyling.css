@@ -23,8 +23,8 @@ font-family: 'Staatliches', cursive;
 #brand{
     font-family: 'Bungee Shade', sans-serif !important;
     font-size: 25pt;
+    /* color: #3F47A2 !important; */
     color: #025928 !important;
-    /* color: #3F47A2  !important; */
     text-shadow: 2px 2px 3px #9BBF9D;
     letter-spacing: 2px;
     animation: fadeIn;
@@ -45,9 +45,9 @@ font-family: 'Staatliches', cursive;
 
 /* need some input on the shopping cart */
 #navbar-links i{
-    background-color: #9BBF9D;
+    /* background-color: #9BBF9D; */
     text-decoration: none !important;
-    color: #3F47A2!important;
+    /* color: #3F47A2!important; */
     border-radius: 50%  !important;
     padding: 10px !important;
 }
@@ -61,8 +61,8 @@ font-family: 'Staatliches', cursive;
 }
 
 /* media queries */
-@media screen and (max-width: 230px){
+/* @media screen and (min-width: 270px){
     #navbar-links i{
         background-color: white !important;
     }
-}
+} */
