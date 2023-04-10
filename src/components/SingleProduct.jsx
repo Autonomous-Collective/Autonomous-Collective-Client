@@ -11,6 +11,8 @@ import { ReviewList, CreateReview, MessageAlert } from "./";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import { ListGroupItem } from "react-bootstrap";
 
 const SingleProduct = ({ token, user, cart }) => {
   const [product, setProduct] = useState({});
@@ -106,98 +108,142 @@ const SingleProduct = ({ token, user, cart }) => {
   };
 
   return (
-    <div className="flex-column">
+    //   <div className="flex-column">
+    //     {message ? <MessageAlert message={message} isError={isError} /> : null}
+    //     {product?.title ? (
+    //       <>
+    //         <div className="flex-row">
+    //           <div id="single-prod-picture">
+    //             <img
+    //               src={product.img}
+    //               alt="placeholder"
+    //               height="500"
+    //               width="450"
+    //             ></img>
+    //           </div>
+    //           <div id="title-details">
+    //             <h1>{product.title}</h1>
+    //             <h3>By: {product.author}</h3>
+    //             <p>{product.isbn}</p>
+    //             <h4>${product.price / 100}</h4>
+    //             <form
+    //               onSubmit={(e) => {
+    //                 e.preventDefault();
+    //                 addProductToCart();
+    //               }}
+    //             >
+    //               <label>choose the quantity</label>
+    //               <input
+    //                 type="number"
+    //                 defaultValue={1}
+    //                 min={1}
+    //                 onChange={(e) => {
+    //                   setQuantity(e.target.value);
+    //                 }}
+    //               />
+    //               <button type="submit">add to cart</button>
+    //             </form>
+    //           </div>
+    //         </div>
+    //         <div className="flex-row">
+    //           <div id="description">
+    //             <p>{product.description}</p>
+    //             <div id="product-tags-div">
+    //               {product.tags?.length
+    //                 ? product.tags.map((tag, idx) => {
+    //                     return <p key={`${idx} tag list map`}>{tag}</p>;
+    //                   })
+    //                 : null}
+    //             </div>
+    //           </div>
+    //           <div id="reviews">
+    //             <button
+    //               onClick={() => {
+    //                 toggle();
+    //               }}
+    //             >
+    //               Add a Reveiw
+    //             </button>
+    //             <div id="create-review">
+    //               <CreateReview token={token} productId={product.id} />
+    //             </div>
+    //             <ReviewList productId={product.id} />
+    //           </div>
+    //         </div>
+    //       </>
+    //     ) : (
+    //       <h1>LOAFING</h1>
+    //     )}
+    //   </div>
+    // );
+
+    <div id="singleProductPage">
       {message ? <MessageAlert message={message} isError={isError} /> : null}
       {product?.title ? (
-        <>
-          <div className="flex-row">
-            <div id="single-prod-picture">
-              <img
+        <div id="singleProductContainer">
+          <Card>
+            <Card.Header as="h2">{product.title}</Card.Header>
+            <Card.Body>
+              <Card.Img
+                variant="top"
                 src={product.img}
-                alt="placeholder"
-                height="500"
-                width="450"
-              ></img>
-            </div>
-            <div id="title-details">
-              <h1>{product.title}</h1>
-              <h3>By: {product.author}</h3>
-              <p>{product.isbn}</p>
-              <h4>${product.price / 100}</h4>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  addProductToCart();
-                }}
-              >
-                <label>choose the quantity</label>
-                <input
+                style={{ height: "300px", width: "200px", padding: "20px" }}
+              />
+              <Card.Title>by {product.author}</Card.Title>
+              <Card.Text>{product.description}</Card.Text>
+              <ListGroup className="list-group-flush">
+                <ListGroup.Item>ISBN :{product.isbn}</ListGroup.Item>
+                <ListGroup.Item>Price: ${product.price / 100}</ListGroup.Item>
+                <ListGroupItem></ListGroupItem>
+              </ListGroup>
+              <Form className="">
+                <Form.Label>Quantity:</Form.Label>
+                <Form.Control
+                  placeholder="Choose Quantity"
+                  className="me-2"
+                  aria-label="Choose Quantity"
                   type="number"
                   defaultValue={1}
                   min={1}
-                  onChange={(e) => {
-                    setQuantity(e.target.value);
+                  onChange={(event) => {
+                    event.preventDefault();
+                    setQuantity(event.target.value);
                   }}
                 />
-                <button type="submit">add to cart</button>
-              </form>
-            </div>
-          </div>
-          <div className="flex-row">
-            <div id="description">
-              <p>{product.description}</p>
-              <div id="product-tags-div">
-                {product.tags?.length
-                  ? product.tags.map((tag, idx) => {
-                      return <p key={`${idx} tag list map`}>{tag}</p>;
-                    })
-                  : null}
-              </div>
-            </div>
-            <div id="reviews">
-              <button
+                <Button style={{marginTop: "15px"}}
+                  variant="success"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    addProductToCart();
+                  }}
+                >
+                  Add To Cart:
+                </Button>
+              </Form>
+              <Card.Body></Card.Body>
+              <Button
+                variant="primary"
                 onClick={() => {
                   toggle();
                 }}
               >
-                Add a Reveiw
-              </button>
+                Create Review
+              </Button>
+              <Card.Body></Card.Body>
               <div id="create-review">
                 <CreateReview token={token} productId={product.id} />
               </div>
-              <ReviewList productId={product.id} />
-            </div>
-          </div>
-        </>
+            </Card.Body>
+          </Card>
+        </div>
       ) : (
-        <h1>LOAFING</h1>
+        <h1>Loafing</h1>
       )}
+      <div id="reviewContainer">
+      <ReviewList productId={product.id} />
+      </div>
     </div>
   );
-
-  //   <Card style={{ width: '18rem' }}>
-  //     <Card.Img variant="top" src={product.img} />
-  //     <Card.Body>
-  //       <Card.Title>{product.title}</Card.Title>
-  //       <Card.Text>
-  //       </Card.Text>
-  //     </Card.Body>
-  //     <ListGroup className="list-group-flush">
-  //       <ListGroup.Item>ISBN: {product.isbn}</ListGroup.Item>
-  //       <ListGroup.Item>Price: ${product.price / 100}</ListGroup.Item>
-  //       <ListGroup.Item></ListGroup.Item>
-  //     </ListGroup>
-  //     <Card.Body>
-  //       <Card.Link href="#">Card Link</Card.Link>
-  //       <Card.Link href="#">Another Link</Card.Link>
-  //     </Card.Body>
-  //     <Form>
-  //       <Form.Group>
-  //         <Form.Label>Test</Form.Label>
-  //       </Form.Group>
-  //     </Form>
-  //   </Card>
-  // );
 };
 
 export default SingleProduct;

@@ -2,16 +2,39 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
-  border: 2px solid black;
   align-items: center;
 }
+#singleProductPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#singleProductContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 40vw;
+  height: 30%;
+}
 
-.flex-column {
+#reviewContainer {
   display: flex;
   flex-direction: column;
-  background-color: grey;
-  border: 2px solid black;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#reviewCard {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 40vw;
+}
+#createReviewContainer {
+  display: flex;
+  width: 40vw;
+}
+
+#createReviewCard {
+  width: 732px;
 }
 
 #description {
@@ -25,6 +48,6 @@
   border: 2px solid black;
 }
 
-#create-review{
+#create-review {
   display: none;
 }
