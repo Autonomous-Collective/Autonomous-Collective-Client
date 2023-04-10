@@ -217,7 +217,7 @@ const SingleProduct = ({ token, user, cart }) => {
                     addProductToCart();
                   }}
                 >
-                  Add To Cart:
+                  Add To Cart
                 </Button>
               </Form>
               <Card.Body></Card.Body>
@@ -234,14 +234,14 @@ const SingleProduct = ({ token, user, cart }) => {
                 <CreateReview token={token} productId={product.id} />
               </div>
             </Card.Body>
+              <div id="reviewContainer">
+          <ReviewList productId={product.id} />
+          </div>
           </Card>
         </div>
       ) : (
         <h1>Loafing</h1>
       )}
-      <div id="reviewContainer">
-      <ReviewList productId={product.id} />
-      </div>
     </div>
   );
 };
