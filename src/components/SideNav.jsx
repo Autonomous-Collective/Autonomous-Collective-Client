@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import Button  from "react-bootstrap/Button";
@@ -25,7 +26,8 @@ const SideNav = (props) =>{
             {allTags.length ?(
               allTags.map((tag, idx) => {
                 return(
-                  <Nav.Link href={`/products/${tag.name}/${tag.id}`} key={`${idx}`}>{tag.name}</Nav.Link>
+                  <Nav.Link as={Link} to={`/products/${tag.name}/${tag.id}`} key={`${idx}`}>{tag.name}</Nav.Link>
+                  // href={`/products/${tag.name}/${tag.id}`}
                 )
               })
             ): <h3>LOADING..</h3>}

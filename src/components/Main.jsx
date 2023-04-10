@@ -33,7 +33,7 @@ const Main = () => {
   const [allUsers, setAllUsers] = useState([]);
 
   const [allTags, setAllTags] = useState([]);
-  const [pastOrders, setPastOrders] = useState([]);
+  const [pastOrders, setPastOrders] = useState(null);
 
   const [searchString, setSearchString] = useState([]);
 
@@ -75,6 +75,8 @@ const Main = () => {
 
     if (response.success) {
       setPastOrders(response.userOrders);
+    }else{
+      setPastOrders([]);
     }
   };
 
@@ -97,7 +99,7 @@ const Main = () => {
     console.log(cart);
 
     getPastOrders();
-  }, [isLoggedIn]);
+  }, [token]);
 
   return (
     <div id="main">

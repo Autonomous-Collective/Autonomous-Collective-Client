@@ -204,6 +204,15 @@ const SingleProduct = ({ token, user, cart }) => {
               />
               <Card.Title>by {product.author}</Card.Title>
               <Card.Text>{product.description}</Card.Text>
+              <div id="product-tags-div" className="flex-row">
+               {product.tags?.length
+                    ?
+                    
+                    product.tags.map((tag, idx) => {
+                        return <p key={`${idx} tag list map`} className="single-product-tags">{tag}</p>;
+                      })
+                    : null}
+                </div>
               <ListGroup className="list-group-flush">
                 <ListGroup.Item>ISBN :{product.isbn}</ListGroup.Item>
                 <ListGroup.Item>Price: ${product.price / 100}</ListGroup.Item>
