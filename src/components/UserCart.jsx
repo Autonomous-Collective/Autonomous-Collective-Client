@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { checkoutCartCall, editCartProductCall } from "../API-Adapter";
 import { MessageAlert } from "./";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import { FormControl, Form, ListGroupItem, ListGroup } from "react-bootstrap";
 
 const UserCart = ({ cart, user, token }) => {
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
   console.log(cart, "cart from userCart page");
-  let totalPrice = 0;
+  let subTotal = 0;
+  const [totalPrice, setTotalPrice] = useState(0) 
 
   const editCartProduct = async (productId, quantity) => {
     const response = await editCartProductCall(
@@ -16,6 +20,8 @@ const UserCart = ({ cart, user, token }) => {
       productId,
       quantity
     );
+     
+    
     if (response.success && quantity === 0) {
       setMessage("Successfully Removed product from cart");
       setIsError(false);
@@ -34,67 +40,137 @@ const UserCart = ({ cart, user, token }) => {
   };
 
   return (
-    <div>
+    <div id="userCartPageContainer">
       {message ? <MessageAlert message={message} isError={isError} /> : null}
-      <h1>Your Order:</h1>
-      {cart?.products?.length ? (
-        cart.products.map((product, idx) => {
-          totalPrice += product.price * product.quantity;
-          return (
-            <div key={`${idx} of cart products map`} className="flex-row">
-              <div>
-                <div className="flex-column">
-                  <h2>Title: {product.title}</h2>
-                  <img
+      <div id="userCartOrderContainer">
+        <h1>Your Order:</h1>
+        {cart?.products?.length ? (
+          cart.products.map((product, idx) => {
+            subTotal += product.price * product.quantity ;
+            return (
+              <div key={`${idx} of cart products map`} id="userCartOrderContainer">
+                <Card>
+                  <Card.Header as="h5">{product.title}</Card.Header>
+                  <Card.Img
                     src={product.img}
-                    alt={`cover image of ${product.title}`}
+                    style={{ height: "300px", width: "200px", padding: "20px" }}
                   />
-                  <h2> author: {product.author}</h2>
-                </div>
-                <div className="flex-column">
-                  {/* <h2>qty:{product.quantity}</h2> */}
-                  <label>quantity</label>
-                  <input
-                    type="number"
-                    min={1}
-                    defaultValue={product.quantity}
-                    onChange={(e) => {
-                      editCartProduct(product.id, e.target.value);
-                    }}
-                  />
-                  <h2>Price: ${(product.price * product.quantity) / 100}</h2>
-                </div>
-                <button
-                  onClick={() => {
-                    editCartProduct(product.id, 0);
-                    setTimeout(() => {
-                      window.location.reload();
-                    }, 1500);
-                  }}
-                >
-                  delete product from cart
-                </button>
+                  <Card.Body>
+                    <Card.Title>by {product.author}</Card.Title>
+                    <Card.Subtitle>${product.price / 100}</Card.Subtitle>
+                    <Form.Label>Quantity:</Form.Label>
+                    <FormControl
+                      type="number"
+                      min={1}
+                      defaultValue={product.quantity}
+                      onClick={(e) => {
+                        editCartProduct(product.id, e.target.value);
+                        subTotal = product.price * e.target.value
+                        setTotalPrice(subTotal)
+                        console.log("####", subTotal)
+                      }}
+                    ></FormControl>
+                    <Form.Label>
+                      Sub-total: ${(totalPrice) / 100}
+                    </Form.Label>
+                    <ListGroupItem></ListGroupItem>
+                    <Button
+                      variant="danger"
+                      onClick={() => {
+                        editCartProduct(product.id, 0);
+                        setTimeout(() => {
+                          window.location.reload();
+                        }, 1500);
+                      }}
+                    >
+                      Remove From Cart
+                    </Button>
+                  </Card.Body>
+                </Card>
               </div>
-            </div>
-          );
-        })
-      ) : (
-        <h1>Your cart is empty!</h1>
-      )}
-      <h3>Total Price: ${totalPrice / 100}</h3>
-      <button
-        onClick={() => {
-          checkOutCart();
+            );
+          })
+        ) : (
+          <h1>Your cart is empty!</h1>
+        )}
+      </div>
+      <div id="userCartCheckoutContainer">
+        <Card style={{ width: "18rem" }}>
+          <Card.Header>Total Price: ${totalPrice / 100}</Card.Header>
 
-          setTimeout(() => {
-            window.location.reload();
-          }, 3500);
-        }}
-      >
-        Check Out!
-      </button>
+          <Button
+          style={{margin: "15px"}}
+          variant="success"
+            onClick={() => {
+              checkOutCart();
+
+              setTimeout(() => {
+                window.location.reload();
+              }, 3500);
+            }}
+          >
+            Checkout Cart
+          </Button>
+        </Card>
+      </div>
     </div>
   );
 };
 
 export default UserCart;
+
+{
+  /* <div>
+  <div className="flex-column">
+    <h2>Title: {product.title}</h2>
+    <img
+      src={product.img}
+      alt={`cover image of ${product.title}`}
+    />
+    <h2> author: {product.author}</h2>
+  </div>
+  <div className="flex-column">
+    {/* <h2>qty:{product.quantity}</h2> */
+}
+{
+  /* <label>quantity</label>
+    <input
+      type="number"
+      min={1}
+      defaultValue={product.quantity}
+      onChange={(e) => {
+        editCartProduct(product.id, e.target.value);
+      }}
+    />
+    <h2>Price: ${(product.price * product.quantity) / 100}</h2>
+  </div>
+  <button
+    onClick={() => {
+      editCartProduct(product.id, 0);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }}
+  >
+    delete product from cart
+  </button>
+</div> */
+}
+//     );
+//   })
+// ) : (
+//   <h1>Your cart is empty!</h1>
+// )}
+//   <h3>Total Price: ${totalPrice / 100}</h3>
+//   <button
+//     onClick={() => {
+//       checkOutCart();
+
+//       setTimeout(() => {
+//         window.location.reload();
+//       }, 3500);
+//     }}
+//   >
+//     Check Out!
+//   </button>
+// </div>

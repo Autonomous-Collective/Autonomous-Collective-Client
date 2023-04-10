@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { createReviewCall } from "../API-Adapter";
 import { MessageAlert } from "./";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const CreateReview = ({ productId, token }) => {
   const [title, setTitle] = useState("");
@@ -35,10 +37,47 @@ const CreateReview = ({ productId, token }) => {
   };
 
   return (
-    <div>
+    <div id= "createReviewCard">
       {message ? <MessageAlert message={message} isError={isError} /> : null}
-      <h1>create a review</h1>
-      <form
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Title</Form.Label>
+          <Form.Control rows="5" cols="20"type="text" placeholder="Enter Title" onChange={(e) => {
+            setTitle(e.target.value);
+          }} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Score</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Enter Score"
+            max="5"
+            min="1"
+            onChange={(e) => {
+              setScore(e.target.value);
+            }}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="">
+          <Form.Label>Content</Form.Label>
+          <Form.Control
+            rows="10"
+            cols="20"
+            type="text"
+            placeholder="Enter Content"
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          ></Form.Control>
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={(e) => {
+          e.preventDefault();
+          createReview();
+        }}>
+          Post Review
+        </Button>
+      </Form>
+      {/* <form
         onSubmit={(e) => {
           e.preventDefault();
           createReview();
@@ -69,7 +108,7 @@ const CreateReview = ({ productId, token }) => {
           }}
         ></textarea>
         <button type="submit">post review</button>
-      </form>
+      </form> */}
     </div>
   );
 };
