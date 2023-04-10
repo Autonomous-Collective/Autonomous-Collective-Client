@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Card } from "react-bootstrap";
 
 const MessageAlert = ({ message, isError }) => {
   useEffect(() => {
@@ -17,9 +18,11 @@ const MessageAlert = ({ message, isError }) => {
   };
 
   return (
-    <div id="message-alert-div">
-      <h1>{message}</h1>
-    </div>
+
+    <Card style={{width:"300px"}} id="message-alert-div" body>{message} </Card>
+    // <div id="message-alert-div">
+    //   <h1>{message}</h1>
+    // </div>
   );
 };
 
