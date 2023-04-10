@@ -7,12 +7,15 @@ const TaggedProductList = (props) => {
   const allTags = props.allTags;
   const { name, tagId } = useParams();
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
 
   const getProductsByTag = async () => {
     const result = await getProductsByTagCall(tagId);
+    console.log(result, "result from tagged products");
     if (result.success) {
       setProducts(result.products);
+    } else {
+      setProducts([]);
     }
   };
 
@@ -20,30 +23,30 @@ const TaggedProductList = (props) => {
     getProductsByTag();
   }, []);
 
+  console.log(products, "products in tagged product list");
+
   return (
     <div>
       <h1 id="productByTagTitle">All {name} Books:</h1>
-    <div id="home-content-container">
-      <SideNav allTags={allTags} />
-      {products.length ? (
-      <div id="productsContainer">
-          {products.length ? (
-            products.map((product, idx) => {
+      <div id="home-content-container">
+        <SideNav allTags={allTags} />
+        {products === null ? (
+          <h1>LOAFING</h1>
+        ) : products?.length ? (
+          <div id="productsContainer">
+            {products.map((product, idx) => {
               return product.isActive ? (
                 <ProductCard
                   product={product}
                   key={`${idx} - product list map`}
                 />
               ) : null;
-            })
-          ) : (
-            <h1>LOAFING</h1>
-          )}
-        </div>
-      ) : (
-        <h1> no products found with this tag! </h1>
-      )}
-    </div>
+            })}
+          </div>
+        ) : (
+          <h1>no products were found with this tag!</h1>
+        )}
+      </div>
     </div>
   );
 };

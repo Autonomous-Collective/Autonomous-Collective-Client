@@ -40,8 +40,12 @@ body {
   left: 25vw;
   width: 50vw;
   height: 25vh;
-  background-color: green;
+  /* background-color: green; */
   z-index: 9999;
+  font-size: 20pt;
+  text-align: center;
+  border: 3px solid black !important;
+  box-shadow: 2px 2px 3px black;
 }
 
 .display-none {

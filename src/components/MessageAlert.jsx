@@ -8,10 +8,7 @@ const MessageAlert = ({ message, isError }) => {
 
   const removeMessage = () => {
     console.log("remove message is running");
-    if (isError) {
-      document.getElementById("message-alert-div").style.backgroundColor =
-        "red";
-    }
+    
     setTimeout(() => {
       document.getElementById("message-alert-div").style.display = "none";
     }, 3000);
@@ -19,8 +16,9 @@ const MessageAlert = ({ message, isError }) => {
 
   return (
 
-    <Card style={{width:"300px"}} id="message-alert-div" body>{message} </Card>
+    <Card id="message-alert-div" body>{message} </Card>
     // <div id="message-alert-div">
+    //style={{width:"300px"}}
     //   <h1>{message}</h1>
     // </div>
   );
