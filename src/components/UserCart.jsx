@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { checkoutCartCall, editCartProductCall } from "../API-Adapter";
 import { MessageAlert } from "./";
 import Button from "react-bootstrap/Button";
@@ -11,7 +11,8 @@ const UserCart = ({ cart, user, token }) => {
 
   console.log(cart, "cart from userCart page");
   let subTotal = 0;
-  const [totalPrice, setTotalPrice] = useState(0) 
+
+  let totalPrice = 0;
 
   const editCartProduct = async (productId, quantity) => {
     const response = await editCartProductCall(
@@ -20,8 +21,7 @@ const UserCart = ({ cart, user, token }) => {
       productId,
       quantity
     );
-     
-    
+
     if (response.success && quantity === 0) {
       setMessage("Successfully Removed product from cart");
       setIsError(false);
@@ -46,9 +46,14 @@ const UserCart = ({ cart, user, token }) => {
         <h1>Your Order:</h1>
         {cart?.products?.length ? (
           cart.products.map((product, idx) => {
-            subTotal += product.price * product.quantity ;
+            subTotal = product.price * product.quantity;
+            totalPrice += subTotal;
+
             return (
-              <div key={`${idx} of cart products map`} id="userCartOrderContainer">
+              <div
+                key={`${idx} of cart products map`}
+                id="userCartOrderContainer"
+              >
                 <Card>
                   <Card.Header as="h5">{product.title}</Card.Header>
                   <Card.Img
@@ -65,13 +70,25 @@ const UserCart = ({ cart, user, token }) => {
                       defaultValue={product.quantity}
                       onClick={(e) => {
                         editCartProduct(product.id, e.target.value);
-                        subTotal = product.price * e.target.value
-                        setTotalPrice(subTotal)
-                        console.log("####", subTotal)
+                        subTotal = product.price * product.quantity;
+                        product.quantity = e.target.value;
+                        totalPrice -= subTotal;
+                        subTotal = product.price * e.target.value;
+                        document.getElementById(
+                          `sub-total${idx}`
+                        ).innerText = `Sub-total: ${subTotal / 100}`;
+                        totalPrice += subTotal;
+                        document.getElementById(
+                          "total"
+                        ).innerText = `Total Price: ${totalPrice / 100}`;
+
+                        console.log("####", subTotal);
                       }}
                     ></FormControl>
                     <Form.Label>
-                      Sub-total: ${(totalPrice) / 100}
+                      <span id={`sub-total${idx}`}>
+                        Sub-total: ${subTotal / 100}{" "}
+                      </span>
                     </Form.Label>
                     <ListGroupItem></ListGroupItem>
                     <Button
@@ -96,11 +113,13 @@ const UserCart = ({ cart, user, token }) => {
       </div>
       <div id="userCartCheckoutContainer">
         <Card style={{ width: "18rem" }}>
-          <Card.Header>Total Price: ${totalPrice / 100}</Card.Header>
+          <Card.Header>
+            <span id="total">Total Price: ${totalPrice / 100}</span>
+          </Card.Header>
 
           <Button
-          style={{margin: "15px"}}
-          variant="success"
+            style={{ margin: "15px" }}
+            variant="success"
             onClick={() => {
               checkOutCart();
 
