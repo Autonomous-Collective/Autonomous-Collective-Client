@@ -30,29 +30,16 @@ const NavBar = (props) => {
 
   return (
     <>
-      <style type="text/css">
-        {`
-      #navbar-container{
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        flex-wrap:wrap;
-        padding-left: 15px;
-        padding-right: 15px
-        
-      }
-      `}
-      </style>
-      <Navbar bg="light" expand="sm" id="navbar-container" sticky="top">
+      <Navbar style= {{justifyContent:"space-evenly"}} bg="light" expand="sm" id="navbar-container" className='gap-20 px-3' sticky="top">
         <div>
           <Navbar.Brand href="/" id="brand">
             The Autonomous Collective
           </Navbar.Brand>
         </div>
-        <div id="navbar-links">
-          <Navbar.Toggle />
+          <Navbar.Toggle/>
           <Navbar.Collapse>
-            <Nav>
+        <Container>
+            <Nav style={{justifyContent: "flex-end"}}>
               <Nav.Link href="/">Home</Nav.Link>
               {verifyGuest ? 
               <GuestRegister 
@@ -122,8 +109,8 @@ const NavBar = (props) => {
                 )}
               <Link className="material-symbols-outlined" to="/cart">shopping_cart</Link>
             </Nav>
+            </Container>
           </Navbar.Collapse>
-        </div>
       </Navbar>
     </>
   );
