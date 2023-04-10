@@ -181,7 +181,7 @@ const SingleProduct = ({ token, user, cart }) => {
       {message ? <MessageAlert message={message} isError={isError} /> : null}
       {product?.title ? (
         <div id="singleProductContainer">
-          <Card>
+          <Card style={{minWidth: "40vw"}}>
             <Card.Header as="h2">{product.title}</Card.Header>
             <Card.Body>
               <Card.Img

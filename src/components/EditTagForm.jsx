@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { editTagCall } from "../API-Adapter";
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
 
 const EditTagForm = ({ token, tagId }) => {
     const [newTagName, setNewTagName] = useState("");
@@ -20,16 +22,16 @@ const EditTagForm = ({ token, tagId }) => {
     
 
     return(
-        <form onSubmit={(e) => {
+        <Form onSubmit={(e) => {
             e.preventDefault();
             editTag();
         }}>
-            <label>new tag name:</label>
-            <input type="text" onChange={(e) => {
+            <Form.Label>New Tag Name:</Form.Label>
+            <Form.Control type="text" onChange={(e) => {
                 setNewTagName(e.target.value);
             }}/>
-            <button type="submit">change tag!</button>
-        </form>
+            <Button variant="success" type="submit">Change Tag!</Button>
+        </Form>
     )
 }
 

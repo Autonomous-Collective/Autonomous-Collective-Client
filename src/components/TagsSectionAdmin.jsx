@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { addTagToDBCall } from "../API-Adapter";
 import { EditTagForm } from "./";
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
 
 const TagSectionAdmin = ({ allTags, token }) => {
     const [tagName, setTagName] = useState("");
@@ -36,25 +38,26 @@ const TagSectionAdmin = ({ allTags, token }) => {
     return (
         <div>
             <h2>tags!</h2>
-            <form onSubmit={(e) => {
+            <Form onSubmit={(e) => {
                 e.preventDefault();
                 addTagToDB();
             }}>
-                <label>Add A Tag To the List!</label>
-                <input type="text" onChange={(e) => {
+                <Form.Label>Add A Tag To the List!</Form.Label>
+                <Form.Control type="text" onChange={(e) => {
                     setTagName(e.target.value);
                 }}/>
-                <button type="submit" >Add Tag</button>
-            </form>
+                <Button type="submit" >Add Tag</Button>
+            </Form>
+            <div className="flex-row">
             {
                 allTags?.length ? 
                 allTags.map((tag, idx) => {
                     return <div key={`${idx} map for tags section in admin`}> 
                     <p>{tag.name}</p>
                    
-                        <button onClick={() => {
+                        <Button onClick={() => {
                             toggleEditForm(tag.id);
-                        }}>edit tag!</button>
+                        }}>edit tag!</Button>
                         <div id={`edit-tag-form${tag.id}`} className="display-none">
                             <EditTagForm token={token} tagId={tag.id}/>
                         </div>
@@ -62,7 +65,7 @@ const TagSectionAdmin = ({ allTags, token }) => {
                     </div>
                 }) : null
             }
-            <button>add new tag</button>
+            </div>
         </div>
     )
 }

@@ -15,6 +15,9 @@ import {
   addTagToProductCall,
   removeTagFromProductCall,
 } from "../API-Adapter";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 
 const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
   const [tagToAdd, setTagToAdd] = useState("");
@@ -150,13 +153,14 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
     <>
       {message ? <MessageAlert message={message} isError={isError} /> : null}
       <h1>I am the Admin Page</h1>
-      <button
+      <Button
+        variant="primary"
         onClick={() => {
           toggleAddProduct();
         }}
       >
         Add Product
-      </button>
+      </Button>
       <div className="display-none" id="add-product-form">
         <AddProductForm token={token} />
       </div>
@@ -164,84 +168,142 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
       {allProducts.map((product, idx) => {
         console.log(product.tags, "Product.tags");
         return product.isActive ? (
-          <div key={`${idx} on productCard map in admin`}>
-            <ProductCard product={product} />
-            <button
+          <div
+            id="activeProductPage"
+            key={`${idx} on productCard map in admin`}
+          >
+            <ProductCard id="activeProductContainer" product={product} />
+            <div id="activeProductContainerButtons">
+              <Card>
+                <div>
+                  <Button
+                    style={{ margin: "20px" }}
+                    variant="primary"
+                    onClick={() => {
+                      toggleForm(product.id);
+                    }}
+                  >
+                    Edit Product
+                  </Button>
+                  <div
+                    className="display-none"
+                    id={`edit-product-form${product.id}`}
+                  >
+                    <EditProductForm token={token} product={product} />
+                  </div>
+                </div>
+                <Form.Group
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    addTagToProduct(product.id, product.tags);
+                  }}
+                >
+                  <Form.Label style={{ marginLeft: "20px" }}>
+                    Select Tag to Add to Product:
+                  </Form.Label>
+                  <div id="addTagFormButtons">
+                    <Form.Select
+                      onChange={(e) => {
+                        setTagToAdd(e.target.value);
+                      }}
+                    >
+                      <option>Select A Tag</option>
+                      {allTags.map((tag) => {
+                        return product.tags.includes(tag.name) ? null : (
+                          <option value={tag.name}>{tag.name}</option>
+                        );
+                      })}
+                    </Form.Select>
+                    <Button
+                      style={{ width: "250px" }}
+                      variant="success"
+                      type="submit"
+                    >
+                      Add tag to Product
+                    </Button>
+                  </div>
+                </Form.Group>
+                <Form.Group
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    removeTagFromProduct(product.id, tagToRemove);
+                  }}
+                >
+                  <Form.Label style={{ marginLeft: "20px" }}>
+                    Remove Tags from this Product:
+                  </Form.Label>
+                  <div id="removeTagFormButtons">
+                    <Form.Select
+                      onChange={(e) => {
+                        setTagToRemove(e.target.value);
+                      }}
+                    >
+                      <option>Please select a tag</option>
+                      {product.tags.map((tag, idx) => {
+                        return <option value={tag}>{tag}</option>;
+                      })}
+                    </Form.Select>
+                    <Button
+                      style={{ width: "250px" }}
+                      variant="danger"
+                      type="submit"
+                    >
+                      Remove Tag
+                    </Button>
+                  </div>
+                </Form.Group>
+
+                <Button
+                  style={{ margin: "20px" }}
+                  variant="danger"
+                  onClick={() => {
+                    deactivateProduct(product.id);
+                  }}
+                >
+                  Dectivate Product
+                </Button>
+              </Card>
+            </div>
+          </div>
+        ) : null;
+      })}
+      <h1>Product List InActive products</h1>
+      <div id="inactiveProductPage">
+      {allProducts.map((product, idx) => {
+        return !product.isActive ? (
+          <div
+            
+            key={`${idx} on productCard deactivated map in admin`}
+          >
+            <div id="">
+            <ProductCard  product={product} />
+            <div>
+            <Button
+              style={{ margin: "20px" }}
+              variant="primary"
               onClick={() => {
                 toggleForm(product.id);
               }}
             >
               Edit Product
-            </button>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                addTagToProduct(product.id, product.tags);
-              }}
-            >
-              <label>Select Tag to Add to Product</label>
-              <select
-                onChange={(e) => {
-                  setTagToAdd(e.target.value);
-                }}
-              >
-                <option>Select A Tag</option>
-                {allTags.map((tag) => {
-                  return product.tags.includes(tag.name) ? null : (
-                    <option value={tag.name}>{tag.name}</option>
-                  );
-                })}
-              </select>
-              <button type="submit">Add tag to Product</button>
-            </form>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                removeTagFromProduct(product.id, tagToRemove);
-              }}
-            >
-              <label>Remove Tags from this product</label>
-              <select
-                onChange={(e) => {
-                  setTagToRemove(e.target.value);
-                }}
-              >
-                <option>Please select a tag</option>
-                {product.tags.map((tag, idx) => {
-                  return <option value={tag}>{tag}</option>;
-                })}
-              </select>
-              <button type="submit">Remove Tag</button>
-            </form>
+            </Button>
             <div className="display-none" id={`edit-product-form${product.id}`}>
               <EditProductForm token={token} product={product} />
             </div>
-            <button
-              onClick={() => {
-                deactivateProduct(product.id);
-              }}
-            >
-              Dectivate Product
-            </button>
-          </div>
-        ) : null;
-      })}
-      <h1>Product List InActive products</h1>
-      {allProducts.map((product, idx) => {
-        return !product.isActive ? (
-          <div key={`${idx} on productCard deactivated map in admin`}>
-            <ProductCard product={product} />
-            <button>Edit Product</button>
-            <button
+            <Button
+              variant="success"
               onClick={() => {
                 activateProduct(product.id);
               }}
             >
               Activate Product
-            </button>
+            </Button>
+            </div>
+            </div>
           </div>
         ) : null;
       })}
+      </div>
 
       <TagsSectionAdmin allTags={allTags} token={token} />
       <h1>User List</h1>
