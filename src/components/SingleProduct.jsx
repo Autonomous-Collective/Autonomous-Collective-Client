@@ -262,7 +262,7 @@ const SingleProduct = ({ token, user, cart }) => {
           </Card>
         </div>
       ) : (
-        <h1>Loafing</h1>
+        <div className="loader"></div>
       )}
     </div>
   );

@@ -30,7 +30,7 @@ const SideNav = (props) =>{
                   // href={`/products/${tag.name}/${tag.id}`}
                 )
               })
-            ): <h3>LOADING..</h3>}
+            ): <div className="loader"></div>}
           </Nav>
         </div>
     )
