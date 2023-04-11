@@ -134,7 +134,7 @@ const Main = () => {
           exact
           path="/products/:name/:tagId"
           element={
-            <TaggedProductList user={user} cart={cart} allTags={allTags} />
+            <TaggedProductList user={user} cart={cart} allTags={allTags} setSearchString={setSearchString} searchString={searchString}/>
           }
         />
         <Route
