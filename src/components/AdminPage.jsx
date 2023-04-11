@@ -308,13 +308,14 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
           ) : null;
         })}
       </div>
-
-      <TagsSectionAdmin allTags={allTags} token={token} />
-      <h1 style={{textAlign: 'center'}}>User List</h1>
+      <div>
+        <TagsSectionAdmin allTags={allTags} token={token} />
+      </div>
+      <h1 style={{ textAlign: "center" }}>User List</h1>
       {allUsers.map((user, idx) => {
         return (
           <div id="adminUserCard" key={`${idx} on users map in admin`}>
-            <Card style={{width: "60vw", padding: "20px"}}>
+            <Card style={{ width: "60vw", padding: "20px" }}>
               <Card.Text>Name: {user.name}</Card.Text>
               <Card.Text>ID: {user.id}</Card.Text>
               <Card.Text>Email: {user.email}</Card.Text>
@@ -329,7 +330,12 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                 {user.isActive ? <span>true</span> : <span>false</span>}{" "}
               </Card.Text>
               <div>
-                <Button style={{marginTop: "20px", marginBottom: "20px", marginRight: "20px"}}
+                <Button
+                  style={{
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                    marginRight: "20px",
+                  }}
                   onClick={() => {
                     toggleEditUser(user.id);
                   }}

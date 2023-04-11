@@ -80,8 +80,18 @@ body {
 #editTagRow {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   margin: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+#editTagsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 60vw;
 }
 
 #adminUserCard {
