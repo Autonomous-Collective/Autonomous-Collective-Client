@@ -18,7 +18,7 @@ console.log ("@@@@", searchString)
           ) : null;
         })
       ) : (
-        <h1>LOAFING</h1>
+        <div className="loader"></div>
       )}
       </div>
     : allProducts.map((product, idx)=> {

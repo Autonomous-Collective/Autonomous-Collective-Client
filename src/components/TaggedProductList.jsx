@@ -31,7 +31,7 @@ const TaggedProductList = (props) => {
       <div id="home-content-container">
         <SideNav allTags={allTags} />
         {products === null ? (
-          <h1>LOAFING</h1>
+          <div className="loader"></div>
         ) : products?.length ? (
           <div id="productsContainer">
             {products.map((product, idx) => {

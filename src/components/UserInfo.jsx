@@ -40,8 +40,8 @@ const UserInfo = (props) => {
 
           <Card.Title>Email</Card.Title>
           <Card.Text>{`${userInfo.email}`}</Card.Text>
-
-          {userAddress ? (
+          {userAddress === null ? <div className="loader"></div> : 
+          userAddress ? (
             <div id="userAddressCard">
               <Card.Title>Shipping Name</Card.Title>
               <Card.Text>{`${userAddress.name}`}</Card.Text>
@@ -51,7 +51,7 @@ const UserInfo = (props) => {
               <Card.Text>{`${userAddress.city}, ${userAddress.state}`}</Card.Text>
             </div>
           ) : (
-            <h3> No address </h3>
+            <h3> No Address </h3>
           )}
         </Card.Body>
         <div className="login-buttons">
@@ -79,7 +79,6 @@ const UserInfo = (props) => {
           </Card.Body>
         </div>
       </Card>
-      {/* : <h1> LOADING ...</h1>} */}
     </div>
   );
 };

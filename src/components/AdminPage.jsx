@@ -152,19 +152,23 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
   return (
     <>
       {message ? <MessageAlert message={message} isError={isError} /> : null}
-      <h1>I am the Admin Page</h1>
-      <Button
-        variant="primary"
-        onClick={() => {
-          toggleAddProduct();
-        }}
-      >
-        Add Product
-      </Button>
-      <div className="display-none" id="add-product-form">
-        <AddProductForm token={token} />
+      <h1 style={{ textAlign: "center" }}>Admin Page</h1>
+      <div id="addProductContainer">
+        <div>
+          <Button
+            variant="primary"
+            onClick={() => {
+              toggleAddProduct();
+            }}
+          >
+            Add Product
+          </Button>
+        </div>
+        <div className="display-none" id="add-product-form">
+          <AddProductForm token={token} />
+        </div>
       </div>
-      <h1>Product List Active products</h1>
+      <h1 style={{ textAlign: "center" }}>Active Products</h1>
       {allProducts.map((product, idx) => {
         console.log(product.tags, "Product.tags");
         return product.isActive ? (
@@ -219,7 +223,7 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                       variant="success"
                       type="submit"
                     >
-                      Add tag to Product
+                      Add Tag to Product
                     </Button>
                   </div>
                 </Form.Group>
@@ -260,93 +264,98 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                     deactivateProduct(product.id);
                   }}
                 >
-                  Dectivate Product
+                  Deactivate Product
                 </Button>
               </Card>
             </div>
           </div>
         ) : null;
       })}
-      <h1>Product List InActive products</h1>
+      <h1 style={{ textAlign: "center" }}>Inactive Products</h1>
       <div id="inactiveProductPage">
-      {allProducts.map((product, idx) => {
-        return !product.isActive ? (
-          <div
-            
-            key={`${idx} on productCard deactivated map in admin`}
-          >
-            <div id="">
-            <ProductCard  product={product} />
-            <div>
-            <Button
-              style={{ margin: "20px" }}
-              variant="primary"
-              onClick={() => {
-                toggleForm(product.id);
-              }}
-            >
-              Edit Product
-            </Button>
-            <div className="display-none" id={`edit-product-form${product.id}`}>
-              <EditProductForm token={token} product={product} />
+        {allProducts.map((product, idx) => {
+          return !product.isActive ? (
+            <div key={`${idx} on productCard deactivated map in admin`}>
+              <div id="">
+                <ProductCard product={product} />
+                <div>
+                  <Button
+                    style={{ margin: "20px" }}
+                    variant="primary"
+                    onClick={() => {
+                      toggleForm(product.id);
+                    }}
+                  >
+                    Edit Product
+                  </Button>
+                  <div
+                    className="display-none"
+                    id={`edit-product-form${product.id}`}
+                  >
+                    <EditProductForm token={token} product={product} />
+                  </div>
+                  <Button
+                    variant="success"
+                    onClick={() => {
+                      activateProduct(product.id);
+                    }}
+                  >
+                    Activate Product
+                  </Button>
+                </div>
+              </div>
             </div>
-            <Button
-              variant="success"
-              onClick={() => {
-                activateProduct(product.id);
-              }}
-            >
-              Activate Product
-            </Button>
-            </div>
-            </div>
-          </div>
-        ) : null;
-      })}
+          ) : null;
+        })}
       </div>
 
       <TagsSectionAdmin allTags={allTags} token={token} />
-      <h1>User List</h1>
+      <h1 style={{textAlign: 'center'}}>User List</h1>
       {allUsers.map((user, idx) => {
         return (
-          <div key={`${idx} on users map in admin`}>
-            <h1>Name: {user.name}</h1>
-            <p>ID: {user.id}</p>
-            <p>Email: {user.email}</p>
-            <p>
-              isAdmin: {user.isAdmin ? <span>true</span> : <span>false</span>}{" "}
-            </p>
-            <p>
-              isGuest: {user.isGuest ? <span>true</span> : <span>false</span>}{" "}
-            </p>
-            <p>
-              isActive: {user.isActive ? <span>true</span> : <span>false</span>}{" "}
-            </p>
-
-            <button
-              onClick={() => {
-                toggleEditUser(user.id);
-              }}
-            >
-              Edit User
-            </button>
-            <div id={`edit-user-form${user.id}`} className="display-none">
-              <EditUserAdminForm
-                name={user.name}
-                email={user.email}
-                isAdmin={user.isAdmin}
-                isActive={user.isActive}
-                token={token}
-                userId={user.id}
-              />
-            </div>
-            <button
-              onClick={() => {
-                deleteUser(user.id);
-              }}
-            >
-              Delete User
-            </button>
+          <div id="adminUserCard" key={`${idx} on users map in admin`}>
+            <Card style={{width: "60vw", padding: "20px"}}>
+              <Card.Text>Name: {user.name}</Card.Text>
+              <Card.Text>ID: {user.id}</Card.Text>
+              <Card.Text>Email: {user.email}</Card.Text>
+              <Card.Text>
+                isAdmin: {user.isAdmin ? <span>true</span> : <span>false</span>}{" "}
+              </Card.Text>
+              <Card.Text>
+                isGuest: {user.isGuest ? <span>true</span> : <span>false</span>}{" "}
+              </Card.Text>
+              <Card.Text>
+                isActive:{" "}
+                {user.isActive ? <span>true</span> : <span>false</span>}{" "}
+              </Card.Text>
+              <div>
+                <Button style={{marginTop: "20px", marginBottom: "20px", marginRight: "20px"}}
+                  onClick={() => {
+                    toggleEditUser(user.id);
+                  }}
+                >
+                  Edit User
+                </Button>
+                <div id={`edit-user-form${user.id}`} className="display-none">
+                  <EditUserAdminForm
+                    name={user.name}
+                    email={user.email}
+                    isAdmin={user.isAdmin}
+                    isActive={user.isActive}
+                    token={token}
+                    userId={user.id}
+                  />
+                </div>
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    deleteUser(user.id);
+                  }}
+                >
+                  Delete User
+                </Button>
+              </div>
+            </Card>
           </div>
         );
       })}

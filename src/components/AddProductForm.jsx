@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { addAProductCall } from "../API-Adapter";
 import { MessageAlert } from "./";
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+import Card from "react-bootstrap/Card"
 
 const AddProductForm = ({ token }) => {
   const [title, setTitle] = useState("");
@@ -12,6 +15,8 @@ const AddProductForm = ({ token }) => {
   const [inventory, setInventory] = useState("");
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
+
+
 
   const addAProduct = async () => {
     const response = await addAProductCall(
@@ -42,65 +47,67 @@ const AddProductForm = ({ token }) => {
   return (
     <>
       {message ? <MessageAlert message={message} isError={isError} /> : null}
-      <form
+    <Card style={{width: "60vw", padding: "20px"}}>
+      <Form
         onSubmit={(e) => {
           e.preventDefault();
           addAProduct();
         }}
-        className="flex-column"
+        className=""
       >
-        <label>Title</label>
-        <input
+        <Form.Label>Title</Form.Label>
+        <Form.Control style={{ marginBottom: "10px" }} 
           type="text"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
         />
-        <label>Author</label>
-        <input
+        <Form.Label>Author</Form.Label>
+        <Form.Control style={{ marginBottom: "10px" }}
           onChange={(e) => {
             setAuthor(e.target.value);
           }}
           type="text"
         />
-        <label>ISBN</label>
-        <input
+        <Form.Label>ISBN</Form.Label>
+        <Form.Control style={{ marginBottom: "10px" }}
           onChange={(e) => {
             setIsbn(e.target.value);
           }}
           type="text"
         />
-        <label>Description</label>
-        <textarea
+        <Form.Label>Description</Form.Label>
+        <Form.Control style={{ marginBottom: "10px" }}
           onChange={(e) => {
             setDescription(e.target.value);
           }}
           rows="5"
           cols="20"
         />
-        <label>Price(in pennies)</label>
-        <input
+        <Form.Label>Price(in pennies)</Form.Label>
+        <Form.Control style={{ marginBottom: "10px" }}
           onChange={(e) => {
             setPrice(e.target.value);
           }}
           type="number"
         />
-        <label>Image URL</label>
-        <input
+        <Form.Label>Image URL</Form.Label>
+        <Form.Control style={{ marginBottom: "10px" }}
           onChange={(e) => {
             setImageUrl(e.target.value);
           }}
           type="text"
         />
-        <label>Inventory</label>
-        <input
+        <Form.Label>Inventory</Form.Label>
+        <Form.Control style={{ marginBottom: "10px" }}
           onChange={(e) => {
             setInventory(e.target.value);
           }}
           type="number"
         />
-        <button type="submit">Submit New Product</button>
-      </form>
+        <Button style={{ marginTop: "20px", marginBottom: "20px" }} variant="success" type="submit">Submit New Product</Button>
+      </Form>
+      </Card>
     </>
   );
 };
