@@ -45,8 +45,8 @@ export const userLoginCall = async (email, password) => {
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
-  throw error;
 };
 
 export const guestLoginCall = async () => {
@@ -198,16 +198,13 @@ export const getUserInfoCall = async (token) =>{
   }
 }
 
-export const editUserInfoCall = async (token, name, email, password, isGuest) => {
+export const editUserInfoCall = async (token, fields) => {
   try{
     const response = await fetch(`${URL}/api/users/me/edit-info`, {
       method: "PATCH",
       headers: makeHeaders(token),
       body: JSON.stringify( {
-        name: name,
-        email: email,
-        password: password,
-        isGuest: isGuest
+        ...fields
       })
     })
 

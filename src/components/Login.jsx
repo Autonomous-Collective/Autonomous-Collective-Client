@@ -35,6 +35,7 @@ const Login = (props) => {
               setIsError(true);
             } else {
               const result = await userLoginCall(email, password);
+              console.log(result, "RESULT FROM LOGIN");
 
               if (result.success) {
                 setMessage("Successfully Logged In!");

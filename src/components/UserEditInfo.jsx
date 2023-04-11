@@ -28,12 +28,11 @@ const UserEditInfo = (props) => {
     updatePassword
   ) => {
     try {
-      const result = await editUserInfoCall(
-        token,
-        updateName,
-        updateEmail,
-        updatePassword
-      );
+      const result = await editUserInfoCall(token, {
+        name: updateName,
+        email: updateEmail,
+        password: updatePassword,
+      });
       if (result.success) {
         handleClose();
         setMessage("Succesfully edited user info");
@@ -110,7 +109,7 @@ const UserEditInfo = (props) => {
                 <Form.Label>Update Password: </Form.Label>
                 <Form.Control
                   type="password"
-                  value={updatePassword}
+                  defaultValue={updatePassword}
                   placeholder="Enter New Password"
                   onChange={(event) => {
                     setUpdatePassword(event.target.value);
@@ -123,9 +122,10 @@ const UserEditInfo = (props) => {
                 <Form.Control
                   type="password"
                   placeholder="Confirm New Password"
-                  value={confirmUpdatePassword}
+                  defaultValue={confirmUpdatePassword}
                   onChange={(event) => {
                     setConfirmUpdatePassword(event.target.value);
+                    console.log(confirmUpdatePassword);
                   }}
                 />
               </Form.Group>
