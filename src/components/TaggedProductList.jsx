@@ -44,7 +44,7 @@ const TaggedProductList = (props) => {
             })}
           </div>
         ) : (
-          <h1>no products were found with this tag!</h1>
+          <h1>No products were found with this tag!</h1>
         )}
       </div>
     </div>

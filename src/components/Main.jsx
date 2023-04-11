@@ -3,7 +3,6 @@ import {
   NavBar,
   Footer,
   Home,
-  Login,
   Register,
   SingleProduct,
   AdminPage,
@@ -42,7 +41,6 @@ const Main = () => {
 
     if (response.success) {
       setAllProducts(response.products);
-      console.log(response, "response from main for all products!!!");
     }
   };
   const getAllUsers = async () => {
@@ -50,7 +48,6 @@ const Main = () => {
 
     if (response.success) {
       setAllUsers(response.allUsers);
-      console.log(response, "response from main for all users!!!");
     }
   };
 
@@ -64,7 +61,7 @@ const Main = () => {
 
   const getCartByUserId = async () => {
     const response = await getCartByUserIdCall(token, user.id);
-    console.log(response, token, user.id);
+
     if (response.success) {
       setCart(response.cart);
     }
@@ -75,14 +72,14 @@ const Main = () => {
 
     if (response.success) {
       setPastOrders(response.userOrders);
-    }else{
+    } else {
       setPastOrders([]);
     }
   };
 
   useEffect(() => {
     getAllProducts();
-    console.log(allProducts, "all products from the main use effect");
+
     getAllTags();
 
     if (localStorage.getItem("token")) {
@@ -96,7 +93,6 @@ const Main = () => {
     getAllUsers();
 
     getCartByUserId();
-    console.log(cart);
 
     getPastOrders();
   }, [token]);

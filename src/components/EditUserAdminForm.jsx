@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { adminEditUserCall } from "../API-Adapter";
 import { MessageAlert } from "./";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const EditUserAdminForm = ({
   token,
@@ -10,9 +12,6 @@ const EditUserAdminForm = ({
   isActive,
   userId,
 }) => {
-  // const userId = props.userId;
-  // const name = props.name;
-  // const email = props.email;
   const [newName, setNewName] = useState(name);
   const [newEmail, setNewEmail] = useState(email);
   const [NewIsAdmin, setNewIsAdmin] = useState(isAdmin);
@@ -47,85 +46,83 @@ const EditUserAdminForm = ({
   return (
     <div>
       {message ? <MessageAlert message={message} isError={isError} /> : null}
-      <form
-        className="flex-column"
+      <Form
         onSubmit={(e) => {
           e.preventDefault();
           adminEditUser();
         }}
       >
-        <label>Name:</label>
-        <input
+        <Form.Label>Name:</Form.Label>
+        <Form.Control
           type="text"
           defaultValue={name}
           onChange={(e) => {
             setNewName(e.target.value);
           }}
-        ></input>
-        <label>Email:</label>
-        <input
+        ></Form.Control>
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
           type="text"
           defaultValue={email}
           onChange={(e) => {
             setNewEmail(e.target.value);
           }}
-        ></input>
-        <label>isAdmin**</label>
-        {/* <input type="text" maxLength="5" minLength="4" defaultValue={isAdmin ? "true" : "false"} onChange={(e) => {
-                    setNewIsAdmin(e.target.value) */}
-        {/* }}> */}
+        ></Form.Control>
+        <Form.Label>isAdmin</Form.Label>
+
         {isAdmin ? (
-          <select
+          <Form.Select
             value={true}
             onChange={(e) => {
               setNewIsAdmin(e.target.value);
-              console.log(NewIsAdmin);
             }}
           >
             <option value={true}>True</option>
             <option value={false}>False</option>
-          </select>
+          </Form.Select>
         ) : (
-          <select
+          <Form.Select
             value={false}
             onChange={(e) => {
               setNewIsAdmin(e.target.value);
-              console.log(NewIsAdmin);
             }}
           >
             <option value={true}>True</option>
             <option value={false}>False</option>
-          </select>
+          </Form.Select>
         )}
 
-        {/* </input> */}
-        <label>isActive**</label>
+        <Form.Label>isActive</Form.Label>
         {isActive ? (
-          <select
+          <Form.Select
             value={true}
             onChange={(e) => {
               setNewIsActive(e.target.value);
-              console.log(NewIsAdmin);
             }}
           >
             <option value={true}>True</option>
             <option value={false}>False</option>
-          </select>
+          </Form.Select>
         ) : (
-          <select
+          <Form.Select
             value={false}
             onChange={(e) => {
               setNewIsAdmin(e.target.value);
-              console.log(NewIsAdmin);
             }}
           >
             <option value={true}>True</option>
             <option value={false}>False</option>
-          </select>
+          </Form.Select>
         )}
 
-        <button type="submit">submit changes</button>
-      </form>
+        <Button
+          style={{ marginTop: "20px", marginBottom: "20px" }}
+          variant="success"
+          type="submit"
+        >
+          submit changes
+        </Button>
+      </Form>
     </div>
   );
 };

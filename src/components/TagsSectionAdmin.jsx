@@ -19,7 +19,7 @@ const TagSectionAdmin = ({ allTags, token }) => {
         setMessage("You may not add a duplicate tag");
         setTimeout(() => {
           window.location.reload();
-        }, 3000)
+        }, 3000);
         return null;
       }
     }
@@ -29,9 +29,9 @@ const TagSectionAdmin = ({ allTags, token }) => {
       //set success message here!
       setMessage("You successfully added a tag to the DB.");
       setIsError(false);
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000)
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
       // setTimeout(() => {
       //   window.location.reload();
       // }, 1500);
@@ -39,10 +39,10 @@ const TagSectionAdmin = ({ allTags, token }) => {
       //set error message stuff here
       setMessage("Something went wrong");
       setIsError(true);
-        setTimeout(() => {
-          setMessage("");
-          window.location.reload();
-        }, 3000)
+      setTimeout(() => {
+        setMessage("");
+        window.location.reload();
+      }, 3000);
     }
   };
   const toggleEditForm = (tagId) => {
@@ -58,21 +58,13 @@ const TagSectionAdmin = ({ allTags, token }) => {
   return (
     <div>
       <div id="addProductContainer">
-
-        {message ? <MessageAlert isError={isError} message={message}/> : null}
-      <h2>Tags</h2>
-      <Card style={{ width: "60vw", padding: "20px" }}>
-        <Form
-          onSubmit={(e) => {
-            e.preventDefault();
-            addTagToDB();
-          }}
-        >
-          <Form.Label>Add A Tag To the List!</Form.Label>
-          <Form.Control
-            type="text"
-            onChange={(e) => {
-              setTagName(e.target.value);
+        {message ? <MessageAlert isError={isError} message={message} /> : null}
+        <h2>Tags</h2>
+        <Card style={{ width: "60vw", padding: "20px" }}>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              addTagToDB();
             }}
           >
             <Form.Label>Add A Tag To the List!</Form.Label>
@@ -82,6 +74,7 @@ const TagSectionAdmin = ({ allTags, token }) => {
                 setTagName(e.target.value);
               }}
             />
+
             <Button style={{ marginTop: "20px" }} type="submit">
               Add Tag
             </Button>

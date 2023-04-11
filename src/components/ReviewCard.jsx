@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "react-bootstrap/Card"
+import Card from "react-bootstrap/Card";
 let reviewString = "";
 
 const ReviewCard = ({ review }) => {
@@ -19,21 +19,14 @@ const ReviewCard = ({ review }) => {
       <Card>
         <Card.Header as="h5">{review.title}</Card.Header>
         <Card.Body>
-          <Card.Title>{<i className="material-icons star">{reviewString}</i>}</Card.Title>
+          <Card.Title>
+            {<i className="material-icons star">{reviewString}</i>}
+          </Card.Title>
           <Card.Subtitle>by {review.name}</Card.Subtitle>
-          <Card.Text>
-           {review.content}
-          </Card.Text>
+          <Card.Text>{review.content}</Card.Text>
         </Card.Body>
       </Card>
-      </div>
-    // );
-    // <div>
-    //   <h4>{review.title}</h4>
-    //   <h3>{<i className="material-icons">{reviewString}</i>}</h3>
-    //   <p>by {review.name}</p>
-    //   <p>{review.content}</p>
-    // </div>
+    </div>
   );
 };
 

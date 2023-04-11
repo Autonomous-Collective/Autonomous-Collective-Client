@@ -24,7 +24,7 @@ export const registerNewUserCall = async (name, email, password) => {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
   throw error;
 };
@@ -44,7 +44,7 @@ export const userLoginCall = async (email, password) => {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log();
+    console.error(error);
   }
   throw error;
 };
@@ -61,7 +61,7 @@ export const guestLoginCall = async () => {
     const result = await response.json();
     return result;
   } catch (error) {
-    console.log();
+    console.error(error);
   }
   throw error;
 };
@@ -118,7 +118,7 @@ export const getReviewsForProductCall = async (productId) => {
     console.log(result, "result from get reviews by product API call")
     return result;
   } catch (error) {
-    console.error
+    console.error(error)
     throw error;
   }
 } 
@@ -334,7 +334,7 @@ export const activateProductCall = async(token, productId) => {
 }
 
 export const adminEditUserCall = async(token, userId, name, email, isAdmin, isActive) => {
-  console.log(token, userId, name, email, isAdmin, isActive, "from admin edit user call")
+ 
   try {
     const response = await fetch(`${URL}/api/users/admin/edit-user/${userId}`, {
       method: "PATCH",
@@ -471,7 +471,7 @@ export const addTagToProductCall = async (token, name, productId) => {
 
 export const getCartByUserIdCall = async (token, userId) => {
   try {
-    console.log(userId, token, "FROM API CALL")
+    
     const response = await fetch(`${URL}/api/users/${userId}/cart`, {
       method: "GET",
       headers: makeHeaders(token)
@@ -490,7 +490,7 @@ export const getCartByUserIdCall = async (token, userId) => {
 export const editCartProductCall = async(token, userId, productId, quantity) => {
   try {
 
-     console.log(token, userId, productId, quantity, "from edit cart product call")
+     
 
       const response = await fetch(`${URL}/api/users/${userId}/cart/update-product/${productId}`, {
         method: "PATCH", 

@@ -18,10 +18,8 @@ const CreateReview = ({ productId, token }) => {
       title,
       content
     );
-    console.log(response, "response from api stuff in front end");
 
     if (response.success) {
-      //MAKE THIS ACTUALLY DO SOMETHING!!!!
       setMessage("Review succesfully posted");
       setIsError(false);
       setTimeout(() => {
@@ -37,14 +35,20 @@ const CreateReview = ({ productId, token }) => {
   };
 
   return (
-    <div id= "createReviewCard">
+    <div id="createReviewCard">
       {message ? <MessageAlert message={message} isError={isError} /> : null}
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Title</Form.Label>
-          <Form.Control rows="5" cols="20"type="text" placeholder="Enter Title" onChange={(e) => {
-            setTitle(e.target.value);
-          }} />
+          <Form.Control
+            rows="5"
+            cols="20"
+            type="text"
+            placeholder="Enter Title"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Score</Form.Label>
@@ -70,45 +74,17 @@ const CreateReview = ({ productId, token }) => {
             }}
           ></Form.Control>
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={(e) => {
-          e.preventDefault();
-          createReview();
-        }}>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            createReview();
+          }}
+        >
           Post Review
         </Button>
       </Form>
-      {/* <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          createReview();
-        }}
-      >
-        <label>Title:</label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-        ></input>
-        <label>Score:</label>
-        <input
-          type="number"
-          max="5"
-          min="1"
-          onChange={(e) => {
-            setScore(e.target.value);
-          }}
-        ></input>
-        <label>Content:</label>
-        <textarea
-          rows="5"
-          cols="20"
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
-        ></textarea>
-        <button type="submit">post review</button>
-      </form> */}
     </div>
   );
 };

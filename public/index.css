@@ -9,6 +9,19 @@ black: #0D0D0D
 body {
   margin: 0;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+#admin-links a {
+  color: black;
+  margin: 1vh, 1vw;
+}
+
+#admin-links {
+  position: fixed;
+  top: 30;
+}
 
 #home-content-container {
   display: flex;
@@ -42,15 +55,23 @@ body {
   align-items: center;
   gap: 5vw;
 }
+
 #activeProductPage {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
+#inactive-product-container {
+  justify-content: center;
+  align-items: center;
+}
+
 #inactiveProductPage {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 #activeProductContainer {
   width: 60vw;

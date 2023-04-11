@@ -10,7 +10,6 @@ import {
 import {
   deactivateProductCall,
   activateProductCall,
-  adminEditUserCall,
   deactivateUserCall,
   addTagToProductCall,
   removeTagFromProductCall,
@@ -151,6 +150,19 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
 
   return (
     <>
+      <div className="flex-row" id="admin-links">
+        <ul>
+          <li>
+            <a href="#addProductContainer">Products</a>
+          </li>
+          <li>
+            <a href="#tags-section">Tags</a>
+          </li>
+          <li>
+            <a href="#adminUserCard">Users</a>
+          </li>
+        </ul>
+      </div>
       {message ? <MessageAlert message={message} isError={isError} /> : null}
       <h1 style={{ textAlign: "center" }}>Admin Page</h1>
       <div id="addProductContainer">
@@ -170,7 +182,6 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
       </div>
       <h1 style={{ textAlign: "center" }}>Active Products</h1>
       {allProducts.map((product, idx) => {
-        console.log(product.tags, "Product.tags");
         return product.isActive ? (
           <div
             id="activeProductPage"
@@ -212,9 +223,14 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                       }}
                     >
                       <option>Select A Tag</option>
-                      {allTags.map((tag) => {
+                      {allTags.map((tag, idx) => {
                         return product.tags.includes(tag.name) ? null : (
-                          <option value={tag.name}>{tag.name}</option>
+                          <option
+                            key={`option map in admin ${idx} `}
+                            value={tag.name}
+                          >
+                            {tag.name}
+                          </option>
                         );
                       })}
                     </Form.Select>
@@ -247,7 +263,11 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                     >
                       <option>Please select a tag</option>
                       {product.tags.map((tag, idx) => {
-                        return <option value={tag}>{tag}</option>;
+                        return (
+                          <option key={`option map 2 ${idx}`} value={tag}>
+                            {tag}
+                          </option>
+                        );
                       })}
                     </Form.Select>
                     <Button
@@ -282,9 +302,9 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
         {allProducts.map((product, idx) => {
           return !product.isActive ? (
             <div key={`${idx} on productCard deactivated map in admin`}>
-              <div id="">
+              <div id="inactive-product-container">
                 <ProductCard product={product} />
-                <div>
+                <div id="inactive-product-container">
                   <Button
                     style={{ margin: "20px" }}
                     variant="primary"
@@ -314,7 +334,7 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
           ) : null;
         })}
       </div>
-      <div>
+      <div id="tags-section">
         <TagsSectionAdmin allTags={allTags} token={token} />
       </div>
       <h1 style={{ textAlign: "center" }}>User List</h1>

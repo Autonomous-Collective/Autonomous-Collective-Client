@@ -18,16 +18,14 @@ const Login = (props) => {
   const setPassword = props.setPassword;
   const setIsLoggedIn = props.setIsLoggedIn;
   const setUser = props.setUser;
-  const token = props.token;
   const setToken = props.setToken;
-  const navigate = useNavigate();
 
   const [isError, setIsError] = useState(false);
   const [message, setMessage] = useState("");
 
   return (
     <>
-    {message ? <MessageAlert message={message} isError={isError} /> : null}
+      {message ? <MessageAlert message={message} isError={isError} /> : null}
       <div
         onSubmit={async (event) => {
           event.preventDefault();
@@ -37,9 +35,6 @@ const Login = (props) => {
               setIsError(true);
             } else {
               const result = await userLoginCall(email, password);
-              console.log(result);
-
-              //think about better error handling? universal error & setError state?
 
               if (result.success) {
                 setMessage("Successfully Logged In!");
@@ -59,7 +54,7 @@ const Login = (props) => {
               }
             }
           } catch (error) {
-            console.log(error);
+            console.error(error);
           }
         }}
       >
@@ -107,7 +102,7 @@ const Login = (props) => {
                 <Button variant="primary" type="submit">
                   Submit
                 </Button>
-                {/* use an onClick here to handle guest user login */}
+
                 <Button
                   variant="primary"
                   type="button"
@@ -122,7 +117,7 @@ const Login = (props) => {
                         if (result !== undefined) {
                           setMessage("Logged in as Guest");
                           setIsError(false);
-                          
+
                           localStorage.setItem("token", result.token);
                           localStorage.setItem("email", result.guestUser.email);
                           localStorage.setItem(
