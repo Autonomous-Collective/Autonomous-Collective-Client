@@ -15,7 +15,6 @@ const ReviewList = ({ productId }) => {
 
   useEffect(() => {
     getReviewsByProduct();
-    console.log(reviews, "reveiws from ReviewList useEffect");
   }, []);
 
   return (

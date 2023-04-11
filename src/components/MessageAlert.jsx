@@ -7,8 +7,6 @@ const MessageAlert = ({ message, isError }) => {
   }, []);
 
   const removeMessage = () => {
-    console.log("remove message is running");
-
     setTimeout(() => {
       document.getElementById("message-alert-div").style.display = "none";
     }, 3000);

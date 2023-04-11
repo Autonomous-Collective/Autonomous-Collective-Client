@@ -11,7 +11,7 @@ const TaggedProductList = (props) => {
 
   const getProductsByTag = async () => {
     const result = await getProductsByTagCall(tagId);
-    console.log(result, "result from tagged products");
+
     if (result.success) {
       setProducts(result.products);
     } else {
@@ -22,8 +22,6 @@ const TaggedProductList = (props) => {
   useEffect(() => {
     getProductsByTag();
   }, [name]);
-
-  console.log(products, "products in tagged product list");
 
   return (
     <div>

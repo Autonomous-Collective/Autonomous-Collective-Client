@@ -13,8 +13,6 @@ const TagSectionAdmin = ({ allTags, token }) => {
   const addTagToDB = async () => {
     for (let i = 0; i < allTags.length; i++) {
       if (allTags[i].name.toLowerCase() === tagName.toLowerCase()) {
-        console.log("they can't match");
-        //set error message here
         setIsError(true);
         setMessage("You may not add a duplicate tag");
         setTimeout(() => {
@@ -26,17 +24,12 @@ const TagSectionAdmin = ({ allTags, token }) => {
 
     const response = await addTagToDBCall(token, tagName);
     if (response.success) {
-      //set success message here!
       setMessage("You successfully added a tag to the DB.");
       setIsError(false);
       setTimeout(() => {
         window.location.reload();
       }, 3000);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 1500);
     } else {
-      //set error message stuff here
       setMessage("Something went wrong");
       setIsError(true);
       setTimeout(() => {

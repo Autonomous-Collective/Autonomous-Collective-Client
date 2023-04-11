@@ -27,7 +27,7 @@ const GuestRegister = (props) => {
     updateEmail,
     updatePassword
   ) => {
-    const isGuest = false; //sets isGuest to false every time bc a guest is registering
+    const isGuest = false;
     try {
       const result = await editUserInfoCall(
         token,

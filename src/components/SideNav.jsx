@@ -43,11 +43,3 @@ const SideNav = (props) => {
 };
 
 export default SideNav;
-
-// type="submit"
-//             onClick={(event) => {
-//               event.preventDefault();
-//               setSearchString(document.getElementById("searchBarInput").value);
-//               document.getElementById("searchBarInput").value = "";
-//             }}
-//             id="searchBarButton"

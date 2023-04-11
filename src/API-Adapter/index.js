@@ -25,8 +25,8 @@ export const registerNewUserCall = async (name, email, password) => {
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
-  throw error;
 };
 
 export const userLoginCall = async (email, password) => {
@@ -62,8 +62,8 @@ export const guestLoginCall = async () => {
     return result;
   } catch (error) {
     console.error(error);
+    throw error;
   }
-  throw error;
 };
 
 export const getAllProductsCall = async () => {

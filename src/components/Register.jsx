@@ -16,10 +16,10 @@ const Register = (props) => {
   const password = props.password;
   const setPassword = props.setPassword;
   const setIsLoggedIn = props.setIsLoggedIn;
-  const user = props.user
-  const setUser = props.setUser
-  const token = props.Token
-  const setToken = props.setToken
+  const user = props.user;
+  const setUser = props.setUser;
+  const token = props.Token;
+  const setToken = props.setToken;
 
   const [name, setName] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,7 +28,7 @@ const Register = (props) => {
 
   return (
     <>
-    {message ? <MessageAlert message={message} isError={isError} /> : null}
+      {message ? <MessageAlert message={message} isError={isError} /> : null}
       <div
         id="registerPage"
         onSubmit={async (event) => {
@@ -56,12 +56,14 @@ const Register = (props) => {
                   setUser(result.user);
                   handleClose();
                 } else {
-                  setMessage("Unable to Register your account, email may already be used");
+                  setMessage(
+                    "Unable to Register your account, email may already be used"
+                  );
                   setIsError(true);
                 }
               }
             } catch (error) {
-              console.log(error);
+              console.error(error);
             }
         }}
       >
@@ -166,7 +168,7 @@ const Register = (props) => {
                         }
                       }
                     } catch (error) {
-                      console.log(error);
+                      console.error(error);
                     }
                   }}
                 >

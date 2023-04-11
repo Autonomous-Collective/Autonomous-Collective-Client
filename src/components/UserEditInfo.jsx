@@ -125,7 +125,6 @@ const UserEditInfo = (props) => {
                   defaultValue={confirmUpdatePassword}
                   onChange={(event) => {
                     setConfirmUpdatePassword(event.target.value);
-                    console.log(confirmUpdatePassword);
                   }}
                 />
               </Form.Group>

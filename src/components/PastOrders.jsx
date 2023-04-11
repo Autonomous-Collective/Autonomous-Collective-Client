@@ -5,8 +5,6 @@ import Card from "react-bootstrap/Card";
 const PastOrders = (props) => {
   const pastOrders = props.pastOrders;
 
-  console.log(pastOrders, "pastorders");
-
   return (
     <div>
       {pastOrders === null ? (

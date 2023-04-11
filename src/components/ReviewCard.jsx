@@ -12,7 +12,6 @@ const ReviewCard = ({ review }) => {
       reviewString = "";
     }
     reviewString += "star ";
-    console.log(reviewString, "reveiwString", review.score, "reveiw.score");
   }
   return (
     <div id="reviewCard">
