@@ -1,36 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 const ProductCard = ({ product }) => {
   return (
-    <Card style={{ width: '18rem', margin: '10px'}}>
-    <Card.Img variant="top" style={{padding: "20px"}} src={product.img} />
-    <Card.Body>
-      <Card.Title>{product.title}</Card.Title>
-      <Card.Text>{product.author}</Card.Text>
-      <Button variant="primary" as={Link} to={`/products/${product.id}`}>See More</Button>
-      {/* href={`/products/${product.id}`} */}
-    </Card.Body>
-  </Card>
-);
-}
-  
-  export default ProductCard;
-  
-  
-  
- 
+    <Card style={{ width: "18rem", margin: "10px" }}>
+      <Card.Img
+        variant="top"
+        style={{
+          padding: "20px",
+          height: "400px",
+          width: "275px",
+          margin: "auto",
+        }}
+        src={product.img}
+      />
+      <Card.Body>
+        <Card.Title>{product.title}</Card.Title>
+        <Card.Text>{product.author}</Card.Text>
+      </Card.Body>
+      <Button
+        style={{ width: "40%", marginLeft: "30%", marginBottom: "20px" }}
+        variant="primary"
+        as={Link}
+        to={`/products/${product.id}`}
+      >
+        See More
+      </Button>
+    </Card>
+  );
+};
 
-// return (
-//   <div className="product-card">
-//     <img src={product.img} alt="placeholder image" height="100" width="100" />
-//     <h4>{product.title}</h4>
-//     <p>by {product.author}</p>
-//     <Link to={`/products/${product.id}`}>
-//       <button>see more!</button>
-//     </Link>
-//   </div>
-// );
-// };
+export default ProductCard;

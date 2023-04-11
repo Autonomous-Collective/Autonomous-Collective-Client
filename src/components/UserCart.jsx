@@ -9,7 +9,6 @@ const UserCart = ({ cart, user, token }) => {
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  console.log(cart, "cart from userCart page");
   let subTotal = 0;
 
   let totalPrice = 0;
@@ -54,7 +53,7 @@ const UserCart = ({ cart, user, token }) => {
                 key={`${idx} of cart products map`}
                 id="userCartOrderContainer"
               >
-                <Card>
+                <Card style={{ marginTop: "20px" }}>
                   <Card.Header as="h5">{product.title}</Card.Header>
                   <Card.Img
                     src={product.img}
@@ -76,13 +75,11 @@ const UserCart = ({ cart, user, token }) => {
                         subTotal = product.price * e.target.value;
                         document.getElementById(
                           `sub-total${idx}`
-                        ).innerText = `Sub-total: ${subTotal / 100}`;
+                        ).innerText = `Sub-total: $${subTotal / 100}`;
                         totalPrice += subTotal;
                         document.getElementById(
                           "total"
-                        ).innerText = `Total Price: ${totalPrice / 100}`;
-
-                        console.log("####", subTotal);
+                        ).innerText = `Total Price: $${totalPrice / 100}`;
                       }}
                     ></FormControl>
                     <Form.Label>
@@ -112,7 +109,7 @@ const UserCart = ({ cart, user, token }) => {
         )}
       </div>
       <div id="userCartCheckoutContainer">
-        <Card style={{ width: "18rem" }}>
+        <Card style={{ width: "18rem", marginTop: "12px" }}>
           <Card.Header>
             <span id="total">Total Price: ${totalPrice / 100}</span>
           </Card.Header>

@@ -31,7 +31,6 @@ const UserInfo = (props) => {
 
   return (
     <div>
-      {/* {userInfo.length && userAddress.length ?  */}
       <Card style={{ width: "20rem" }}>
         <Card.Header>Your Info:</Card.Header>
         <Card.Body>
@@ -40,8 +39,9 @@ const UserInfo = (props) => {
 
           <Card.Title>Email</Card.Title>
           <Card.Text>{`${userInfo.email}`}</Card.Text>
-          {userAddress === null ? <div className="loader"></div> : 
-          userAddress ? (
+          {userAddress === null ? (
+            <div className="loader"></div>
+          ) : userAddress ? (
             <div id="userAddressCard">
               <Card.Title>Shipping Name</Card.Title>
               <Card.Text>{`${userAddress.name}`}</Card.Text>
@@ -57,7 +57,6 @@ const UserInfo = (props) => {
         <div className="login-buttons">
           <Card.Body>
             <UserEditInfo token={token} />
-            {/* <Button href="#" variant="secondary">Edit your info</Button> */}
           </Card.Body>
           <Card.Body>
             <UserEditAddress token={token} userAddress={userAddress} />

@@ -9,14 +9,13 @@ const PastOrders = (props) => {
 
   return (
     <div>
-      {pastOrders === null ? 
-      <h1>LOAFING...</h1> : 
-      pastOrders?.length ? 
-      (
+      {pastOrders === null ? (
+        <h1>LOAFING...</h1>
+      ) : pastOrders?.length ? (
         pastOrders.map((order, idx) => {
           let total = 0;
           return (
-            <Card key={idx}>
+            <Card style={{ marginBottom: "20px" }} key={idx}>
               <Card.Header>Cart {`${idx + 1}`}</Card.Header>
               <div>
                 {order.products.map((product, idx) => {
@@ -24,7 +23,7 @@ const PastOrders = (props) => {
                   return (
                     <Card.Body key={idx}>
                       <Card.Title>{product.title}</Card.Title>
-                      <Card.Text>Quantity:{product.quantity}</Card.Text>
+                      <Card.Text>Quantity: {product.quantity}</Card.Text>
                       <Card.Text>Price: ${product.price / 100}</Card.Text>
                     </Card.Body>
                   );
@@ -34,7 +33,9 @@ const PastOrders = (props) => {
             </Card>
           );
         })
-      ) : <h1>you have not made any orders!</h1> }
+      ) : (
+        <h1>you have not made any orders!</h1>
+      )}
     </div>
   );
 };

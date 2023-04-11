@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-// import Nav from "react-bootstrap/Nav";
+
 import { useNavigate } from "react-router-dom";
 import { editUserInfoCall } from "../API-Adapter";
 import { MessageAlert } from "./";
-
-// import Register from "./Register";
 
 const UserEditInfo = (props) => {
   const [show, setShow] = useState(false);

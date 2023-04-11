@@ -21,7 +21,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
 }
 #reviewCard {
   margin-top: 20px;
