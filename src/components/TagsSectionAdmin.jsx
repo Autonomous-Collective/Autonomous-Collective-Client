@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { addTagToDBCall } from "../API-Adapter";
-import { EditTagForm } from "./";
+import { EditTagForm, MessageAlert } from "./";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
 const TagSectionAdmin = ({ allTags, token }) => {
   const [tagName, setTagName] = useState("");
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const addTagToDB = async () => {
     for (let i = 0; i < allTags.length; i++) {
       if (allTags[i].name.toLowerCase() === tagName.toLowerCase()) {
         console.log("they can't match");
         //set error message here
+        setIsError(true);
+        setMessage("You may not add a duplicate tag");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000)
         return null;
       }
     }
@@ -20,9 +27,22 @@ const TagSectionAdmin = ({ allTags, token }) => {
     const response = await addTagToDBCall(token, tagName);
     if (response.success) {
       //set success message here!
-      console.log("tag successfully added! reload your page!");
+      setMessage("You successfully added a tag to the DB.");
+      setIsError(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000)
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 1500);
     } else {
       //set error message stuff here
+      setMessage("Something went wrong");
+      setIsError(true);
+        setTimeout(() => {
+          setMessage("");
+          window.location.reload();
+        }, 3000)
     }
   };
   const toggleEditForm = (tagId) => {
@@ -38,12 +58,21 @@ const TagSectionAdmin = ({ allTags, token }) => {
   return (
     <div>
       <div id="addProductContainer">
-        <h2>Tags</h2>
-        <Card style={{ width: "60vw", padding: "20px" }}>
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              addTagToDB();
+
+        {message ? <MessageAlert isError={isError} message={message}/> : null}
+      <h2>Tags</h2>
+      <Card style={{ width: "60vw", padding: "20px" }}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            addTagToDB();
+          }}
+        >
+          <Form.Label>Add A Tag To the List!</Form.Label>
+          <Form.Control
+            type="text"
+            onChange={(e) => {
+              setTagName(e.target.value);
             }}
           >
             <Form.Label>Add A Tag To the List!</Form.Label>

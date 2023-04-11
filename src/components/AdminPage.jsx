@@ -219,6 +219,9 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                       })}
                     </Form.Select>
                     <Button
+                      onClick={() => {
+                        addTagToProduct(product.id, product.tags);
+                      }}
                       style={{ width: "250px" }}
                       variant="success"
                       type="submit"
@@ -248,6 +251,9 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
                       })}
                     </Form.Select>
                     <Button
+                      onClick={() => {
+                        removeTagFromProduct(product.id, tagToRemove);
+                      }}
                       style={{ width: "250px" }}
                       variant="danger"
                       type="submit"
