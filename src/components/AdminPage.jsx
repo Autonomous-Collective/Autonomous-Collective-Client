@@ -314,8 +314,9 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
           ) : null;
         })}
       </div>
-
-      <TagsSectionAdmin allTags={allTags} token={token} />
+      <div>
+        <TagsSectionAdmin allTags={allTags} token={token} />
+      </div>
       <h1 style={{ textAlign: "center" }}>User List</h1>
       {allUsers.map((user, idx) => {
         return (

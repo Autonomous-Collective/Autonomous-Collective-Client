@@ -56,8 +56,9 @@ const TagSectionAdmin = ({ allTags, token }) => {
   };
 
   return (
-    <div >
+    <div>
       <div id="addProductContainer">
+
         {message ? <MessageAlert isError={isError} message={message}/> : null}
       <h2>Tags</h2>
       <Card style={{ width: "60vw", padding: "20px" }}>
@@ -73,34 +74,51 @@ const TagSectionAdmin = ({ allTags, token }) => {
             onChange={(e) => {
               setTagName(e.target.value);
             }}
-          />
-          <Button style={{marginTop:"20px"}}type="submit">Add Tag</Button>
-        </Form>
-      </Card>
+          >
+            <Form.Label>Add A Tag To the List!</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={(e) => {
+                setTagName(e.target.value);
+              }}
+            />
+            <Button style={{ marginTop: "20px" }} type="submit">
+              Add Tag
+            </Button>
+          </Form>
+        </Card>
       </div>
       <div id="editTagRow">
-        {allTags?.length
-          ? allTags.map((tag, idx) => {
-              return (
-                <div key={`${idx} map for tags section in admin`}>
-                  <Card style={{padding: "20px"}}>
-                    <Form.Label style={{textAlign: "center"}}>{tag.name}</Form.Label>
+        <div id="editTagsContainer">
+          {allTags?.length
+            ? allTags.map((tag, idx) => {
+                return (
+                  <div key={`${idx} map for tags section in admin`}>
+                    <Card style={{ padding: "20px" }}>
+                      <Form.Label style={{ textAlign: "center" }}>
+                        {tag.name}
+                      </Form.Label>
 
-                    <Button className = "btn-sm"
-                      onClick={() => {
-                        toggleEditForm(tag.id);
-                      }}
-                    >
-                      Edit Tag
-                    </Button>
-                    <div id={`edit-tag-form${tag.id}`} className="display-none">
-                      <EditTagForm token={token} tagId={tag.id} />
-                    </div>
-                  </Card>
-                </div>
-              );
-            })
-          : null}
+                      <Button
+                        className="btn-sm"
+                        onClick={() => {
+                          toggleEditForm(tag.id);
+                        }}
+                      >
+                        Edit Tag
+                      </Button>
+                      <div
+                        id={`edit-tag-form${tag.id}`}
+                        className="display-none"
+                      >
+                        <EditTagForm token={token} tagId={tag.id} />
+                      </div>
+                    </Card>
+                  </div>
+                );
+              })
+            : null}
+        </div>
       </div>
     </div>
   );
