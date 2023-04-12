@@ -27,7 +27,7 @@ const TaggedProductList = (props) => {
 
   return (
     <div>
-      <h1 id="productByTagTitle">All {name} Books:</h1>
+      <h1 id="productByTagTitle">{name}:</h1>
       
       <div id="home-content-container">
         <SideNav allTags={allTags} searchString={searchString} setSearchString={setSearchString}/>

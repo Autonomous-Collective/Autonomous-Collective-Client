@@ -42,7 +42,7 @@ const UserCart = ({ cart, user, token }) => {
     <div id="userCartPageContainer">
       {message ? <MessageAlert message={message} isError={isError} /> : null}
       <div id="userCartOrderContainer">
-        <h1>Your Order:</h1>
+        <h1 style={{textDecoration: "underline"}}>Your Order:</h1>
         {cart?.products?.length ? (
           cart.products.map((product, idx) => {
             subTotal = product.price * product.quantity;

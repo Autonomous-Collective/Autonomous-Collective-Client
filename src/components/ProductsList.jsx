@@ -6,7 +6,7 @@ const ProductsList = (props) => {
   const searchString = props.searchString;
 
   return (
-    <div id="">
+    <div style={{display: "flex"}}>
       {!searchString.length ? (
         <div id="productsContainer">
           {allProducts.length ? (
