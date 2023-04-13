@@ -28,13 +28,17 @@ const UserCart = ({ cart, user, token }) => {
   };
 
   const checkOutCart = async () => {
-    const response = await checkoutCartCall(token);
-    if (response.success) {
-      setMessage("You have succesfully checked out ");
-      setIsError(false);
+    if (totalPrice === 0) {
+      setMessage("You can't check out an empty cart");
     } else {
-      setMessage("Something went wrong");
-      setIsError(true);
+      const response = await checkoutCartCall(token);
+      if (response.success) {
+        setMessage("You have succesfully checked out ");
+        setIsError(false);
+      } else {
+        setMessage("Something went wrong");
+        setIsError(true);
+      }
     }
   };
 
@@ -42,7 +46,9 @@ const UserCart = ({ cart, user, token }) => {
     <div id="userCartPageContainer">
       {message ? <MessageAlert message={message} isError={isError} /> : null}
       <div id="userCartOrderContainer">
-        <h1 style={{textDecoration: "underline"}}>Your Order:</h1>
+        <h1 style={{ textDecoration: "underline", marginLeft: "15px" }}>
+          Your Order:
+        </h1>
         {cart?.products?.length ? (
           cart.products.map((product, idx) => {
             subTotal = product.price * product.quantity;

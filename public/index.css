@@ -8,6 +8,7 @@ black: #0D0D0D
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 html {
   scroll-behavior: smooth;
@@ -33,6 +34,7 @@ html {
   flex-direction: column;
   min-width: 15vw;
   padding-left: 10px;
+  margin-left: 10px;
 }
 #side-bar {
   display: flex;
@@ -181,13 +183,14 @@ html {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   min-width: 85vw;
+  margin-left: 2vw;
 }
 
 #pastOrderContainer {
   width: 66vw;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 #userInfoContainer {
   display: flex;
@@ -208,12 +211,6 @@ html {
   justify-content: space-between;
   margin-top: 20px;
 }
-/* #userCartContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 20px;
-} */
 
 #userCartOrderContainer {
   width: 66vw;
@@ -250,6 +247,21 @@ html {
   position: fixed;
   left: 50%;
   top: 50%;
+}
+
+#footer {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background-color: grey;
+  width: 100vw;
+  height: 4vh;
+  overflow: hidden;
+}
+
+#footer p {
+  margin-top: 2vh;
 }
 
 @keyframes spin {

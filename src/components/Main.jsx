@@ -134,7 +134,13 @@ const Main = () => {
           exact
           path="/products/:name/:tagId"
           element={
-            <TaggedProductList user={user} cart={cart} allTags={allTags} setSearchString={setSearchString} searchString={searchString}/>
+            <TaggedProductList
+              user={user}
+              cart={cart}
+              allTags={allTags}
+              setSearchString={setSearchString}
+              searchString={searchString}
+            />
           }
         />
         <Route
@@ -167,7 +173,7 @@ const Main = () => {
           element={<UserCart cart={cart} user={user} token={token} />}
         />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
