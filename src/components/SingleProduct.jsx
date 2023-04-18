@@ -5,7 +5,7 @@ import {
   addProductToCartCall,
   editCartProductCall,
 } from "../API-Adapter";
-import "./componentStyles/SingleProduct.css";
+
 import { ReviewList, CreateReview, MessageAlert } from "./";
 
 import Card from "react-bootstrap/Card";

@@ -5,7 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Login from "./Login";
 import Register from "./Register";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import GuestRegister from "./GuestRegister";
 
@@ -27,6 +27,8 @@ const NavBar = (props) => {
   const verifyGuest = user.isGuest;
 
   const navigate = useNavigate();
+
+  const locationHook = useLocation();
 
   return (
     <>
@@ -65,9 +67,24 @@ const NavBar = (props) => {
                 />
               ) : null}
               {isLoggedIn && verifyAdmin ? (
-                <Nav.Link as={Link} to="/admin">
-                  Admin
-                </Nav.Link>
+                <>
+                  <Nav.Link as={Link} to="/admin">
+                    Admin
+                  </Nav.Link>
+                  {locationHook.pathname === "/admin" ? (
+                    <NavDropdown title="Shortcuts" id="basic-nav-dropdown">
+                      <NavDropdown.Item href="#addProductContainer">
+                        Products
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="#tags-section">
+                        Tags
+                      </NavDropdown.Item>
+                      <NavDropdown.Item href="#adminUserCard">
+                        Users
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  ) : null}
+                </>
               ) : null}
 
               {isLoggedIn && !verifyGuest ? (

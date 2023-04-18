@@ -264,11 +264,163 @@ html {
   margin-top: 2vh;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+#singleProductPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#singleProductContainer {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 40vw;
+  height: 30%;
+}
+
+#reviewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#reviewCard {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 40vw;
+}
+#createReviewContainer {
+  display: flex;
+  width: 40vw;
+}
+
+#createReviewCard {
+  width: 732px;
+}
+
+#description {
+  width: 40vw;
+  border: 2px solid black;
+}
+
+#reviews {
+  width: 40vw;
+
+  border: 2px solid black;
+}
+
+#create-review {
+  display: none;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 414px) {
+  #sideNav {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 20vw;
+    padding-left: 0px;
+    margin-left: 0px;
+    /* margin-right: 12px; */
+  }
+
+  #sideNav input {
+    min-width: 22vw;
+    padding-left: 2px;
+    margin-left: 2px;
+  }
+
+  #sideNav a {
+    padding-left: 2px;
+    margin-left: 2px;
+  }
+
+  #singleProductPage {
+    display: flex !important;
+    flex-direction: column !important;
+
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+    margin-top: 10vh;
+  }
+
+  #singleProductContainer {
+    width: 85vw;
+    margin: 2vh 0;
+    padding: 0;
+  }
+
+  #reviewCard {
+    width: 85vw;
+  }
+
+  #main {
+    overflow-x: hidden;
+  }
+  #activeProductPage {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #activeProductContainerButtons .card {
+    margin: 0;
+    padding: 0;
+    gap: 0;
+  }
+
+  #activeProductPage input {
+    width: 50vw;
+  }
+  #activeProductPage .card {
+    width: 85vw !important;
+    margin-left: 10px;
+  }
+  #navbar-container {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+  }
+
+  #admin-h1 {
+    margin-top: 10vh;
+  }
+
+  #home-content-container {
+    margin-top: 7vh;
+  }
+
+  #userProfileContainer {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+  }
+
+  #userCartPageContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #userCartCheckoutContainer {
+    width: 85vw !important;
+  }
+
+  #userCartOrderContainer {
+    margin-left: 0;
+    width: 85vw;
   }
 }

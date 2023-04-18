@@ -8,7 +8,7 @@ const PastOrders = (props) => {
   return (
     <div>
       {pastOrders === null ? (
-        <h1>LOAFING...</h1>
+        <div className="loader"></div>
       ) : pastOrders?.length ? (
         pastOrders.map((order, idx) => {
           let total = 0;
@@ -32,7 +32,7 @@ const PastOrders = (props) => {
           );
         })
       ) : (
-        <h1>you have not made any orders!</h1>
+        <h1>You have not made any orders</h1>
       )}
     </div>
   );

@@ -17,6 +17,7 @@ import {
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
   const [tagToAdd, setTagToAdd] = useState("");
@@ -150,21 +151,10 @@ const AdminPage = ({ allProducts, allUsers, token, allTags }) => {
 
   return (
     <>
-      <div className="flex-row" id="admin-links">
-        <ul>
-          <li>
-            <a href="#addProductContainer">Products</a>
-          </li>
-          <li>
-            <a href="#tags-section">Tags</a>
-          </li>
-          <li>
-            <a href="#adminUserCard">Users</a>
-          </li>
-        </ul>
-      </div>
       {message ? <MessageAlert message={message} isError={isError} /> : null}
-      <h1 style={{ textAlign: "center" }}>Admin Page</h1>
+      <h1 id="admin-h1" style={{ textAlign: "center" }}>
+        Admin Page
+      </h1>
       <div id="addProductContainer">
         <div>
           <Button
