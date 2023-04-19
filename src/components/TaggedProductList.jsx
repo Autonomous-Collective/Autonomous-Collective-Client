@@ -7,6 +7,8 @@ const TaggedProductList = (props) => {
   const allTags = props.allTags;
   const setSearchString = props.setSearchString;
   const searchString = props.searchString;
+  const activeTag = props.activeTag;
+  const setActiveTag = props.setActiveTag;
   const { name, tagId } = useParams();
 
   const [products, setProducts] = useState(null);
@@ -27,49 +29,54 @@ const TaggedProductList = (props) => {
 
   return (
     <div>
-      <h1 id="productByTagTitle">{name}:</h1>
-      
       <div id="home-content-container">
-        <SideNav allTags={allTags} searchString={searchString} setSearchString={setSearchString}/>
+        <SideNav
+          allTags={allTags}
+          searchString={searchString}
+          setSearchString={setSearchString}
+          activeTag={activeTag}
+          setActiveTag={setActiveTag}
+        />
         {!searchString.length ? (
-        <div>
-        {products === null ? (
-          <div className="loader"></div>
-        ) : products?.length ? (
-          <div id="productsContainer">
-            {products.map((product, idx) => {
-              return product.isActive ? (
-                <ProductCard
-                  product={product}
-                  key={`${idx} - product list map`}
-                />
-              ) : null;
-            })}
+          <div>
+            {products === null ? (
+              <div className="loader"></div>
+            ) : products?.length ? (
+              <div id="productsContainer">
+                {products.map((product, idx) => {
+                  return product.isActive ? (
+                    <ProductCard
+                      product={product}
+                      key={`${idx} - product list map`}
+                    />
+                  ) : null;
+                })}
+              </div>
+            ) : (
+              <h1>No products were found with this tag!</h1>
+            )}
           </div>
         ) : (
-          <h1>No products were found with this tag!</h1>
-        )}
-      </div>
-      ): (
-        <div id="productsContainer">
+          <div id="productsContainer">
             {products.map((product, idx) => {
               let titleLowerCase = product.title.toLowerCase();
               let authorLowerCase = product.author.toLowerCase();
               let searchStringLowerCase = searchString.toLowerCase();
 
-              if(
+              if (
                 titleLowerCase.includes(searchStringLowerCase) ||
-            authorLowerCase.includes(searchStringLowerCase)
-              ){
-              return product.isActive ? (
-                <ProductCard
-                  product={product}
-                  key={`${idx} - product list map`}
-                />
-              ) : null;}
+                authorLowerCase.includes(searchStringLowerCase)
+              ) {
+                return product.isActive ? (
+                  <ProductCard
+                    product={product}
+                    key={`${idx} - product list map`}
+                  />
+                ) : null;
+              }
             })}
           </div>
-      )}
+        )}
       </div>
     </div>
   );

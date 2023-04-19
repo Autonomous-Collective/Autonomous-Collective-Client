@@ -36,6 +36,14 @@ html {
   padding-left: 10px;
   margin-left: 10px;
 }
+
+.activeTag {
+  color: #063377 !important;
+  font-weight: bold !important;
+}
+
+.inactiveTag {
+}
 #side-bar {
   display: flex;
   flex-direction: column;

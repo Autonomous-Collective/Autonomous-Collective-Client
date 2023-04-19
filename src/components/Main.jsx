@@ -36,6 +36,8 @@ const Main = () => {
 
   const [searchString, setSearchString] = useState([]);
 
+   
+
   const getAllProducts = async () => {
     const response = await getAllProductsCall();
 
@@ -96,6 +98,8 @@ const Main = () => {
 
     getPastOrders();
   }, [token]);
+
+ 
 
   return (
     <div id="main">

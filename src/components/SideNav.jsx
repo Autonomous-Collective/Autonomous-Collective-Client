@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -7,6 +7,22 @@ import Button from "react-bootstrap/Button";
 const SideNav = (props) => {
   const allTags = props.allTags;
   const setSearchString = props.setSearchString;
+
+  const [activeTag, setActiveTag] = useState(0);
+
+  const locationHook = useLocation();
+
+  useEffect(() => {
+    let tempTag = locationHook.pathname.slice(-2)
+    if (
+      tempTag.includes("/")
+    ) {
+      tempTag = tempTag.slice(-1)
+    }
+    tempTag = Number(tempTag)
+    setActiveTag(tempTag);
+  }, []);
+
   return (
     <div id="sideNav">
       <Form className="d-flex">
@@ -26,6 +42,12 @@ const SideNav = (props) => {
           allTags.map((tag, idx) => {
             return (
               <Nav.Link
+                onClick={() => {
+                  setActiveTag(tag.id);
+                }}
+                className={
+                  activeTag === tag.id ? "activeTag" : "inactiveTag"
+                }
                 as={Link}
                 to={`/products/${tag.name}/${tag.id}`}
                 key={`${idx}`}
