@@ -23,7 +23,8 @@ const ProductsList = (props) => {
           )}
         </div>
       ) : (
-        allProducts.map((product, idx) => {
+        <div id="productsContainer">
+        {allProducts.map((product, idx) => {
           let titleLowerCase = product.title.toLowerCase();
           let authorLowerCase = product.author.toLowerCase();
           let searchStringLowerCase = searchString.toLowerCase();
@@ -33,13 +34,14 @@ const ProductsList = (props) => {
             authorLowerCase.includes(searchStringLowerCase)
           ) {
             return (
-              <ProductCard
+              <ProductCard 
                 product={product}
                 key={`${idx} - product list map`}
               />
             );
           }
-        })
+        })}
+        </div>
       )}
     </div>
   );
