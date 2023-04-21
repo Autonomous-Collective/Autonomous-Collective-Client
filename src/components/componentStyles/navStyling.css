@@ -1,0 +1,21 @@
+#navbar-container{
+    background-color: #a173bf  !important;
+    /* text-shadow: 2px 2px 3px #f25244; */
+}
+
+#brand{
+    font-family: 'Archivo Black', sans-serif !important;
+    font-size: 17pt;
+    color: #eaf205 !important;
+}
+
+#navSection a{
+    font-family: 'Azeret Mono', sans-serif !important;
+    color: #eaf205 !important;
+    font-size: 13pt;
+}
+
+#navSection a:hover{
+    border-bottom: 3px solid #eaf205;
+}
+

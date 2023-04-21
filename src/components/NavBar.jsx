@@ -11,6 +11,8 @@ import GuestRegister from "./GuestRegister";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import navStyling from "./componentStyles/navStyling.css"
+
 const NavBar = (props) => {
   const email = props.email;
   const setEmail = props.setEmail;
@@ -42,12 +44,12 @@ const NavBar = (props) => {
       >
         <div>
           <Navbar.Brand as={Link} to="/" id="brand">
-            The Autonomous Collective
+            THE AUTONOMOUS COLLECTIVE
           </Navbar.Brand>
         </div>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Container style={{ marginRight: "0px", paddingRight: "0px" }}>
+          <Container style={{ marginRight: "0px", paddingRight: "0px" }} id="navSection">
             <Nav style={{ justifyContent: "flex-end" }}>
               <Nav.Link as={Link} to="/">
                 Home
@@ -141,7 +143,7 @@ const NavBar = (props) => {
                 </>
               )}
               <Link className="material-symbols-outlined" to="/cart">
-                shopping_cart
+                <i className="material-icons">shopping_cart</i>
               </Link>
             </Nav>
           </Container>

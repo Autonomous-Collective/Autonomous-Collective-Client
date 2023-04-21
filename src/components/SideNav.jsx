@@ -4,6 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import sideNavStyling from "./componentStyles/sideNavStyling.css"
+
 const SideNav = (props) => {
   const allTags = props.allTags;
   const setSearchString = props.setSearchString;

@@ -1,0 +1,14 @@
+#sideNav a{
+    color: #a173bf !important;
+    text-shadow: 2px 2px 3px #eaf205 !important;
+    font-size: 15pt !important;
+    font-family: 'Azeret Mono', sans-serif !important;
+    font-weight: 700;
+}
+
+#sideNav input{
+    /* background-color: #a173bf !important; */
+    /* color: #eaf205 !important; */
+    font-family: 'Azeret Mono', sans-serif !important;
+    border: solid 3px #a173bf !important;
+}
