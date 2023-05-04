@@ -1,21 +1,38 @@
+/*
+colors:
+pink: #F24B59
+darker sky blue: #447EF2
+sky blue/ darker periwinkle maybe: #5E90F2
+light yellow: #F2D06B
+black: #0D0D0D
+*/
+
 #navbar-container{
-    background-color: #a173bf  !important;
+    background-color: #447EF2 !important;
     /* text-shadow: 2px 2px 3px #f25244; */
 }
 
 #brand{
     font-family: 'Archivo Black', sans-serif !important;
     font-size: 17pt;
-    color: #eaf205 !important;
+    color: #F2D06B !important;
+    text-shadow: 2px 2px 3px #F24B59;
 }
 
 #navSection a{
     font-family: 'Azeret Mono', sans-serif !important;
-    color: #eaf205 !important;
+    color: #F2D06B !important;
+    text-shadow: 2px 2px 3px #F24B59;
     font-size: 13pt;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: ease-in !important;
+  transition-duration: 0.3s !important;
 }
 
 #navSection a:hover{
-    border-bottom: 3px solid #eaf205;
+    border-bottom: 3px solid #F2D06B;
+    transition: ease-in !important;
+  transition-duration: 0.3s !important;
 }
 

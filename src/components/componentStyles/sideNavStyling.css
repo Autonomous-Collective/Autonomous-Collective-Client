@@ -1,14 +1,33 @@
+/*
+colors:
+pink: #F24B59
+darker sky blue: #447EF2
+sky blue/ darker periwinkle maybe: #5E90F2
+light yellow: #F2D06B
+black: #0D0D0D
+*/
+
 #sideNav a{
-    color: #a173bf !important;
-    text-shadow: 2px 2px 3px #eaf205 !important;
+    color: #F24B59 !important;
+    text-shadow: 1px 1px 2px #F2D06B !important;
     font-size: 15pt !important;
     font-family: 'Azeret Mono', sans-serif !important;
     font-weight: 700;
+    transition: ease-in !important;
+    transition-duration: 0.3s !important;
+}
+
+#sideNav a:hover{
+    color: #447EF2 !important;
+    text-decoration: 3px underline #F24B59 !important;
+    transition: ease-in !important;
+    transition-duration: 0.3s !important;
 }
 
 #sideNav input{
     /* background-color: #a173bf !important; */
     /* color: #eaf205 !important; */
     font-family: 'Azeret Mono', sans-serif !important;
-    border: solid 3px #a173bf !important;
+    border: solid 3px #F24B59 !important;
+    box-shadow: 2px 2px 3px #F2D06B !important;
 }
