@@ -1,0 +1,42 @@
+/*
+colors:
+pink: #F24B59
+darker sky blue: #447EF2
+sky blue/ darker periwinkle maybe: #5E90F2
+light yellow: #F2D06B
+black: #0D0D0D
+*/
+
+#product-card{
+   border: solid 3px #F24B59;
+   box-shadow: 2px 2px 3px #F24B59;
+   border-radius: 35px;
+   /* background-color: #f4e2ac !important; */
+}
+
+
+#product-card-img{
+    
+    margin-top: 5px !important;
+    /* border: 2px solid #F24B59 !important; */
+    border-radius: 35px !important;
+    /* box-shadow: 2px 2px 3px #F24B59 !important; */
+}
+
+#product-card-title{
+    font-family: 'Azeret Mono', sans-serif !important;
+    color: #447EF2 !important;
+    font-weight: 700 !important;
+}
+
+#product-card-author{
+    font-family: 'Archivo Black', sans-serif;
+    color: #F24B59 !important;
+}
+
+#product-card-button{
+    font-family: 'Azeret Mono', sans-serif !important;
+    background-color: #447EF2 !important;
+    color: #F2D06B !important;
+    text-shadow: 2px 2px 3px #F24B59 !important;
+}

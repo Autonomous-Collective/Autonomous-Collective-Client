@@ -9,6 +9,7 @@ black: #0D0D0D
 body {
   margin: 0;
   overflow-x: hidden;
+  background-color:  #f4e2ac !important;
 }
 html {
   scroll-behavior: smooth;
